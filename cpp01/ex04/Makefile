@@ -1,13 +1,13 @@
 #! Makefile
 
-NAME = Sed
+NAME = SedBad
 CXX = @c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g -fsanitize=address
 RM = rm -rf
 
 OBJ_DIR = obj
 
-SRC_CPP = main.cpp
+SRC_CPP = main.cpp utils.cpp
 SRCS = $(addprefix src/, $(SRC_CPP))
 OBJS = $(addprefix, $(OBJ_DIR)/, $(SRC_CPP:%.c=%.o))
 
@@ -25,7 +25,7 @@ $(OBJ_DIR)/%.o: $(SRCS)
 	@$(CXX) $(CXXFLAGS) -o $@ -c $<
 
 clean:
-	@$(RM) $(OBJS) $(OBJ_DIR)
+	@$(RM) $(OBJS) $(OBJ_DIR) *.replace
 
 fclean: clean
 	@$(RM) $(NAME)
