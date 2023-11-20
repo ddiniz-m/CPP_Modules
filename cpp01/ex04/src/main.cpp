@@ -4,7 +4,7 @@
 
 /* 
 	I use string.compare() and string.substr() to help me replace s1 for s2.
-Getline delimiter is first character of s1. I then compare the fisrt n characters of
+Getline delimiter is first character of s1. I then compare the first n characters of
 each line to s1 (minus the fisrt character that was removed by getline).
 */
 int	main(int ac, char **av)
@@ -33,16 +33,16 @@ int	main(int ac, char **av)
 	while (!file.eof())
 	{
 		getline(file, line, av[2][0]);
-		std::string sub2 = sub.substr(sub.length() - 2);
-		if (sub2.compare(line.substr(0, sub.length() - 1)) == 0)
+		std::string sub2 = sub.substr(1);
+		if (sub2.compare(line.substr(0, sub.length() - 1)) == 0 && flag != 0)
 			outfile << std::string(av[3]) << line.substr(sub.length() - 1);
 		else
 		{
 			if (flag != 0)
 				outfile << av[2][0];
 			outfile << line;
+			flag++;
 		}
-		flag++;
 	}
 	file.close();
 	outfile.close();

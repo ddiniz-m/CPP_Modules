@@ -8,7 +8,7 @@ Harl::Harl()
 
 Harl::~Harl()
 {
-	std::cout << RED << "HumanA Object Destroyed" << NC << std::endl;
+	std::cout << RED << "Harl Object Destroyed" << NC << std::endl;
 }
 
 void	Harl::debug(void)
