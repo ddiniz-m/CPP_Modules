@@ -24,6 +24,10 @@ $(OBJ_DIR)/%.o: $(SRCS)
 	@mkdir -p $(OBJ_DIR)
 	@$(CXX) $(CXXFLAGS) -o $@ -c $<
 
+a: re
+	clear
+	@./Fixed
+
 clean:
 	@$(RM) $(OBJS) $(OBJ_DIR)
 
