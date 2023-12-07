@@ -1,40 +1,42 @@
 
 #include "../inc/Fixed.hpp"
 
+// ---------------------- Orthodox Canonical Form -----------------------------
 Fixed::Fixed()
 {
-	std::cout << GREEN << "Default Constructor Called" << NC << std::endl;
-	value = 0;
+	//std::cout << GREEN << "Default Constructor Called" << NC << std::endl;
+	this->value = 0;
 }
 
-Fixed::Fixed(const Fixed &t)
+Fixed::Fixed(const Fixed &n)
 {
-	std::cout << GREEN << "Copy Constructor Called" << NC << std::endl;
-	*this = t;
+	//std::cout << GREEN << "Copy Constructor Called" << NC << std::endl;
+	*this = n;
 }
 
-Fixed::Fixed(const int i)
+Fixed& Fixed::operator=(const Fixed &n)
 {
-	std::cout << GREEN << "Int Constructor Called" << NC << std::endl;
-	this->setRawBits((i << bit));
-}
-
-Fixed::Fixed(const float f)
-{
-	std::cout << GREEN << "Float Constructor Called" << NC << std::endl;
-	this->setRawBits(roundf(f * (1 << bit)));
-}
-
-Fixed& Fixed::operator=(const Fixed &t)
-{
-	std::cout << GREEN << "Copy Assignment Operator Called" << NC << std::endl;
-	this->setRawBits(t.getRawBits());
+	//std::cout << GREEN << "Copy Assignment Operator Called" << NC << std::endl;
+	this->setRawBits(n.getRawBits());
 	return (*this);
 }
 
 Fixed::~Fixed()
 {
-	std::cout << RED << "Destructor Called" << NC << std::endl;
+	//std::cout << RED << "Destructor Called" << NC << std::endl;
+}
+// ---------------------- Orthodox Canonical Form -----------------------------
+
+Fixed::Fixed(const int i)
+{
+	//std::cout << GREEN << "Int Constructor Called" << NC << std::endl;
+	this->setRawBits((i << bit));
+}
+
+Fixed::Fixed(const float f)
+{
+	//std::cout << GREEN << "Float Constructor Called" << NC << std::endl;
+	this->setRawBits(roundf(f * (1 << bit)));
 }
 
 int Fixed::getRawBits(void) const
@@ -67,4 +69,122 @@ std::ostream& operator<<(std::ostream &ostream, Fixed const &n)
 {
 	ostream << n.toFloat();
 	return (ostream);
+}
+
+bool Fixed::operator>(const Fixed &n)const
+{
+	return (this->getRawBits() > n.getRawBits());
+}
+
+bool Fixed::operator<(const Fixed &n)const
+{
+	return (this->getRawBits() < n.getRawBits());
+}
+
+bool Fixed::operator>=(const Fixed &n)const
+{
+	return (this->getRawBits() >= n.getRawBits());
+}
+
+bool Fixed::operator<=(const Fixed &n)const
+{
+	return (this->getRawBits() <= n.getRawBits());
+}
+
+bool Fixed::operator==(const Fixed &n)const
+{
+	return (this->getRawBits() == n.getRawBits());
+}
+
+bool Fixed::operator!=(const Fixed &n)const
+{
+	return (this->getRawBits() != n.getRawBits());
+}
+
+Fixed Fixed::operator+(const Fixed &n)
+{
+	Fixed add;
+
+	add = this->toFloat() + n.toFloat();
+	return (add);
+}
+
+Fixed Fixed::operator-(const Fixed &n)
+{
+	Fixed add;
+
+	add = this->toFloat() - n.toFloat();
+	return (add);
+}
+
+Fixed Fixed::operator*(const Fixed &n)
+{
+	Fixed add;
+
+	add = this->toFloat() * n.toFloat();
+	return (add);
+}
+
+Fixed Fixed::operator/(const Fixed &n)
+{
+	Fixed add;
+
+	add = this->toFloat() / n.toFloat();
+	return (add);
+}
+
+Fixed& Fixed::operator++(void)
+{
+	value++;			// Increment current value
+	return (*this);		// Return reference to modified object
+}
+
+Fixed& Fixed::operator--(void)
+{
+	value--;			// Decrement current value
+	return (*this);
+}
+
+Fixed Fixed::operator++(int)
+{
+	Fixed tmp;			//Create copy of original object
+	tmp = *this;
+	++(this->value);	//Incremente value of current object
+	return (tmp);		//Return copy of original
+}
+
+Fixed Fixed::operator--(int)
+{
+	Fixed tmp;
+	tmp = *this;
+	--(this->value);
+	return (tmp);
+}
+
+Fixed& Fixed::min(Fixed &n1, Fixed &n2)
+{
+	if (n1 < n2)
+		return (n1);
+	return (n2);
+}
+
+Fixed& Fixed::max(Fixed &n1, Fixed &n2)
+{
+	if (n1 > n2)
+		return (n1);
+	return (n2);
+}
+
+const Fixed& Fixed::min(const Fixed &n1, const Fixed &n2)
+{
+	if (n1 < n2)
+		return (n1);
+	return (n2);
+}
+
+const Fixed& Fixed::max(const Fixed &n1, const Fixed &n2)
+{
+	if (n1 > n2)
+		return (n1);
+	return (n2);
 }

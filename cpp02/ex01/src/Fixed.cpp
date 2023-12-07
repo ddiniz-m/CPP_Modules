@@ -1,28 +1,17 @@
 
 #include "../inc/Fixed.hpp"
 
+// ---------------------- Orthodox Canonical Form -----------------------------
 Fixed::Fixed()
 {
 	std::cout << GREEN << "Default Constructor Called" << NC << std::endl;
-	value = 0;
+	this->value = 0;
 }
 
 Fixed::Fixed(const Fixed &t)
 {
 	std::cout << GREEN << "Copy Constructor Called" << NC << std::endl;
 	*this = t;
-}
-
-Fixed::Fixed(const int i)
-{
-	std::cout << GREEN << "Int Constructor Called" << NC << std::endl;
-	this->setRawBits((i << bit));
-}
-
-Fixed::Fixed(const float f)
-{
-	std::cout << GREEN << "Float Constructor Called" << NC << std::endl;
-	this->setRawBits(roundf(f * (1 << bit)));
 }
 
 Fixed& Fixed::operator=(const Fixed &t)
@@ -35,6 +24,19 @@ Fixed& Fixed::operator=(const Fixed &t)
 Fixed::~Fixed()
 {
 	std::cout << RED << "Destructor Called" << NC << std::endl;
+}
+// ---------------------- Orthodox Canonical Form -----------------------------
+
+Fixed::Fixed(const int i)
+{
+	std::cout << GREEN << "Int Constructor Called" << NC << std::endl;
+	this->setRawBits((i << bit));
+}
+
+Fixed::Fixed(const float f)
+{
+	std::cout << GREEN << "Float Constructor Called" << NC << std::endl;
+	this->setRawBits(roundf(f * (1 << bit)));
 }
 
 int Fixed::getRawBits(void) const
