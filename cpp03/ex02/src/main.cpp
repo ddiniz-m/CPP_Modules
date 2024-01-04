@@ -1,21 +1,20 @@
 
-#include "../inc/ClapTrap.hpp"
+#include "../inc/FragTrap.hpp"
 
 int main()
 {
-	ClapTrap mc("Luffy");
-	ClapTrap villain("Arlong");
+	FragTrap mc("Luffy");
+	FragTrap villain("Arlong");
 
-	mc.setAttack(2);
-	villain.setAttack(3);
+	mc.getAttack();
 	mc.getHp();
-	villain.getHp();
-
+	mc.getEnergy(0);
 	std::cout << std::endl;
 
 	mc.attack(villain.getName());
 	villain.takeDamage(mc.getAttack());
 	villain.getHp();
+	mc.highFivesGuys();
 	std::cout << std::endl;
 
 	villain.attack(mc.getName());
@@ -30,10 +29,11 @@ int main()
 	std::cout << std::endl;
 
 	std::cout << mc.getName() << " got a power boost!"<< std::endl;
-	mc.setAttack(20);
+	mc.setAttack(200);
 	mc.attack(villain.getName());
 	villain.takeDamage(mc.getAttack());
 	villain.getHp();
+	mc.highFivesGuys();
 	std::cout << std::endl;
 
 	villain.attack(mc.getName());
@@ -42,7 +42,7 @@ int main()
 	mc.getHp();
 	std::cout << std::endl;
 
-	mc.getEnergy();
+	mc.getEnergy(0);
 	mc.setEnergy(0);
 	mc.attack("Arlong");
 }

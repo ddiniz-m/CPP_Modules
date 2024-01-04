@@ -4,7 +4,7 @@
 // ---------------------- Orthodox Canonical Form -----------------------------
 ClapTrap::ClapTrap()
 {
-	std::cout << GREEN << "Default Constructor Called" << NC << std::endl;
+	std::cout << GREEN << "ClapTrap Default Constructor Called" << NC << std::endl;
 	this->hp = 10;
 	this->energy = 10;
 	this->atk = 0;
@@ -12,7 +12,7 @@ ClapTrap::ClapTrap()
 
 ClapTrap::ClapTrap(std::string name)
 {
-	std::cout << GREEN << "Name Constructor Called" << NC << std::endl;
+	std::cout << GREEN << "ClapTrap Name Constructor Called" << NC << std::endl;
 	this->name = name;
 	this->hp = 10;
 	this->energy = 10;
@@ -21,7 +21,7 @@ ClapTrap::ClapTrap(std::string name)
 
 ClapTrap& ClapTrap::operator=(const ClapTrap &copy_a)
 {
-	std::cout << GREEN << "Copy Assignment Operator Called" << NC << std::endl;
+	std::cout << GREEN << "ClapTrap Copy Assignment Operator Called" << NC << std::endl;
 	this->atk = copy_a.atk;
 	this->name = copy_a.name;
 	this->energy = copy_a.energy;
@@ -31,13 +31,13 @@ ClapTrap& ClapTrap::operator=(const ClapTrap &copy_a)
 
 ClapTrap::ClapTrap(const ClapTrap &copy)
 {
-	std::cout << GREEN << "Copy Constructor Called" << NC << std::endl;
+	std::cout << GREEN << "ClapTrap Copy Constructor Called" << NC << std::endl;
 	*this = copy;
 }
 
 ClapTrap::~ClapTrap()
 {
-	std::cout << RED << "Destructor Called" << NC << std::endl;
+	std::cout << RED << "ClapTrap Destructor Called" << NC << std::endl;
 }
 // ---------------------- Orthodox Canonical Form -----------------------------
 
@@ -50,13 +50,11 @@ int	ClapTrap::getHp(void)
 {
 	if (this->hp == 0)
 		return (0);
-	std::cout << "ClapTrap " << this->getName() << " has " << this->hp << " health points!" << std::endl;
 	return(this->hp);
 }
 
 int	ClapTrap::getEnergy(void)
 {
-	std::cout << "ClapTrap " << this->getName() << " has " << this->energy << " energy points!" << std::endl;
 	return (this->energy);
 }
 
@@ -73,12 +71,16 @@ void	ClapTrap::setAttack(unsigned int amount)
 		return ;
 	}
 	this->atk = amount;
-	std::cout << "ClapTrap " << this->getName() << " deals " << this->atk << " damage." << std::endl;
 }
 
 void	ClapTrap::setEnergy(unsigned int amount)
 {
 	this->energy = amount;
+}
+
+void	ClapTrap::setHp(unsigned int amount)
+{
+	this->hp = amount;
 }
 
 int		ClapTrap::check(void)

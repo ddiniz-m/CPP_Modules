@@ -1,13 +1,13 @@
 #! Makefile
 
-NAME = 
+NAME = DiamondTrap
 CXX = @c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g -fsanitize=address
 RM = rm -rf
 
 OBJ_DIR = obj
 
-SRC_CPP = 
+SRC_CPP = main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp
 SRCS = $(addprefix src/, $(SRC_CPP))
 OBJS = $(addprefix, $(OBJ_DIR)/, $(SRC_CPP:%.c=%.o))
 
@@ -23,6 +23,10 @@ $(NAME): $(OBJS)
 $(OBJ_DIR)/%.o: $(SRCS)
 	@mkdir -p $(OBJ_DIR)
 	@$(CXX) $(CXXFLAGS) -o $@ -c $<
+
+shadow:
+	CXXFLAGS = -Wall -Wextra -Werror -Wshadow -std=c++98 -g -fsanitize=address
+	$(NAME)
 
 a: re
 	clear
