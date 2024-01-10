@@ -5,9 +5,9 @@
 FragTrap::FragTrap() : ClapTrap()
 {
 	std::cout << GREEN << "FragTrap Default Constructor Called" << NC << std::endl;
-	this->setHp(100);
+	this->setHp(50);
 	this->setEnergy(100);
-	this->setAttack(30);
+	this->setAttack(5550);
 }
 
 FragTrap::FragTrap(std::string name) : ClapTrap(name)

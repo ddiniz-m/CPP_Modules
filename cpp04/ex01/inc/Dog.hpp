@@ -5,16 +5,20 @@
 #include <iostream>
 
 #include "Animal.hpp"
+#include "Brain.hpp"
 
 class Dog : public Animal
 {
+	private:
+		Brain *brain;
 	public:
 		Dog();
-		~Dog();
+		virtual ~Dog();
 		Dog(const Dog &copy);
 		Dog& operator=(const Dog &copy_a);
 
 		void	makeSound(void) const;
+		Brain *getBrain(void);
 };
 
 #endif

@@ -1,39 +1,33 @@
 #! Makefile
 
 NAME = Polymorphism
-CPP = @c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 #-g -fsanitize=address
+CXX = c++
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g -fsanitize=address
 RM = rm -rf
 
 OBJ_DIR = obj
 
 SRC_CPP = main.cpp Animal.cpp Cat.cpp Dog.cpp WrongAnimal.cpp WrongCat.cpp
 SRCS = $(addprefix src/, $(SRC_CPP))
-OBJS = $(addprefix, $(OBJ_DIR)/, $(SRC_CPP:%.c=%.o))
+OBJS = $(SRCS:src/%.cpp=$(OBJ_DIR)/%.o)
 
-GREEN = "\033[0;32m"
 NC = "\033[0m"
+RED = "\033[0;31m"
+GREEN = "\033[0;32m"
+YELLOW = "\033[0;33m"
 
 all : $(NAME)
 
 $(NAME): $(OBJS)
-	$(CXX) $(CXXFLAGS) $(SRCS) -o $(NAME)
+	@$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 	@echo $(GREEN)"Compiled!"$(NC)
 
-$(OBJ_DIR)/%.o: $(SRCS)
+$(OBJ_DIR)/%.o:src/%.cpp
 	@mkdir -p $(OBJ_DIR)
 	@$(CXX) $(CXXFLAGS) -o $@ -c $<
 
-shadow:
-	CXXFLAGS = -Wall -Wextra -Werror -Wshadow -std=c++98 -g -fsanitize=address
-	$(NAME)
-
-a: re
-	clear
-	@./$(NAME)
-
 clean:
-	@$(RM) $(OBJS) $(OBJ_DIR)
+	@$(RM) $(OBJ_DIR)
 
 fclean: clean
 	@$(RM) $(NAME)

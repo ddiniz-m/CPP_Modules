@@ -8,8 +8,10 @@ RM = rm -rf
 SRC = megaphone.cpp
 OBJ = $(SRC:%.c=%.o)
 
-GREEN = "\033[0;32m"
 NC = "\033[0m"
+RED = "\033[0;31m"
+GREEN = "\033[0;32m"
+YELLOW = "\033[0;33m"
 
 all : $(NAME)
 
@@ -18,7 +20,7 @@ $(NAME): $(OBJ)
 	@echo $(GREEN)"Compiled!"$(NC)
 
 %$(OBJ): %$(SRC)
-	@$(CXX) $(CXXFLAGS) -o $@ -c $<
+	@$(CXX) $(CXXFLAGS) -c $@ -o $<
 
 clean:
 	@$(RM) $(OBJS)

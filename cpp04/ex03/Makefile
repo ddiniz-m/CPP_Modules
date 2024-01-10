@@ -9,10 +9,12 @@ OBJ_DIR = obj
 
 SRC_CPP = 
 SRCS = $(addprefix src/, $(SRC_CPP))
-OBJS = $(addprefix, $(OBJ_DIR)/, $(SRC_CPP:%.c=%.o))
+OBJS = $(addprefix, $(OBJ_DIR)/, $(SRC_CPP:%.cpp=%.o))
 
-GREEN = "\033[0;32m"
 NC = "\033[0m"
+RED = "\033[0;31m"
+GREEN = "\033[0;32m"
+YELLOW = "\033[0;33m"
 
 all : $(NAME)
 
@@ -22,7 +24,7 @@ $(NAME): $(OBJS)
 
 $(OBJ_DIR)/%.o: $(SRCS)
 	@mkdir -p $(OBJ_DIR)
-	@$(CXX) $(CXXFLAGS) -o $@ -c $<
+	@$(CXX) $(CXXFLAGS) -c $@ -o $<
 
 shadow:
 	CXXFLAGS = -Wall -Wextra -Werror -Wshadow -std=c++98 -g -fsanitize=address

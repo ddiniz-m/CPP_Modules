@@ -1,4 +1,3 @@
-
 #include "../inc/ClapTrap.hpp"
 
 // ---------------------- Orthodox Canonical Form -----------------------------
