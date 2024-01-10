@@ -1,0 +1,37 @@
+
+#include "../inc/WrongAnimal.hpp"
+
+// ---------------------- Orthodox Canonical Form -----------------------------
+WrongAnimal::WrongAnimal()
+{
+	std::cout << GREEN << "WrongAnimal Default Constructor Called" << NC << std::endl;
+}
+
+WrongAnimal& WrongAnimal::operator=(const WrongAnimal &copy_a)
+{
+	std::cout << GREEN << "WrongAnimal Copy Assignment Operator Called" << NC << std::endl;
+
+	return (*this);
+}
+
+WrongAnimal::WrongAnimal(const WrongAnimal &copy)
+{
+	std::cout << GREEN << "WrongAnimal Copy Constructor Called" << NC << std::endl;
+	*this = copy;
+}
+
+WrongAnimal::~WrongAnimal()
+{
+	std::cout << RED << "WrongAnimal Destructor Called" << NC << std::endl;
+}
+// ---------------------- Orthodox Canonical Form -----------------------------
+
+std::string	WrongAnimal::getType(void)
+{
+	return(this->type);
+}
+
+void	WrongAnimal::setType(std::string name)
+{
+	this->type = name;
+}

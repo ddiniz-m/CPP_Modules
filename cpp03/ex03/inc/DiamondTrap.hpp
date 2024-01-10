@@ -2,6 +2,13 @@
 #ifndef DIAMONDTRAP_HPP
 # define DIAMONDTRAP_HPP
 
+#include <iostream>
+
+# define GREEN "\033[0;32m"
+# define YELLOW "\033[0;33m"
+# define RED "\033[0;31m"
+# define NC "\033[0m"
+
 #include "ScavTrap.hpp"
 #include "FragTrap.hpp"
 
