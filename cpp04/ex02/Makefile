@@ -1,15 +1,15 @@
 #! Makefile
 
-NAME = 
-CXX = @c++
+NAME = Abstract
+CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g -fsanitize=address
 RM = rm -rf
 
 OBJ_DIR = obj
 
-SRC_CPP = 
+SRC_CPP = main.cpp AAnimal.cpp Cat.cpp Dog.cpp WrongAnimal.cpp WrongCat.cpp Brain.cpp
 SRCS = $(addprefix src/, $(SRC_CPP))
-OBJS = $(addprefix, $(OBJ_DIR)/, $(SRC_CPP:%.cpp=%.o))
+OBJS = $(SRCS:src/%.cpp=$(OBJ_DIR)/%.o)
 
 NC = "\033[0m"
 RED = "\033[0;31m"
@@ -19,23 +19,15 @@ YELLOW = "\033[0;33m"
 all : $(NAME)
 
 $(NAME): $(OBJS)
-	$(CXX) $(CXXFLAGS) $(SRCS) -o $(NAME)
+	@$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 	@echo $(GREEN)"Compiled!"$(NC)
 
-$(OBJ_DIR)/%.o: $(SRCS)
+$(OBJ_DIR)/%.o:src/%.cpp
 	@mkdir -p $(OBJ_DIR)
-	@$(CXX) $(CXXFLAGS) -c $@ -o $<
-
-shadow:
-	CXXFLAGS = -Wall -Wextra -Werror -Wshadow -std=c++98 -g -fsanitize=address
-	$(NAME)
-
-a: re
-	clear
-	@./$(NAME)
+	@$(CXX) $(CXXFLAGS) -o $@ -c $<
 
 clean:
-	@$(RM) $(OBJS) $(OBJ_DIR)
+	@$(RM) $(OBJ_DIR)
 
 fclean: clean
 	@$(RM) $(NAME)

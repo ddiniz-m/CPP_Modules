@@ -13,7 +13,7 @@ Cat::Cat()
 Cat& Cat::operator=(const Cat &copy_a)
 {
 	std::cout << GREEN << "Cat Copy Assignment Operator Called" << NC << std::endl;
-	Animal::operator=(copy_a);
+	AAnimal::operator=(copy_a);
 	if (this->brain)
 		delete(this->brain);
 	this->brain = new Brain(*copy_a.brain);

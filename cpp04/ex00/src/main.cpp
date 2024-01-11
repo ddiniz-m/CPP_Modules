@@ -19,26 +19,36 @@ int main()
 	delete(i);
 	delete(j);
 
-	std::cout << std::endl;
+	std::cout << YELLOW <<  "\nWrongAnimal test\n" << NC << std::endl;
+	{
+		Dog Terrier;
+		Animal *k = &Terrier;
+		std::cout << "Terrier is of type: " << k->getType() << std::endl;
+		std::cout << "Terrier made the sound: ";
+		k->makeSound();
 
-	Dog Terrier;
-	Animal *k = &Terrier;
-	std::cout << "Terrier is of type: " << k->getType() << std::endl;
-	std::cout << "Terrier made the sound: ";
-	k->makeSound();
+		const WrongAnimal *OrangeCat = new WrongCat();
+		std::cout << "OrangeCat is of type: " << OrangeCat->getType() << std::endl;
+		OrangeCat->makeSound();
 
-	std::cout << std::endl << "WRONG ANIMAL:" << std::endl;
+		WrongCat SiameseCat;
+		WrongAnimal *f = &SiameseCat;
+		std::cout << "SiameseCat is of type: " << f->getType() << std::endl;
+		f->makeSound();
 
-	const WrongAnimal *OrangeCat = new WrongCat();
-	std::cout << "OrangeCat is of type: " << OrangeCat->getType() << std::endl;
-	OrangeCat->makeSound();
+		delete(OrangeCat);
+	}
+	std::cout << YELLOW <<  "\nCopy and Copy Assignment Test\n" << NC << std::endl;
+	{
+		Dog Terrier;
+		Terrier.setType("Terrier");
+		std::cout << "Terrier Type: " << Terrier.getType() << std::endl;
 
-	WrongCat SiameseCat;
-	WrongAnimal *f = &SiameseCat;
-	std::cout << "SiameseCat is of type: " << f->getType() << std::endl;
-	f->makeSound();
-
-	delete(OrangeCat);
+		Dog Yorkshire(Terrier);
+		Dog Scottish = Terrier;
+		std::cout << "Yorkshire Type: " << Yorkshire.getType() << std::endl;
+		std::cout << "Scottish Type: " << Scottish.getType() << std::endl;
+	}
 
 	return 0;
 }

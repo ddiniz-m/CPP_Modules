@@ -6,8 +6,12 @@
 int main()
 {
 	{
-		const Animal*	j = new Dog();
-		const Animal*	i = new Cat();
+		//AAnimal a; ---> Gives Error
+		// Abstract classes are used to represent general concepts;
+		// In this case, Animal. No objects can be created, however, pointers
+		//	and references can be declared.
+		const AAnimal*	j = new Dog();
+		const AAnimal*	i = new Cat();
 
 		std::cout << i->getType() << " " << std::endl;
 		std::cout << j->getType() << " " << std::endl;
@@ -17,7 +21,7 @@ int main()
 		delete(j);
 	}
 	{
-		Animal *arr[10];
+		AAnimal *arr[10];
 		for (int i = 0; i < 10; i++)
 		{
 			if (i < 5)
@@ -57,10 +61,10 @@ int main()
 		std::cout << "Copy Brain:" << std::endl;
 		CopyBrain->printIdea();
 	}
-	std::cout << YELLOW <<  "\nWrongAnimal test\n" << NC << std::endl;
+	std::cout << YELLOW <<  "\nWrongAAnimal test\n" << NC << std::endl;
 	{
 		Dog Terrier;
-		Animal *i = &Terrier;
+		AAnimal *i = &Terrier;
 		std::cout << "Terrier is of type: " << i->getType() << std::endl;
 		std::cout << "Terrier made the sound: ";
 		i->makeSound();
