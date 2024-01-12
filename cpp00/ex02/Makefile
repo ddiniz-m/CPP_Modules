@@ -1,13 +1,13 @@
 #! Makefile
 
 NAME = MissingFile
-CXX = @c++
+CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g -fsanitize=address
 RM = rm -rf
 
 OBJ_DIR = obj
 
-SRC_CPP = Account.cpp test.cpp
+SRC_CPP = tests.cpp Account.cpp
 SRCS = $(addprefix src/, $(SRC_CPP))
 OBJS = $(SRCS:src/%.cpp=$(OBJ_DIR)/%.o)
 

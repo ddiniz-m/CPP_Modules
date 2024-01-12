@@ -1,11 +1,11 @@
 #! Makefile
 
-NAME = megaphone
+NAME = Megaphone
 CXX = @c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -fsanitize=address
 RM = rm -rf
 
-SRC = megaphone.cpp
+SRC = Megaphone.cpp
 OBJ = $(SRC:%.c=%.o)
 
 NC = "\033[0m"
@@ -20,7 +20,7 @@ $(NAME): $(OBJ)
 	@echo $(GREEN)"Compiled!"$(NC)
 
 %$(OBJ): %$(SRC)
-	@$(CXX) $(CXXFLAGS) -c $@ -o $<
+	@$(CXX) $(CXXFLAGS) -o $@ -c $<
 
 clean:
 	@$(RM) $(OBJS)

@@ -11,7 +11,12 @@ std::string	Contact::input_field(std::string str)
 			break ;
 		if (field.empty())
 		{
-			std::cout << "Field must nor be empty" << std::endl;
+			std::cout << "Field must not be empty" << std::endl;
+			continue ;
+		}
+		if (str.compare("Phone Number") == 0 && s_isdigit(field))
+		{
+			std::cout << "Field must be a valid Phone Number" << std::endl;
 			continue ;
 		}
 		return (field);
@@ -44,4 +49,15 @@ Contact Contact::add()
 	contact.PhoneNumber = input_field("Phone Number");
 	contact.DarkSecret = input_field("Darkest Secret");
 	return (contact);
+}
+
+int Contact::s_isdigit(std::string str)
+{
+	std::string::const_iterator iterator;
+	iterator = str.begin();
+	while (iterator != str.end() && std::isdigit(*iterator))
+		iterator++;
+	if (str.end() == iterator)
+		return (0);
+	return (1);
 }

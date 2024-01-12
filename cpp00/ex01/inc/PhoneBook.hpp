@@ -6,15 +6,16 @@
 
 class PhoneBook
 {
-	public:
-	PhoneBook();
-	~PhoneBook();
-	void	search_book(void);
-	void	add_contact(int index);
-	std::string	truncate(std::string str);
-
 	private:
 		Contact	Contacts[8];
+
+	public:
+		PhoneBook();
+		~PhoneBook();
+		void	search_book(void);
+		void	add_contact(int index);
+		std::string	truncate(std::string str);
+
 	
 };
 
