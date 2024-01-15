@@ -22,6 +22,9 @@ class	Point
 		Point(const Point &n);
 		Point& operator=(const Point &n);
 		~Point();
+
+		Fixed	getX() const;
+		Fixed	getY() const;
 };
 
 #endif

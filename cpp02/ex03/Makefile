@@ -1,6 +1,6 @@
 #! Makefile
 
-NAME = Bsq
+NAME = Bsp
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g -fsanitize=address
 INC = -I /usr/includes/c++/11/iostream
@@ -8,7 +8,7 @@ RM = rm -rf
 
 OBJ_DIR = obj
 
-SRC_CPP = main.cpp Fixed.cpp Point.cpp bsq.cpp
+SRC_CPP = main.cpp Fixed.cpp Point.cpp bsp.cpp
 SRCS = $(addprefix src/, $(SRC_CPP))
 OBJS = $(SRCS:src/%.cpp=$(OBJ_DIR)/%.o)
 
