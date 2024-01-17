@@ -9,6 +9,12 @@ each line to s1 (minus the fisrt character that was removed by getline).
 */
 int	main(int ac, char **av)
 {
+	if (ac != 4)
+	{
+		std::cout << "Incorrect number of arguments" << std::endl;
+		return (0);
+	}
+
 	int				flag = 0;
 	const char		*str2;
 	std::string		str1;
@@ -16,11 +22,6 @@ int	main(int ac, char **av)
 	std::fstream	file;
 	std::string		sub = std::string(av[2]);
 
-	if (ac != 4)
-	{
-		std::cout << "Incorrect number of arguments" << std::endl;
-		return (0);
-	}
 	file.open(av[1], std::ios::in);
 	if (!file.is_open())
 	{

@@ -13,7 +13,7 @@ int	main()
 
 	std::cout << std::endl << std::endl;
 
-	a.setRawBits(1);
+	a.setRawBits(2);
 	Fixed d;
 	d = a;
 	Fixed e(a);

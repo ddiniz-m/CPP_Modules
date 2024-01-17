@@ -30,7 +30,7 @@ clean:
 	@$(RM) $(OBJS) $(OBJ_DIR) *.replace
 
 fclean: clean
-	@$(RM) $(NAME)
+	@$(RM) $(NAME) 
 
 re: fclean all
 

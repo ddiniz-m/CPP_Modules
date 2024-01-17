@@ -7,9 +7,9 @@ AMateria::AMateria()
 	std::cout << GREEN << "AMateria Default Constructor Called" << NC << std::endl;
 }
 
-AMateria::AMateria(std::string const &type)
+AMateria::AMateria(std::string const &_type)
 {
-	;
+	setType(type);
 }
 
 AMateria& AMateria::operator=(const AMateria &copy_a)

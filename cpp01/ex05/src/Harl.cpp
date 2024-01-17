@@ -43,7 +43,12 @@ void	Harl::complain(std::string level)
 	int		i;
 	Harl	object;
 
-	void	(Harl::*member_ptr[4])() = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
+	void	(Harl::*member_ptr[4])() = {
+		&Harl::debug, 
+		&Harl::info, 
+		&Harl::warning, 
+		&Harl::error
+		};
 	std::string levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 
 	i = 0;

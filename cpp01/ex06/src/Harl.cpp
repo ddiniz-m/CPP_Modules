@@ -41,16 +41,29 @@ void	Harl::error(void)
 void	Harl::complain(std::string level)
 {
 	int		i;
-	Harl	object;
 
-	void	(Harl::*member_ptr[4])() = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
 	std::string levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 
 	i = 0;
 	while (i < 4)
 	{
 		if (level == levels[i])
-			(object.*member_ptr[i])();
+			break ;
 		i++;
+	}
+	switch (i)
+	{
+		case 0:
+			debug();
+		case 1:
+			info();
+		case 2:
+			warning();
+		case 3:
+			error();
+			break;
+		default:
+			std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
+			break;
 	}
 }

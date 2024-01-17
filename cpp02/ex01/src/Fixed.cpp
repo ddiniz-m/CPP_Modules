@@ -17,7 +17,7 @@ Fixed::Fixed(const Fixed &t)
 Fixed& Fixed::operator=(const Fixed &t)
 {
 	std::cout << GREEN << "Copy Assignment Operator Called" << NC << std::endl;
-	this->setRawBits(t.getRawBits());
+	this->value = t.value;
 	return (*this);
 }
 
@@ -27,12 +27,14 @@ Fixed::~Fixed()
 }
 // ---------------------- Orthodox Canonical Form -----------------------------
 
+//(i << bit) = (i * 256)
 Fixed::Fixed(const int i)
 {
 	std::cout << GREEN << "Int Constructor Called" << NC << std::endl;
 	this->setRawBits((i << bit));
 }
 
+//roudf(f * (1 << bit) = roundf(f * 256)
 Fixed::Fixed(const float f)
 {
 	std::cout << GREEN << "Float Constructor Called" << NC << std::endl;
@@ -49,11 +51,12 @@ void	Fixed::setRawBits(int const raw)
 	this->value = raw;
 }
 
+//value / (1 << bit) = value / 256
 float	Fixed::toFloat(void) const
 {
 	float f;
 
-	f = (float)this->getRawBits() / (1 << bit);
+	f = (float)this->value / (1 << bit);
 	return (f);
 }
 
@@ -61,7 +64,7 @@ int		Fixed::toInt(void) const
 {
 	int	i;
 
-	i = this->getRawBits() >> bit;
+	i = this->value >> bit;
 	return (i);
 }
 
