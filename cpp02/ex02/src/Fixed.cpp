@@ -103,34 +103,39 @@ bool Fixed::operator!=(const Fixed &n)const
 
 Fixed Fixed::operator+(const Fixed &n)
 {
-	Fixed add;
+	Fixed op;
 
-	add = this->toFloat() + n.toFloat();
-	return (add);
+	op = this->toFloat() + n.toFloat();
+	return (op);
 }
 
 Fixed Fixed::operator-(const Fixed &n)
 {
-	Fixed add;
+	Fixed op;
 
-	add = this->toFloat() - n.toFloat();
-	return (add);
+	op = this->toFloat() - n.toFloat();
+	return (op);
 }
 
 Fixed Fixed::operator*(const Fixed &n)
 {
-	Fixed add;
+	Fixed op;
 
-	add = this->toFloat() * n.toFloat();
-	return (add);
+	op = this->toFloat() * n.toFloat();
+	return (op);
 }
 
 Fixed Fixed::operator/(const Fixed &n)
 {
-	Fixed add;
+	Fixed op;
 
-	add = this->toFloat() / n.toFloat();
-	return (add);
+	if (n.toFloat() == 0)
+	{
+		std::cout << "Cannot divide by 0! Return Value: ";
+		return (1);
+	}
+	op = this->toFloat() / n.toFloat();
+	return (op);
 }
 
 Fixed& Fixed::operator++(void)

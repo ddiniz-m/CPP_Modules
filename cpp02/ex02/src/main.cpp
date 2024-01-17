@@ -14,7 +14,7 @@ int main( void )
 	std::cout << Fixed::max( a, b ) << std::endl << std::endl;
 
 	Fixed d(10);
-	Fixed e(2);
+	Fixed e(0);
 	Fixed f(10.1f);
 	std::cout << "d: "<< d << std::endl;
 	std::cout << "e: "<< e << std::endl;
@@ -48,8 +48,8 @@ int main( void )
 	std::cout << "min: " << Fixed::min(g, h) << std::endl;
 	std::cout << "max: " << Fixed::max(g, h) << std::endl << std::endl;
 
-	Fixed const i(Fixed(2.2f));
-	Fixed const j(Fixed(78.9f));
+	Fixed const i(2.2f);
+	Fixed const j(78.9f);
 	std::cout << "const min: " << Fixed::min(i, j)  << std::endl;
 	std::cout << "const max: " << Fixed::max(i, j) << std::endl;
 	return 0;
