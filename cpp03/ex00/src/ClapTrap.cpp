@@ -78,16 +78,19 @@ void	ClapTrap::setAttack(unsigned int amount)
 void	ClapTrap::setEnergy(unsigned int amount)
 {
 	this->energy = amount;
+	std::cout << "ClapTrap " << this->getName() << "'s energy points were set to " << this->energy << std::endl;
 }
+
 
 int		ClapTrap::check(void)
 {
 	if (this->energy <= 0)
 	{
-		std::cout << "Out of energy points!" << std::endl;
+		std::cout << this->getName() << " is out of energy points!" << std::endl;
 		return (1);
 	}
 	if (this->hp <= 0)
+			std::cout << this->getName() << " has no hp left!" << std::endl;
 		return (1);
 	return (0);
 }

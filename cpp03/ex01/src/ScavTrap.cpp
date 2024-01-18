@@ -12,7 +12,7 @@ ScavTrap::ScavTrap() : ClapTrap()
 
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 {
-	std::cout << GREEN << "ScavTrap Default Constructor Called" << NC << std::endl;
+	std::cout << GREEN << "ScavTrap Name Constructor Called" << NC << std::endl;
 	this->setHp(100);
 	this->setEnergy(50);
 	this->setAttack(20);

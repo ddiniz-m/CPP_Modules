@@ -2,7 +2,7 @@
 #include "../inc/DiamondTrap.hpp"
 
 // ---------------------- Orthodox Canonical Form -----------------------------
-DiamondTrap::DiamondTrap() : ClapTrap(), ScavTrap(), FragTrap()
+DiamondTrap::DiamondTrap() : ScavTrap(), FragTrap()
 {
 	std::cout << GREEN << "DiamondTrap Default Constructor Called" << NC << std::endl;
 	this->setHp(ft.getHp());
