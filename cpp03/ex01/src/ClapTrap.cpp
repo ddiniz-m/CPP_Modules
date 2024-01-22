@@ -103,7 +103,8 @@ void ClapTrap::attack(const std::string& target)
 {
 	if (check())
 		return ;
-	std::cout << "ClapTrap " << this->getName() << " attacked " << target << "!!" << std::endl;
+	std::cout << "ClapTrap " << this->getName() << " attacked " << target;
+	std::cout << " dealing " << this->atk << " points of damage!" << std::endl;
 	this->energy--;
 }
 

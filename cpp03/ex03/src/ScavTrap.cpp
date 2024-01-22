@@ -5,17 +5,17 @@
 ScavTrap::ScavTrap() : ClapTrap()
 {
 	std::cout << GREEN << "ScavTrap Default Constructor Called" << NC << std::endl;
-	this->setHp(100);
-	this->setEnergy(50);
-	this->setAttack(20);
+	this->hp = 100;
+	this->energy = 50;
+	this->atk = 20;
 }
 
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 {
 	std::cout << GREEN << "ScavTrap Name Constructor Called" << NC << std::endl;
-	this->setHp(100);
-	this->setEnergy(50);
-	this->setAttack(20);
+	this->hp = 100;
+	this->energy = 50;
+	this->atk = 20;
 }
 
 ScavTrap::ScavTrap(const ScavTrap &copy) : ClapTrap()
@@ -41,8 +41,9 @@ void ScavTrap::attack(const std::string& target)
 {
 	if (check())
 		return ;
-	std::cout << "ScavTrap " << this->getName() << " attacked " << target << "!!" << std::endl;
-	this->setEnergy(getEnergy() - 1);
+	std::cout << "ScavTrap " << this->getName() << " attacked " << target;
+	std::cout << " dealing " << this->atk << " points of damage!" << std::endl;
+	this->energy--;
 }
 
 void	ScavTrap::guardGate(void)

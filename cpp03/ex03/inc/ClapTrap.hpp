@@ -10,11 +10,11 @@
 
 class ClapTrap
 {
-	private:
+	protected:
 		std::string		name;
-		int	hp;
-		int	energy;
-		int	atk;
+		int				hp;
+		int				energy;
+		int				atk;
 
 	public:
 		ClapTrap();

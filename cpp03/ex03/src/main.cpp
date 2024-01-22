@@ -24,8 +24,8 @@ int main()
 	std::cout << "DiamondTrap " << mc.getName() << " has " << mc.getHp() << " health points!" << std::endl;
 
 	mc.guardGate();
-	mc.highFivesGuys();
 	mc.whoAmI();
 	std::cout << std::endl;
-
+	std::cout << std::endl;
+	std::cout << std::endl;
 }

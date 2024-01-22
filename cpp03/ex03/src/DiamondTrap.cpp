@@ -5,18 +5,13 @@
 DiamondTrap::DiamondTrap() : ScavTrap(), FragTrap()
 {
 	std::cout << GREEN << "DiamondTrap Default Constructor Called" << NC << std::endl;
-	this->setHp(ft.getHp());
-	this->setEnergy(st.getEnergy());
-	this->setAttack(ft.getAttack());
+	
 }
 
 DiamondTrap::DiamondTrap(std::string name) : ClapTrap(name + "_clap_name")
 {
 	std::cout << GREEN << "DiamondTrap Name Constructor Called" << NC << std::endl;
 	this->name = name;
-	this->setHp(ft.getHp());
-	this->setEnergy(st.getEnergy());
-	this->setAttack(ft.getAttack());
 }
 
 DiamondTrap& DiamondTrap::operator=(const DiamondTrap &copy_a)

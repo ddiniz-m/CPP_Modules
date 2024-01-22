@@ -5,17 +5,17 @@
 FragTrap::FragTrap() : ClapTrap()
 {
 	std::cout << GREEN << "FragTrap Default Constructor Called" << NC << std::endl;
-	this->setHp(100);
-	this->setEnergy(100);
-	this->setAttack(30);
+	this->hp = 100;
+	this->energy = 100;
+	this->atk = 30;
 }
 
 FragTrap::FragTrap(std::string name) : ClapTrap(name)
 {
 	std::cout << GREEN << "FragTrap Name Constructor Called" << NC << std::endl;
-	this->setHp(100);
-	this->setEnergy(100);
-	this->setAttack(30);
+	this->hp = 100;
+	this->energy = 100;
+	this->atk = 30;
 }
 
 FragTrap::FragTrap(const FragTrap &copy) : ClapTrap()
@@ -41,8 +41,9 @@ void FragTrap::attack(const std::string& target)
 {
 	if (check())
 		return ;
-	std::cout << "FragTrap " << this->getName() << " attacked " << target << "!!" << std::endl;
-	this->setEnergy(getEnergy() - 1);
+	std::cout << "FragTrap " << this->getName() << " attacked " << target;
+	std::cout << " dealing " << this->atk << " points of damage!" << std::endl;
+	this->energy--;
 }
 
 void	FragTrap::highFivesGuys(void)
