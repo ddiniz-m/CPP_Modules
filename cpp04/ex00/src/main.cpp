@@ -5,26 +5,28 @@
 
 int main()
 {
-	const Animal* meta = new Animal();
-	const Animal* j = new Dog();
-	const Animal* i = new Cat();
+	std::cout << YELLOW <<  "\nSubject test\n" << NC << std::endl;
+	{
+		const Animal* meta = new Animal();
+		const Animal* j = new Dog();
+		const Animal* i = new Cat();
 
-	std::cout << i->getType() << " " << std::endl;
-	std::cout << j->getType() << " " << std::endl;
-	i->makeSound(); //will output the cat sound!
-	j->makeSound();
-	meta->makeSound();
+		std::cout << i->getType() << " " << std::endl;
+		std::cout << j->getType() << " " << std::endl;
+		i->makeSound(); //will output the cat sound!
+		j->makeSound();
+		meta->makeSound();
 
-	delete(meta);
-	delete(i);
-	delete(j);
-
+		delete(meta);
+		delete(i);
+		delete(j);
+	}
 	std::cout << YELLOW <<  "\nWrongAnimal test\n" << NC << std::endl;
 	{
 		Dog Terrier;
 		Animal *k = &Terrier;
 		std::cout << "Terrier is of type: " << k->getType() << std::endl;
-		std::cout << "Terrier made the sound: ";
+		std::cout << "Terrier ";
 		k->makeSound();
 
 		const WrongAnimal *OrangeCat = new WrongCat();
@@ -49,6 +51,5 @@ int main()
 		std::cout << "Yorkshire Type: " << Yorkshire.getType() << std::endl;
 		std::cout << "Scottish Type: " << Scottish.getType() << std::endl;
 	}
-
 	return 0;
 }

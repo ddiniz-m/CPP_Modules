@@ -6,10 +6,8 @@
 int main()
 {
 	{
-		//AAnimal a; ---> Gives Error
-		// Abstract classes are used to represent general concepts;
-		// In this case, Animal. No objects can be created, however, pointers
-		//	and references can be declared.
+		/* AAnimal test; */
+
 		const AAnimal*	j = new Dog();
 		const AAnimal*	i = new Cat();
 
@@ -43,30 +41,43 @@ int main()
 		Dog _Dog;
 		Brain *_Brain;
 		_Brain = _Dog.getBrain();
-		_Brain->setIdeas("MAIN BRAIN");
-		std::cout << "Brain:" << std::endl;
-		_Brain->printIdea();
+		_Brain->setIdeas('a');
+		_Brain->printIdea("_Dog");
 
-		Dog CopyDog = _Dog;
+		Dog _Copy(_Dog);
 		Brain *CopyBrain;
-		CopyBrain = CopyDog.getBrain();
-		std::cout << "Copy Brain:" << std::endl;
-		CopyBrain->printIdea();
+		CopyBrain = _Copy.getBrain();
+		CopyBrain->printIdea("_Copy");
 
-		_Brain->setIdeas("CHANGED BRAIN");
-		std::cout << "Brain:" << std::endl;
-		_Brain->printIdea();
-
-		CopyBrain = CopyDog.getBrain();
-		std::cout << "Copy Brain:" << std::endl;
-		CopyBrain->printIdea();
+		_Brain->setIdeas('0');
+		std::cout << YELLOW << "IDEAS WERE CHANGED" << NC << std::endl;
+		_Brain->printIdea("_Dog");
+		CopyBrain->printIdea("_Copy");
 	}
-	std::cout << YELLOW <<  "\nWrongAAnimal test\n" << NC << std::endl;
+	std::cout << YELLOW << "\nDeep Copy Assingment Op Test\n" << NC <<std::endl;
+	{
+		Dog _Dog;
+		Brain *_Brain;
+		_Brain = _Dog.getBrain();
+		_Brain->setIdeas('a');
+		_Brain->printIdea("_Dog");
+
+		Dog _Copy = _Dog;
+		Brain *CopyBrain;
+		CopyBrain = _Copy.getBrain();
+		CopyBrain->printIdea("_Copy");
+
+		_Brain->setIdeas('0');
+		std::cout << YELLOW << "IDEAS WERE CHANGED\n" << NC << std::endl;
+		_Brain->printIdea("_Dog");
+		CopyBrain->printIdea("_Copy");
+	}
+	std::cout << YELLOW <<  "\nWrongAnimal test\n" << NC << std::endl;
 	{
 		Dog Terrier;
 		AAnimal *i = &Terrier;
 		std::cout << "Terrier is of type: " << i->getType() << std::endl;
-		std::cout << "Terrier made the sound: ";
+		std::cout << "Terrier ";
 		i->makeSound();
 
 		const WrongAnimal *OrangeCat = new WrongCat();
@@ -80,7 +91,7 @@ int main()
 
 		delete(OrangeCat);
 	}
-	std::cout << YELLOW <<  "\nCopy and Copy Assignment Test\n" << NC << std::endl;
+	std::cout << YELLOW <<  "\nCopy and Copy Assignment Op. Test\n" << NC << std::endl;
 	{
 		Dog Terrier;
 		Terrier.setType("Terrier");

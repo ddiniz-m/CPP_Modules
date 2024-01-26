@@ -5,7 +5,7 @@
 Cat::Cat()
 {
 	std::cout << GREEN << "Cat Default Constructor Called" << NC << std::endl;
-	setType("Cat");
+	this->type = "Cat";
 }
 
 Cat& Cat::operator=(const Cat &copy_a)
@@ -15,7 +15,7 @@ Cat& Cat::operator=(const Cat &copy_a)
 	return (*this);
 }
 
-Cat::Cat(const Cat &copy)
+Cat::Cat(const Cat &copy) : Animal()
 {
 	std::cout << GREEN << "Cat Copy Constructor Called" << NC << std::endl;
 	*this = copy;
@@ -29,5 +29,5 @@ Cat::~Cat()
 
 void	Cat::makeSound(void) const
 {
-	std::cout << getType() << " made a sound: Meow Meow" << std::endl;
+	std::cout << this->type << " made a sound: Meow Meow" << std::endl;
 }

@@ -16,11 +16,12 @@ Cat& Cat::operator=(const Cat &copy_a)
 	Animal::operator=(copy_a);
 	if (this->brain)
 		delete(this->brain);
+	this->type = copy_a.type;
 	this->brain = new Brain(*copy_a.brain);
 	return (*this);
 }
 
-Cat::Cat(const Cat &copy)
+Cat::Cat(const Cat &copy) : Animal()
 {
 	std::cout << GREEN << "Cat Copy Constructor Called" << NC << std::endl;
 	this->brain = NULL;

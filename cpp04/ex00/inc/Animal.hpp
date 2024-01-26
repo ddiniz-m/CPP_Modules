@@ -11,7 +11,7 @@
 
 class Animal
 {
-	private:
+	protected:
 		std::string	type;
 	public:
 		Animal();
@@ -19,9 +19,9 @@ class Animal
 		Animal(const Animal &copy);
 		Animal& operator=(const Animal &copy_a);
 
-		std::string	getType(void) const;
-		virtual void		makeSound(void) const;
-		void		setType(std::string name);
+		std::string		getType(void) const;
+		virtual void	makeSound(void) const;
+		void			setType(std::string name);
 
 };
 

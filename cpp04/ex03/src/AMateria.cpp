@@ -9,13 +9,13 @@ AMateria::AMateria()
 
 AMateria::AMateria(std::string const &_type)
 {
-	setType(type);
+	this->type = _type;
 }
 
 AMateria& AMateria::operator=(const AMateria &copy_a)
 {
 	std::cout << GREEN << "AMateria Copy Assignment Operator Called" << NC << std::endl;
-	(void)copy_a;
+	this->type = copy_a.type;
 	return (*this);
 }
 
@@ -33,10 +33,16 @@ AMateria::~AMateria()
 
 std::string const &AMateria::getType() const
 {
-	;
+	return(this->type);
 }
 
 void	AMateria::setType(std::string const &type)
 {
-	;
+	this->type = type;
+}
+
+void	AMateria::use(ICharacter &target)
+{
+	std::cout << "Default Use" << std::endl;
+	(void)target;
 }

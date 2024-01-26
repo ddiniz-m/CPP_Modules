@@ -12,12 +12,12 @@
 
 class AAnimal
 {
-	private:
+	protected:
 		std::string	type;
 	public:
 		AAnimal();
 		virtual ~AAnimal();
-		virtual AAnimal& operator=(const AAnimal &copy_a);
+		AAnimal& operator=(const AAnimal &copy_a);
 		AAnimal(const AAnimal &copy);
 
 		std::string	getType(void) const;
@@ -27,3 +27,4 @@ class AAnimal
 };
 
 #endif
+

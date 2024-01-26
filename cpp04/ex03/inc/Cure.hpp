@@ -12,11 +12,9 @@
 
 class Cure : public AMateria
 {
-	private:
-		
 	public:
 		Cure();
-		~Cure();
+		virtual ~Cure();
 		Cure& operator=(const Cure &copy_a);
 		Cure(const Cure &copy);
 

@@ -15,7 +15,7 @@ WrongCat& WrongCat::operator=(const WrongCat &copy_a)
 	return (*this);
 }
 
-WrongCat::WrongCat(const WrongCat &copy)
+WrongCat::WrongCat(const WrongCat &copy) : WrongAnimal()
 {
 	std::cout << GREEN << "WrongCat Copy Constructor Called" << NC << std::endl;
 	*this = copy;

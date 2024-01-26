@@ -1,5 +1,6 @@
 
 #include "../inc/Brain.hpp"
+#include <string>
 
 // ---------------------- Orthodox Canonical Form -----------------------------
 Brain::Brain()
@@ -27,13 +28,38 @@ Brain::~Brain()
 }
 // ---------------------- Orthodox Canonical Form -----------------------------
 
-	void	Brain::setIdeas(std::string str)
+	void	Brain::setIdeas(char c)
 	{
-		for (int i = 0; i < 100; i++)
-			this->ideas[i] = str;
+		if (isalpha(c))
+		{
+			for (int i = 0; i < 100; i++)
+			{
+				for (int alpha = 0; alpha < 26 && i < 100; alpha++)
+				{
+					this->ideas[i] = 'a' + alpha;
+					i++;
+				}
+				i--;
+			}
+		}
+		else if (isdigit(c))
+		{
+			for (int i = 0; i < 100; i++)
+			{
+				for (int dig = 0; dig < 10 && i < 100; dig++)
+				{
+					this->ideas[i] = 48 + dig;
+					i++;
+				}
+				i--;
+			}
+		}
 	}
 
-	void	Brain::printIdea(void)
+	void	Brain::printIdea(std::string Owner)
 	{
-		std::cout << "Idea: " << this->ideas[50] << std::endl;
+		std::cout << Owner << "'s Ideas = {";
+		for (int i = 0; i < 100; i++)
+			std::cout << this->ideas[i] << ", ";
+		std::cout << "}" << std::endl;
 	}

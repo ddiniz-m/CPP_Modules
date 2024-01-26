@@ -15,12 +15,12 @@ class Brain
 		std::string ideas[100];
 	public:
 		Brain();
-		virtual ~Brain();
+		~Brain();
 		Brain(const Brain &copy);
 		Brain& operator=(const Brain &copy_a);
 
-		void	setIdeas(std::string str);
-		void	printIdea(void);
+		void	setIdeas(char c);
+		void	printIdea(std::string Owner);
 };
 
 #endif

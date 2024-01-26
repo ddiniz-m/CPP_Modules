@@ -12,8 +12,6 @@
 
 class IMateriaSource
 {
-	private:
-		
 	public:
 		virtual ~IMateriaSource() {};
 		virtual void learnMateria(AMateria*) = 0;

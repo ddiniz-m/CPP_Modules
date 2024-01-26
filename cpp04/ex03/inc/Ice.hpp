@@ -16,7 +16,7 @@ class Ice : public AMateria
 		
 	public:
 		Ice();
-		~Ice();
+		virtual ~Ice();
 		Ice& operator=(const Ice &copy_a);
 		Ice(const Ice &copy);
 

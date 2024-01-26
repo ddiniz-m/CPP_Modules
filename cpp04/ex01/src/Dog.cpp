@@ -16,11 +16,12 @@ Dog& Dog::operator=(const Dog &copy_a)
 	Animal::operator=(copy_a);
 	if (this->brain)
 		delete(this->brain);
+	this->type = copy_a.type;
 	this->brain = new Brain(*copy_a.brain);
 	return (*this);
 }
 
-Dog::Dog(const Dog &copy)
+Dog::Dog(const Dog &copy) : Animal()
 {
 	std::cout << GREEN << "Dog Copy Constructor Called" << NC << std::endl;
 	this->brain = NULL;

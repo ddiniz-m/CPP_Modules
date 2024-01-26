@@ -2,8 +2,6 @@
 # define CHARACTER_HPP
 
 #include <iostream>
-#include "AMateria.hpp"
-#include "ICharacter.hpp"
 
 #define NC "\033[0m"
 #define RED "\033[0;31m"
@@ -11,13 +9,17 @@
 #define YELLOW "\033[0;33m"
 #define MAGENTA "\033[0;35m"
 
+#include "ICharacter.hpp"
+
 class Character : public ICharacter
 {
 	private:
-		AMateria *inventory[3];
+		AMateria *inventory[4];
+		std::string name;
 	public:
 		Character();
-		~Character() {}
+		Character(std::string name);
+		virtual ~Character();
 		Character& operator=(const Character &copy_a);
 		Character(const Character &copy);
 

@@ -5,7 +5,7 @@
 Dog::Dog()
 {
 	std::cout << GREEN << "Dog Default Constructor Called" << NC << std::endl;
-	setType("Dog");
+	this->type = "Dog";
 }
 
 Dog& Dog::operator=(const Dog &copy_a)
@@ -15,7 +15,7 @@ Dog& Dog::operator=(const Dog &copy_a)
 	return (*this);
 }
 
-Dog::Dog(const Dog &copy)
+Dog::Dog(const Dog &copy) : Animal()
 {
 	std::cout << GREEN << "Dog Copy Constructor Called" << NC << std::endl;
 	*this = copy;
@@ -29,5 +29,5 @@ Dog::~Dog()
 
 void	Dog::makeSound(void) const
 {
-	std::cout << getType() << " made a sound: Woof Woof" << std::endl;
+	std::cout << this->type << " made a sound: Woof Woof" << std::endl;
 }

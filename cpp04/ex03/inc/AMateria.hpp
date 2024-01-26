@@ -2,7 +2,6 @@
 # define AMATERIA_HPP
 
 #include <iostream>
-#include "ICharacter.hpp"
 
 #define NC "\033[0m"
 #define RED "\033[0;31m"
@@ -10,10 +9,12 @@
 #define YELLOW "\033[0;33m"
 #define MAGENTA "\033[0;35m"
 
+class ICharacter;
+
 class AMateria
 {
 	protected:
-		std::string const &type;
+		std::string type;
 	public:
 		AMateria();
 		AMateria(std::string const &type);
