@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "AMateria.hpp"
+#include "ICharacter.hpp"
 
 #define NC "\033[0m"
 #define RED "\033[0;31m"

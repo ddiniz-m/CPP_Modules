@@ -12,7 +12,13 @@ MateriaSource::MateriaSource()
 MateriaSource& MateriaSource::operator=(const MateriaSource &copy_a)
 {
 	std::cout << GREEN << "MateriaSource Copy Assignment Operator Called" << NC << std::endl;
-	(void)copy_a;
+	for (int i =0; i < 4; i++)
+	{
+		if (this->materia[i])
+			this->materia[i] = copy_a.materia[i];
+		else
+			this->materia[i] = NULL;
+	}
 	return (*this);
 }
 
@@ -25,6 +31,8 @@ MateriaSource::MateriaSource(const MateriaSource &copy)
 MateriaSource::~MateriaSource()
 {
 	std::cout << RED << "MateriaSource Destructor Called" << NC << std::endl;
+	for (int i =0; i < 4; i++)
+		delete(this->materia[i]);
 }
 // ---------------------- Orthodox Canonical Form -----------------------------
 
@@ -34,7 +42,7 @@ void	MateriaSource::learnMateria(AMateria* m)
 	this->materia[i] = m;
 	std::cout << "materia[" << i << "] learned type " << m->getType() << ": " << this->materia[i]->getType() << std::endl;
 	i++;
-	if (i == 3)
+	if (i == 4)
 		i = 0;
 }
 

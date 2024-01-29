@@ -10,6 +10,8 @@
 #define YELLOW "\033[0;33m"
 #define MAGENTA "\033[0;35m"
 
+class AMateria;
+
 class ICharacter
 {
 	public:
