@@ -30,7 +30,7 @@ Character::~Character()
 	std::cout << RED << "Character Destructor Called" << NC << std::endl;
 	for (int i = 0; i < 4; i++)
 	{
-		if (this->inventory[i] != NULL)
+		if (this->inventory[i])
 			delete(this->inventory[i]);
 		this->inventory[i] = NULL;
 	}
@@ -53,27 +53,51 @@ std::string const &Character::getName() const
 
 void	Character::equip(AMateria* m)
 {
-	static int index = 0;
-
-	if (inventory[index])
+	if (!m)
 	{
-		std::cout << "Dropped " << this->inventory[index]->getType() << " that was in slot " << index << std::endl;
-		delete (this->inventory[index]);
-		this->inventory[index] = NULL;
+		std::cout << "Invalid Materia" << std::endl;
+		return ;
 	}
-	inventory[index] = m;
-	std::cout << "Equiped " << m->getType() << " in slot " << index << std::endl;
-	index++;
-	if (index == 4)
-		index = 0;
+	for (int i = 0; i < 4; i++)
+	{
+		if (inventory[i])
+			continue ;
+		else
+		{
+			inventory[i] = m;
+			std::cout << "Equiped " << m->getType() << " in slot " << i << std::endl;
+			return ;
+		}
+	}
 }
 
 void	Character::unequip(int idx)
 {
-	std::cout << "Unequiped " << inventory[idx]->getType() << " slot number " << idx << std::endl;
+	if (idx < 0 || idx > 3)
+	{
+		std::cout << "Invalid Index" << std::endl;
+		return ;
+	}
+	if (!inventory[idx])
+	{
+		std::cout << "Empty Slot" << std::endl;
+		return ;
+	}
+	std::cout << "Unequiped " << inventory[idx]->getType() << " in slot " << idx << std::endl;
+	inventory[idx] = NULL;
 }
 
 void	Character::use(int idx, ICharacter& target)
 {
+	if (idx < 0 || idx > 3)
+	{
+		std::cout << "Invalid Index" << std::endl;
+		return ;
+	}
+	if (!inventory[idx])
+	{
+		std::cout << "Empty Slot" << std::endl;
+		return ;
+	}
 	inventory[idx]->use(target);
 }

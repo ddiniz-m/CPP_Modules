@@ -32,18 +32,28 @@ MateriaSource::~MateriaSource()
 {
 	std::cout << RED << "MateriaSource Destructor Called" << NC << std::endl;
 	for (int i =0; i < 4; i++)
-		delete(this->materia[i]);
+	{
+		if (this->materia[i])
+			delete(this->materia[i]);
+		this->materia[i] = NULL;
+	}
 }
 // ---------------------- Orthodox Canonical Form -----------------------------
 
 void	MateriaSource::learnMateria(AMateria* m)
 {
-	static int i = 0;
-	this->materia[i] = m;
-	std::cout << "materia[" << i << "] learned type " << m->getType() << ": " << this->materia[i]->getType() << std::endl;
-	i++;
-	if (i == 4)
-		i = 0;
+	for (int i =0; i < 4; i++)
+	{
+		if (!this->materia[i])
+		{
+			this->materia[i] = m;
+			std::cout << "materia[" << i << "] learned type " << m->getType() << ": ";
+			std::cout << this->materia[i]->getType() << std::endl;
+			return ;
+		}
+	}
+	delete m;
+	
 }
 
 AMateria*	MateriaSource::createMateria(std::string const & type)
@@ -51,11 +61,8 @@ AMateria*	MateriaSource::createMateria(std::string const & type)
 	for (int i = 0; i < 4; i++)
 	{
 		if (this->materia[i] && type.compare(this->materia[i]->getType()) == 0)
-		{
-			std::cout << "Type: " << type << " | this->materia[i]: " << this->materia[i]->getType()<< std::endl;
 			return (this->materia[i]->clone());
-		}
 	}
-	std::cout << "Unkown type!" << std::endl;
-	return (NULL);
+
+	return (0);
 }

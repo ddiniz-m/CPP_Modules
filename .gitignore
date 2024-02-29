@@ -1,2 +1,4 @@
 .nfs*
 .vscode
+*obj/
+*.sh

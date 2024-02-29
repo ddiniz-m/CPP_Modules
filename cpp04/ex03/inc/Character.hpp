@@ -19,7 +19,7 @@ class Character : public ICharacter
 	public:
 		Character();
 		Character(std::string name);
-		virtual ~Character();
+		~Character();
 		Character& operator=(const Character &copy_a);
 		Character(const Character &copy);
 
