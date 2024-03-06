@@ -1,18 +1,54 @@
 
-#include "../inc/ScaleConverter.hpp"
+#include "../inc/Bureaucrat.hpp"
 
 int	main(void)
 {
-	ScaleConverter	Conv;
+	{
+		Bureaucrat	Bu(12);
+		Bu.setName("Saturn");
 
-	std::string	chr = "a";
-	std::string	i = "42";
-	std::string	f = "42.0f";
-	std::string	d = "42.0";
+		std::cout << "Name: " << Bu.getName() << "\n";
+		std::cout << "Grade: " << Bu.getGrade() << "\n\n";
+	}
+	{
+		Bureaucrat	Bu(0);
+		std::cout << "Grade: " << Bu.getGrade() << "\n\n";
+	}
+	{
+		Bureaucrat	Bu(200);
+		std::cout << "Grade: " << Bu.getGrade() << "\n\n";
+	}
+	{
+		Bureaucrat	Bu(1);
+		std::cout << "Grade Pre-Increment: " << Bu.getGrade() << "\n";
+		Bu.Increment();
+		std::cout << "Grade Pos-Increment: " << Bu.getGrade() << "\n";
+		std::cout << "Grade Pre-Decrement: " << Bu.getGrade() << "\n";
+		Bu.Decrement();
+		std::cout << "Grade Pos-Decrement: " << Bu.getGrade() << "\n\n";
+	}
+	{
+		Bureaucrat	Bu(150);
+		std::cout << "Grade Pre-Decrement: " << Bu.getGrade() << "\n";
+		Bu.Decrement();
+		std::cout << "Grade Pos-Decrement: " << Bu.getGrade() << "\n";
+		std::cout << "Grade Pre-Increment: " << Bu.getGrade() << "\n";
+		Bu.Increment();
+		std::cout << "Grade Pos-Increment: " << Bu.getGrade() << "\n\n";
 
-	std::cout << "Character: " << Conv.Convert(chr) << "\n";
-	std::cout << "Integer: " << Conv.Convert(i) << "\n";
-	std::cout << "Float: " << Conv.Convert(f) << "\n";
-	std::cout << "Double: " << Conv.Convert(d) << "\n";
+	}
+	{
+		Bureaucrat	Bu(50);
+		std::cout << "Grade Pre-Increment: " << Bu.getGrade() << "\n";
+		Bu.Increment();
+		std::cout << "Grade Pos-Increment: " << Bu.getGrade() << "\n\n";
+	}
+	{
+		Bureaucrat	Bu(50);
+		std::cout << "Grade Pre-Decrement: " << Bu.getGrade() << "\n";
+		Bu.Decrement();
+		std::cout << "Grade Pos-Decrement: " << Bu.getGrade() << "\n";
+	}
 
+	return (0);
 }

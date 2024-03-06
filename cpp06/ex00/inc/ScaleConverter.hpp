@@ -18,7 +18,8 @@ class ScaleConverter
 		ScaleConverter& operator=(const ScaleConverter &copy_a);
 		ScaleConverter(const ScaleConverter &copy);
 
-		static void *Convert(std::string str);
+		static void	Convert(char *str);
+		const char	*getType(char *str);
 };
 
 #endif
