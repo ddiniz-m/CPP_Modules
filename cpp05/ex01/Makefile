@@ -1,13 +1,13 @@
 #! Makefile
 
-NAME = 
-CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g -fsanitize=address
+NAME = Form
+CPP = c++
+CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -g -fsanitize=address
 RM = rm -rf
 
 OBJ_DIR = obj
 
-SRC_CPP = 
+SRC_CPP = main.cpp Bureaucrat.cpp Form.cpp
 SRCS = $(addprefix src/, $(SRC_CPP))
 OBJS = $(SRCS:src/%.cpp=$(OBJ_DIR)/%.o)
 
@@ -19,12 +19,12 @@ YELLOW = "\033[0;33m"
 all : $(NAME)
 
 $(NAME): $(OBJS)
-	@$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
+	@$(CPP) $(CPPFLAGS) $(OBJS) -o $(NAME)
 	@echo $(GREEN)"Compiled!"$(NC)
 
 $(OBJ_DIR)/%.o:src/%.cpp
 	@mkdir -p $(OBJ_DIR)
-	@$(CXX) $(CXXFLAGS) -o $@ -c $<
+	@$(CPP) $(CPPFLAGS) -o $@ -c $<
 
 clean:
 	@$(RM) $(OBJ_DIR)
