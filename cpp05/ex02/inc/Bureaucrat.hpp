@@ -10,6 +10,8 @@
 #define YELLOW "\033[0;33m"
 #define MAGENTA "\033[0;35m"
 
+class AForm;
+
 class Bureaucrat
 {
 	private:
@@ -40,6 +42,10 @@ class Bureaucrat
 		const std::string	getName() const;
 		void				Increment(void);
 		void				Decrement(void);
+
+		void				signForm(AForm &Form);
+
+		void				executeForm(AForm const & form);
 };
 
 std::ostream &operator<<(std::ostream& os, const Bureaucrat &bureaucrat);

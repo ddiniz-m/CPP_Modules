@@ -1,8 +1,8 @@
 #! Makefile
 
 NAME = Megaphone
-CXX = @c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -fsanitize=address
+CPP = @c++
+CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -fsanitize=address
 RM = rm -rf
 
 SRC = Megaphone.cpp
@@ -16,11 +16,11 @@ YELLOW = "\033[0;33m"
 all : $(NAME)
 
 $(NAME): $(OBJ)
-	$(CXX) $(CXXFLAGS) $(SRC) -o $(NAME)
+	$(CPP) $(CPPFLAGS) $(SRC) -o $(NAME)
 	@echo $(GREEN)"Compiled!"$(NC)
 
 %$(OBJ): %$(SRC)
-	@$(CXX) $(CXXFLAGS) -o $@ -c $<
+	@$(CPP) $(CPPFLAGS) -o $@ -c $<
 
 clean:
 	@$(RM) $(OBJS)

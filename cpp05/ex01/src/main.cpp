@@ -1,52 +1,30 @@
 
 #include "../inc/Form.hpp"
+#include "../inc/Bureaucrat.hpp"
 
 int	main(void)
 {
 	{
 		Bureaucrat	FBI(12, "FBI-man");
+		Bureaucrat	Boss(1, "Boss-man");
+		Form		Nda("Non-Disclosure Agreement");
 
 		std::cout << FBI << "\n";
+		std::cout << Boss << "\n";
+
+		std::cout << Nda << "\n";
+		FBI.signForm(Nda);
+
+		std::cout << Nda << "\n";
+		Boss.signForm(Nda);
+
+		std::cout << Nda << "\n";
 	}
+	std::cout << YELLOW << "\n************************";
+	std::cout << YELLOW << "************************\n\n";
 	{
 		Bureaucrat	FBI(0, "FBI-man");
-		std::cout << FBI << "\n";
+		Bureaucrat	Boss(151, "Boss-man");
 	}
-	{
-		Bureaucrat	FBI(200, "FBI-man");
-		std::cout << FBI << "\n";
-	}
-	{
-		Bureaucrat	FBI(1,"FBI-man");
-		std::cout << "Pre-Increment:\n" << FBI << "\n";
-		FBI.Increment();
-		std::cout << "Pos-Increment:\n" << FBI << "\n";
-		std::cout << "Pre-Decrement:\n" << FBI << "\n";
-		FBI.Decrement();
-		std::cout << "Pos-Decrement:\n" << FBI << "\n";
-	}
-	{
-		Bureaucrat	FBI(150, "FBI-man");
-		std::cout << "Pre-Decrement:\n" << FBI << "\n";
-		FBI.Decrement();
-		std::cout << "Pos-Decrement:\n" << FBI << "\n";
-		std::cout << "Pre-Increment:\n" << FBI << "\n";
-		FBI.Increment();
-		std::cout << "Pos-Increment:\n" << FBI << "\n";
-
-	}
-	{
-		Bureaucrat	FBI(50, "FBI-man");
-		std::cout << "Pre-Increment:\n" << FBI << "\n";
-		FBI.Increment();
-		std::cout << "Pos-Increment:\n" << FBI << "\n";
-	}
-	{
-		Bureaucrat	FBI(50, "FBI-man");
-		std::cout << "Pre-Decrement:\n" << FBI << "\n";
-		FBI.Decrement();
-		std::cout << "Pos-Decrement:\n" << FBI << "\n";
-	}
-
 	return (0);
 }

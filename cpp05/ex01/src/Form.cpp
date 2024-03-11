@@ -1,11 +1,12 @@
 
 #include "../inc/Form.hpp"
+#include "../inc/Bureaucrat.hpp"
 
 // ---------------------- Orthodox Canonical Form -----------------------------
-Form::Form() : name("Default"), signGrade(150), execGrade(1)
+Form::Form() : name("Default"), signGrade(2), execGrade(1)
 {
 	std::cout << GREEN << "Form Default Constructor Called" << NC << std::endl;
-	this->sign = 0;
+	this->sign = false;
 }
 
 Form& Form::operator=(const Form &copy_a)
@@ -27,39 +28,59 @@ Form::~Form()
 }
 // ---------------------- Orthodox Canonical Form -----------------------------
 
-const std::string	Form::getName(void) const
+Form::Form(std::string name) : name(name), signGrade(2), execGrade(1)
+{
+	std::cout << GREEN << "Form Name Default Constructor Called" << NC << std::endl;
+	this->sign = false;
+}
+
+std::string	Form::getName(void) const
 {
 	return(this->name);
 }
 
-bool				Form::getSign(void) const
+bool		Form::getSign(void) const
 {
 	return(this->sign);
 }
 
-const int			Form::getSignGrade(void) const
+void		Form::setSign(bool sign)
+{
+	this->sign = sign;
+}
+
+int			Form::getSignGrade(void) const
 {
 	return (this->signGrade);
 }
 
-const int			Form::getExecGrade(void) const
+int			Form::getExecGrade(void) const
 {
 	return (this->execGrade);
 }
 
-void			Form::beSigned(const Bureaucrat &Bureaucrat)
+void		Form::beSigned(Bureaucrat &Bureaucrat)
 {
 	if (Bureaucrat.getGrade() > this->getSignGrade())
 		throw GradeTooLowException();
-	Bureaucrat.myExeception(Bureaucrat.getGrade());
-	Bureaucrat.signForm(this->getSign(), this->getName());
+	else
+		setSign(true);
 }
 
 std::ostream &operator<<(std::ostream& os, Form &form)
 {
-	if (form.getSign())
-		os << "Form " << form.getName() << "" << " is signed";
-	else
-		os << "Form " << form.getName() << "" << " is NOT signed";
+	os << form.getName() << " can only be signed by personnel with grade ";
+	os << form.getSignGrade() << " or higher.\nIt can only be executed by personnel with grade " << form.getExecGrade();
+	os << " or higher.\nThis document has a sign value of: " << std::boolalpha << form.getSign() << "\n";
 	return (os);
+}
+
+const char	*Form::GradeTooHighException::what() const throw()
+{
+	return("the grade is too high");
+}
+
+const char	*Form::GradeTooLowException::what() const throw()
+{
+	return("the grade is too low");
 }

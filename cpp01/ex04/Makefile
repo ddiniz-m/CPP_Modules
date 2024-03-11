@@ -1,8 +1,8 @@
 #! Makefile
 
 NAME = SedBad
-CXX = @c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g -fsanitize=address
+CPP = @c++
+CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -g -fsanitize=address
 RM = rm -rf
 
 OBJ_DIR = obj
@@ -19,12 +19,12 @@ YELLOW = "\033[0;33m"
 all : $(NAME)
 
 $(NAME): $(OBJS)
-	$(CXX) $(CXXFLAGS) $(SRCS) -o $(NAME)
+	$(CPP) $(CPPFLAGS) $(SRCS) -o $(NAME)
 	@echo $(GREEN)"Compiled!"$(NC)
 
 $(OBJ_DIR)/%.o: $(SRCS)
 	@mkdir -p $(OBJ_DIR)
-	@$(CXX) $(CXXFLAGS) -c $@ -o $<
+	@$(CPP) $(CPPFLAGS) -c $@ -o $<
 
 clean:
 	@$(RM) $(OBJS) $(OBJ_DIR) *.replace

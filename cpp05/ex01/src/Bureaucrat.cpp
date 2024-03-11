@@ -1,5 +1,6 @@
 
 #include "../inc/Bureaucrat.hpp"
+#include "../inc/Form.hpp"
 
 // ---------------------- Orthodox Canonical Form -----------------------------
 Bureaucrat::Bureaucrat() : name("Default")
@@ -29,7 +30,6 @@ Bureaucrat::~Bureaucrat()
 Bureaucrat::Bureaucrat(int grade, const std::string name) : name(name)
 {
 	std::cout << GREEN << "Bureaucrat Grade Constructor Called" << NC << std::endl;
-	throw 1;
 	myExeception(grade);
 	this->grade = grade;
 }
@@ -49,10 +49,6 @@ int	Bureaucrat::myExeception(int grade)
 	{
 		std::cerr << e.what() << '\n';
 		return (1);
-	}
-	catch(int i)
-	{
-		std::cout << i;
 	}
 	return (0);
 }
@@ -97,17 +93,25 @@ void	Bureaucrat::Decrement(void)
 	this->grade++;
 }
 
-void	Bureaucrat::signForm(int sign, const std::string name)
+void	Bureaucrat::signForm(Form &Form)
 {
-	if (sign)
-		std::cout << this->getName() << " signed " << name << "\n";
-	else
-		std::cout << this->getName() << " couldn't sign " << name << " because " << "reason" << "\n";
+	try
+	{
+		Form.beSigned(*this);
+	}
+	catch(std::exception & e)
+	{
+		std::cout << this->getName() << RED << " couldn't sign " << NC << Form.getName();
+		std::cout <<" because " << e.what() << "\n";
+	}
+	if (Form.getSign())
+		std::cout << this->getName() << GREEN << " signed " << NC << Form.getName() << "\n";
 	
 }
 
 std::ostream &operator<<(std::ostream& os, const Bureaucrat &bureaucrat)
 {
-	os << "Bureaucrat Mr." << bureaucrat.getName() << " has grade " << bureaucrat.getGrade() << "\n";
+	os << "Bureaucrat Mr." << bureaucrat.getName() << " has grade ";
+	os << bureaucrat.getGrade() << "\n";
 	return (os);
 }

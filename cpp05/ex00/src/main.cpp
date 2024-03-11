@@ -4,50 +4,51 @@
 int	main(void)
 {
 	{
-		Bureaucrat	Bu(12);
-		Bu.setName("Saturn");
+		Bureaucrat	FBI(12, "FBI-man");
+		Bureaucrat	Boss(0, "Boss-man");
+		Bureaucrat	Janitor(200, "Janitor-man");
 
-		std::cout << "Name: " << Bu.getName() << "\n";
-		std::cout << "Grade: " << Bu.getGrade() << "\n\n";
+		std::cout << FBI << "\n";
+		std::cout << Boss << "\n";
+		std::cout << Janitor;
 	}
+	std::cout << YELLOW << "\n************************";
+	std::cout << YELLOW << "************************\n\n";
 	{
-		Bureaucrat	Bu(0);
-		std::cout << "Grade: " << Bu.getGrade() << "\n\n";
+		Bureaucrat	FBI(1,"FBI-man");
+		std::cout << "Pre-Increment:\n" << FBI << "\n";
+		FBI.Increment();
+		std::cout << "Pos-Increment:\n" << FBI << "\n";
+		std::cout << "Pre-Decrement:\n" << FBI << "\n";
+		FBI.Decrement();
+		std::cout << "Pos-Decrement:\n" << FBI;
 	}
+	std::cout << YELLOW << "\n************************";
+	std::cout << YELLOW << "************************\n\n";
 	{
-		Bureaucrat	Bu(200);
-		std::cout << "Grade: " << Bu.getGrade() << "\n\n";
+		Bureaucrat	FBI(150, "FBI-man");
+		std::cout << "Pre-Decrement:\n" << FBI << "\n";
+		FBI.Decrement();
+		std::cout << "Pos-Decrement:\n" << FBI << "\n";
+		std::cout << "Pre-Increment:\n" << FBI << "\n";
+		FBI.Increment();
+		std::cout << "Pos-Increment:\n" << FBI;
 	}
+	std::cout << YELLOW << "\n************************";
+	std::cout << YELLOW << "************************\n\n";
 	{
-		Bureaucrat	Bu(1);
-		std::cout << "Grade Pre-Increment: " << Bu.getGrade() << "\n";
-		Bu.Increment();
-		std::cout << "Grade Pos-Increment: " << Bu.getGrade() << "\n";
-		std::cout << "Grade Pre-Decrement: " << Bu.getGrade() << "\n";
-		Bu.Decrement();
-		std::cout << "Grade Pos-Decrement: " << Bu.getGrade() << "\n\n";
+		Bureaucrat	FBI(50, "FBI-man");
+		std::cout << "Pre-Increment:\n" << FBI << "\n";
+		FBI.Increment();
+		std::cout << "Pos-Increment:\n" << FBI;
 	}
+	std::cout << YELLOW << "\n************************";
+	std::cout << YELLOW << "************************\n\n";
 	{
-		Bureaucrat	Bu(150);
-		std::cout << "Grade Pre-Decrement: " << Bu.getGrade() << "\n";
-		Bu.Decrement();
-		std::cout << "Grade Pos-Decrement: " << Bu.getGrade() << "\n";
-		std::cout << "Grade Pre-Increment: " << Bu.getGrade() << "\n";
-		Bu.Increment();
-		std::cout << "Grade Pos-Increment: " << Bu.getGrade() << "\n\n";
-
-	}
-	{
-		Bureaucrat	Bu(50);
-		std::cout << "Grade Pre-Increment: " << Bu.getGrade() << "\n";
-		Bu.Increment();
-		std::cout << "Grade Pos-Increment: " << Bu.getGrade() << "\n\n";
-	}
-	{
-		Bureaucrat	Bu(50);
-		std::cout << "Grade Pre-Decrement: " << Bu.getGrade() << "\n";
-		Bu.Decrement();
-		std::cout << "Grade Pos-Decrement: " << Bu.getGrade() << "\n";
+		Bureaucrat	FBI(50, "FBI-man");
+		std::cout << "Pre-Decrement:\n" << FBI << "\n";
+		FBI.Decrement();
+		std::cout << "Pos-Decrement:\n" << FBI;
 	}
 
 	return (0);

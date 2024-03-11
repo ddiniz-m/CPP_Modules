@@ -1,8 +1,8 @@
 #! Makefile
 
 NAME = Bsp
-CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g -fsanitize=address
+CPP = c++
+CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -g -fsanitize=address
 INC = -I /usr/includes/c++/11/iostream
 RM = rm -rf
 
@@ -20,12 +20,12 @@ YELLOW = "\033[0;33m"
 all : $(NAME)
 
 $(NAME): $(OBJS)
-	@$(CXX) $(CXXFLAGS) $(INC) $(OBJS) -o $(NAME)
+	@$(CPP) $(CPPFLAGS) $(INC) $(OBJS) -o $(NAME)
 	@echo $(GREEN)"Compiled!"$(NC)
 
 $(OBJ_DIR)/%.o:src/%.cpp
 	@mkdir -p $(OBJ_DIR)
-	@$(CXX) $(CXXFLAGS) $(INC)  -o $@ -c $<
+	@$(CPP) $(CPPFLAGS) $(INC)  -o $@ -c $<
 
 clean:
 	@$(RM) $(OBJ_DIR)

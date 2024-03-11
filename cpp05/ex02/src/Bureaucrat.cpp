@@ -1,5 +1,6 @@
 
 #include "../inc/Bureaucrat.hpp"
+#include "../inc/AForm.hpp"
 
 // ---------------------- Orthodox Canonical Form -----------------------------
 Bureaucrat::Bureaucrat() : name("Default")
@@ -14,7 +15,7 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat &copy_a)
 	return (*this);
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat &copy)
+Bureaucrat::Bureaucrat(const Bureaucrat &copy) : name("Copy")
 {
 	std::cout << GREEN << "Bureaucrat Copy Constructor Called" << NC << std::endl;
 	*this = copy;
@@ -92,8 +93,25 @@ void	Bureaucrat::Decrement(void)
 	this->grade++;
 }
 
+void	Bureaucrat::signForm(Form &Form)
+{
+	try
+	{
+		Form.beSigned(*this);
+	}
+	catch(std::exception & e)
+	{
+		std::cout << this->getName() << RED << " couldn't sign " << NC << Form.getName();
+		std::cout <<" because " << e.what() << "\n";
+	}
+	if (Form.getSign())
+		std::cout << this->getName() << GREEN << " signed " << NC << Form.getName() << "\n";
+	
+}
+
 std::ostream &operator<<(std::ostream& os, const Bureaucrat &bureaucrat)
 {
-	os << "Bureaucrat Mr." << bureaucrat.getName() << " has grade " << bureaucrat.getGrade() << "\n";
+	os << "Bureaucrat Mr." << bureaucrat.getName() << " has grade ";
+	os << bureaucrat.getGrade() << "\n";
 	return (os);
 }
