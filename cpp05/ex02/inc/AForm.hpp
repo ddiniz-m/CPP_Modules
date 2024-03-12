@@ -21,18 +21,18 @@ class AForm
 
 	public:
 		AForm();
-		~AForm();
+		virtual ~AForm();
 		AForm& operator=(const AForm &copy_a);
 		AForm(const AForm &copy);
 
 		AForm(const std::string name);
-		std::string		getName(void) const;
-		bool			getSign(void) const;
-		void			setSign(bool sign);
-		int				getSignGrade(void) const;
-		int				getExecGrade(void) const;
-		void			beSigned(Bureaucrat &Bureaucrat);
-		virtual void	execute(Bureaucrat const &executor) const = 0;
+		virtual std::string		getName(void) const;
+		bool					getSign(void) const;
+		int						getSignGrade(void) const;
+		int						getExecGrade(void) const;
+		void					setSign(bool sign);
+		void					beSigned(Bureaucrat &Bureaucrat);
+		virtual void			execute(Bureaucrat const &executor) const = 0;
 
 		class	GradeTooHighException : public std::exception
 		{
@@ -45,7 +45,13 @@ class AForm
 			public:
 				virtual const char	*what() const throw();
 		};
-	
+
+		class FormNotSigned : public std::exception
+		{
+			public:
+				virtual const char	*what() const throw();
+		};
+
 };
 
 std::ostream &operator<<(std::ostream& os, AForm &AForm);

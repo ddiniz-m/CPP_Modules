@@ -25,10 +25,18 @@ class RobotomyRequestForm : public AForm
 		RobotomyRequestForm& operator=(const RobotomyRequestForm &copy_a);
 		RobotomyRequestForm(const RobotomyRequestForm &copy);
 
+		std::string		getName(void) const;
+		bool			getSign(void) const;
+		int				getSignGrade(void) const;
+		int				getExecGrade(void) const;
+		std::string		getTarget(void) const;
+
 		RobotomyRequestForm(std::string target);
 		void	execute(Bureaucrat const & executor) const;
 
 };
+
+std::ostream &operator<<(std::ostream& os, RobotomyRequestForm &Robo);
 
 #endif
 

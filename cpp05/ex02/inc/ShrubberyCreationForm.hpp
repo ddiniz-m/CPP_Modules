@@ -2,6 +2,8 @@
 # define SHRUBBERYCREATIONFORM_HPP
 
 #include <iostream>
+#include <fstream>
+#include <cstring>
 #include "AForm.hpp"
 
 #define NC "\033[0m"
@@ -25,9 +27,17 @@ class ShrubberyCreationForm : public AForm
 		ShrubberyCreationForm& operator=(const ShrubberyCreationForm &copy_a);
 		ShrubberyCreationForm(const ShrubberyCreationForm &copy);
 
+		std::string			getName(void) const;
+		bool				getSign(void) const;
+		int					getSignGrade(void) const;
+		int					getExecGrade(void) const;
+		const std::string	getTarget(void) const;
+
 		ShrubberyCreationForm(std::string target);
 		void	execute(Bureaucrat const & executor) const;
 };
+
+std::ostream &operator<<(std::ostream& os, ShrubberyCreationForm &Shrub);
 
 #endif
 

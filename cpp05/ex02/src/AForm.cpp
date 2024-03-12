@@ -44,11 +44,6 @@ bool		AForm::getSign(void) const
 	return(this->sign);
 }
 
-void		AForm::setSign(bool sign)
-{
-	this->sign = sign;
-}
-
 int			AForm::getSignGrade(void) const
 {
 	return (this->signGrade);
@@ -58,6 +53,12 @@ int			AForm::getExecGrade(void) const
 {
 	return (this->execGrade);
 }
+
+void		AForm::setSign(bool sign)
+{
+	this->sign = sign;
+}
+
 
 void		AForm::beSigned(Bureaucrat &Bureaucrat)
 {
@@ -70,7 +71,7 @@ void		AForm::beSigned(Bureaucrat &Bureaucrat)
 std::ostream &operator<<(std::ostream& os, AForm &AForm)
 {
 	os << AForm.getName() << " can only be signed by personnel with grade ";
-	os << AForm.getSignGrade() << " or higher.\nIt can only be executed by personnel with grade " << AForm.getExecGrade();
+	os << AForm.getSignGrade() << " or higher\n  and it can only be executed by personnel with grade " << AForm.getExecGrade();
 	os << " or higher.\nThis document has a sign value of: " << std::boolalpha << AForm.getSign() << "\n";
 	return (os);
 }
@@ -83,4 +84,17 @@ const char	*AForm::GradeTooHighException::what() const throw()
 const char	*AForm::GradeTooLowException::what() const throw()
 {
 	return("the grade is too low");
+}
+
+const char	*AForm::FormNotSigned::what() const throw()
+{
+	return("form was not signed");
+}
+
+void	AForm::execute(Bureaucrat const &executor) const
+{
+	if (this->getSign() == false)
+		throw FormNotSigned();
+	if (executor.getGrade() < this->getExecGrade())
+		throw GradeTooLowException();
 }

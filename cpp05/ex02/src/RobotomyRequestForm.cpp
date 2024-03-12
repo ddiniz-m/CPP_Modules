@@ -1,4 +1,6 @@
 
+#include "../inc/AForm.hpp"
+#include "../inc/Bureaucrat.hpp"
 #include "../inc/RobotomyRequestForm.hpp"
 
 // ---------------------- Orthodox Canonical Form -----------------------------
@@ -26,6 +28,31 @@ RobotomyRequestForm::~RobotomyRequestForm()
 }
 // ---------------------- Orthodox Canonical Form -----------------------------
 
+std::string	RobotomyRequestForm::getName(void) const
+{
+	return(this->name);
+}
+
+bool		RobotomyRequestForm::getSign(void) const
+{
+	return(this->sign);
+}
+
+int			RobotomyRequestForm::getSignGrade(void) const
+{
+	return (this->signGrade);
+}
+
+int			RobotomyRequestForm::getExecGrade(void) const
+{
+	return (this->execGrade);
+}
+
+std::string		RobotomyRequestForm::getTarget(void) const
+{
+	return(this->target);
+}
+
 RobotomyRequestForm::RobotomyRequestForm(std::string target) : target(target), name("Robotomy Request"), signGrade(72), execGrade(45)
 {
 	std::cout << GREEN << "RobotomyRequestForm Default Constructor Called" << NC << std::endl;
@@ -33,5 +60,20 @@ RobotomyRequestForm::RobotomyRequestForm(std::string target) : target(target), n
 
 void	RobotomyRequestForm::execute(Bureaucrat const & executor) const
 {
-	;
+	try
+	{
+		AForm::execute(executor);
+	}
+	catch(const std::exception& e)
+	{
+		throw;
+	}
+}
+
+std::ostream &operator<<(std::ostream& os, RobotomyRequestForm &Robo)
+{
+	os << Robo.getName() << " can only be signed by personnel with grade ";
+	os << Robo.getSignGrade() << " or higher\n  and it can only be executed by personnel with grade " << Robo.getExecGrade();
+	os << " or higher.\nThis document has a sign value of: " << std::boolalpha << Robo.getSign() << "\n";
+	return (os);
 }

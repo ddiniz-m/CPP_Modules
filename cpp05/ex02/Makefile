@@ -1,13 +1,13 @@
 #! Makefile
 
-NAME = 
+NAME = AForm
 CPP = c++
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -g -fsanitize=address
 RM = rm -rf
 
 OBJ_DIR = obj
 
-SRC_CPP = main.cpp Bureaucrat.cpp Form.cpp
+SRC_CPP = main.cpp Bureaucrat.cpp AForm.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp ShrubberyCreationForm.cpp
 SRCS = $(addprefix src/, $(SRC_CPP))
 OBJS = $(SRCS:src/%.cpp=$(OBJ_DIR)/%.o)
 
@@ -30,7 +30,7 @@ clean:
 	@$(RM) $(OBJ_DIR)
 
 fclean: clean
-	@$(RM) $(NAME)
+	@$(RM) $(NAME) *.shrubbery
 
 re: fclean all
 

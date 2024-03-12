@@ -1,7 +1,6 @@
 
 #include "../inc/sedbad.h"
 
-
 /* 
 	I use string.compare() and string.substr() to help me replace s1 for s2.
 Getline delimiter is first character of s1. I then compare the first n characters of

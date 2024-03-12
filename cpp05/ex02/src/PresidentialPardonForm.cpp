@@ -1,5 +1,6 @@
 
-#include "../inc/PresidentialPardonForm.hpp"
+#include "../inc/AForm.hpp"
+#include "../inc/Bureaucrat.hpp"
 #include "../inc/PresidentialPardonForm.hpp"
 
 // ---------------------- Orthodox Canonical Form -----------------------------
@@ -27,6 +28,31 @@ PresidentialPardonForm::~PresidentialPardonForm()
 }
 // ---------------------- Orthodox Canonical Form -----------------------------
 
+std::string	PresidentialPardonForm::getName(void) const
+{
+	return(this->name);
+}
+
+bool		PresidentialPardonForm::getSign(void) const
+{
+	return(this->sign);
+}
+
+int			PresidentialPardonForm::getSignGrade(void) const
+{
+	return (this->signGrade);
+}
+
+int			PresidentialPardonForm::getExecGrade(void) const
+{
+	return (this->execGrade);
+}
+
+std::string		PresidentialPardonForm::getTarget(void) const
+{
+	return(this->target);
+}
+
 PresidentialPardonForm::PresidentialPardonForm(std::string target) : target(target), name("Presidential Pardon"), signGrade(25), execGrade(5)
 {
 	std::cout << GREEN << "PresidentialPardonForm Default Constructor Called" << NC << std::endl;
@@ -34,5 +60,20 @@ PresidentialPardonForm::PresidentialPardonForm(std::string target) : target(targ
 
 void	PresidentialPardonForm::execute(Bureaucrat const & executor) const
 {
-	;
+	try
+	{
+		AForm::execute(executor);
+	}
+	catch(std::exception & e)
+	{
+		throw;
+	}
+}
+
+std::ostream &operator<<(std::ostream& os, PresidentialPardonForm &Pres)
+{
+	os << Pres.getName() << " can only be signed by personnel with grade ";
+	os << Pres.getSignGrade() << " or higher\n  and it can only be executed by personnel with grade ";
+	os << Pres.getExecGrade() << " or higher.\nThis document has a sign value of: " << std::boolalpha << Pres.getSign() << "\n";
+	return (os);
 }
