@@ -1,9 +1,8 @@
-#ifndef ROBOTOMYREQUESTFORM_HPP
-# define ROBOTOMYREQUESTFORM_HPP
+#ifndef PRESIDENTIALPARDONFORM_HPP
+# define PRESIDENTIALPARDONFORM_HPP
 
 #include <iostream>
-#include <cstdlib>
-#include "AForm.hpp"
+#include "Form.hpp"
 
 #define NC "\033[0m"
 #define RED "\033[0;31m"
@@ -11,7 +10,7 @@
 #define YELLOW "\033[0;33m"
 #define MAGENTA "\033[0;35m"
 
-class RobotomyRequestForm : public AForm
+class PresidentialPardonForm : public Form
 {
 	private:
 		const std::string	target;
@@ -21,10 +20,10 @@ class RobotomyRequestForm : public AForm
 		const int			execGrade;
 		
 	public:
-		RobotomyRequestForm();
-		~RobotomyRequestForm();
-		RobotomyRequestForm& operator=(const RobotomyRequestForm &copy_a);
-		RobotomyRequestForm(const RobotomyRequestForm &copy);
+		PresidentialPardonForm();
+		~PresidentialPardonForm();
+		PresidentialPardonForm& operator=(const PresidentialPardonForm &copy_a);
+		PresidentialPardonForm(const PresidentialPardonForm &copy);
 
 		std::string		getName(void) const;
 		bool			getSign(void) const;
@@ -32,12 +31,11 @@ class RobotomyRequestForm : public AForm
 		int				getExecGrade(void) const;
 		std::string		getTarget(void) const;
 
-		RobotomyRequestForm(std::string target);
+		PresidentialPardonForm(std::string target);
 		void	execute(Bureaucrat const & executor) const;
-
 };
 
-std::ostream &operator<<(std::ostream& os, RobotomyRequestForm &Robo);
+std::ostream &operator<<(std::ostream& os, PresidentialPardonForm &Pres);
 
 #endif
 

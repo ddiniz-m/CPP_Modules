@@ -1,6 +1,6 @@
 
 #include "../inc/Bureaucrat.hpp"
-#include "../inc/AForm.hpp"
+#include "../inc/Form.hpp"
 
 // ---------------------- Orthodox Canonical Form -----------------------------
 Bureaucrat::Bureaucrat() : name("Default")
@@ -93,19 +93,24 @@ void	Bureaucrat::Decrement(void)
 	this->grade++;
 }
 
-void	Bureaucrat::signForm(AForm &AForm)
+void	Bureaucrat::signForm(Form &form)
 {
 	try
 	{
-		AForm.beSigned(*this);
+		form.beSigned(*this);
 	}
 	catch(std::exception & e)
 	{
-		std::cout << this->getName() << RED << " couldn't sign " << NC << AForm.getName();
+		std::cout << this->getName() << RED << " couldn't sign " << NC << form.getName();
 		std::cout <<" because " << e.what() << "\n";
 	}
-	if (AForm.getSign())
-		std::cout << this->getName() << GREEN << " signed " << NC << AForm.getName() << "\n";
+	catch (int i)
+	{
+		std::cout << "Form does not exist\n";
+		return ;
+	}
+	if (form.getSign())
+		std::cout << this->getName() << GREEN << " signed " << NC << form.getName() << "\n";
 	
 }
 
@@ -116,7 +121,7 @@ std::ostream &operator<<(std::ostream& os, const Bureaucrat &bureaucrat)
 	return (os);
 }
 
-void	Bureaucrat::executeForm(AForm const & form)
+void	Bureaucrat::executeForm(Form const & form)
 {
 	try
 	{
@@ -126,6 +131,11 @@ void	Bureaucrat::executeForm(AForm const & form)
 	{
 		std::cout << this->getName() << " could not execute " << form.getName();
 		std::cout << " because " << e.what() << "\n";
+		return ;
+	}
+	catch(int i)
+	{
+		std::cout << "Form does not exist\n";
 		return ;
 	}
 	std::cout << YELLOW << this->getName() << " executed " << form.getName() << NC << "\n\n";

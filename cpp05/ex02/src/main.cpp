@@ -8,14 +8,15 @@
 int	main(void)
 {
 	{
-		Bureaucrat	FBI(12, "FBI-man");
+		Bureaucrat	FBI(75, "FBI-man");
 		Bureaucrat	Boss(1, "Boss-man");
+		Bureaucrat	Intern(150, "John");
 
-		PresidentialPardonForm	President;
-		RobotomyRequestForm		Robot;
+		PresidentialPardonForm	President("Captain");
+		RobotomyRequestForm		Robot("Lagann");
 		ShrubberyCreationForm	Shrub("Home");
 
-		std::cout << FBI;
+		std::cout << FBI << "\n";
 		std::cout << Boss << "\n";
 		std::cout << President << "\n";
 
@@ -23,11 +24,23 @@ int	main(void)
 		Boss.signForm(Robot);
 		Boss.signForm(Shrub);
 
+		std::cout << "\n";
+
+		Intern.executeForm(President);
+		Intern.executeForm(Robot);
+		Intern.executeForm(Shrub);
+
+		std::cout << "\n";
+
+		FBI.executeForm(President);
+		FBI.executeForm(Robot);
+		FBI.executeForm(Shrub);
+
+		std::cout << "\n";
+
 		Boss.executeForm(President);
 		Boss.executeForm(Robot);
 		Boss.executeForm(Shrub);
-
-
 	}
 	return (0);
 }

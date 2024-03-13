@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <cstdlib>
-#include "AForm.hpp"
+#include "Form.hpp"
 
 #define NC "\033[0m"
 #define RED "\033[0;31m"
@@ -11,7 +11,7 @@
 #define YELLOW "\033[0;33m"
 #define MAGENTA "\033[0;35m"
 
-class RobotomyRequestForm : public AForm
+class RobotomyRequestForm : public Form
 {
 	private:
 		const std::string	target;

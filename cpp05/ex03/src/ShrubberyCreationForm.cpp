@@ -1,5 +1,5 @@
 
-#include "../inc/AForm.hpp"
+#include "../inc/Form.hpp"
 #include "../inc/Bureaucrat.hpp"
 #include "../inc/ShrubberyCreationForm.hpp"
 
@@ -63,7 +63,7 @@ void	ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 
 	try
 	{
-		AForm::execute(executor);
+		Form::execute(executor);
 	}
 	catch(const std::exception& e)
 	{

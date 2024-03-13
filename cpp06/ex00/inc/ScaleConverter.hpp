@@ -3,6 +3,9 @@
 
 #include <iostream>
 #include <cstring>
+#include <cstdlib>
+#include <string>
+#include <sstream>
 
 #define NC "\033[0m"
 #define RED "\033[0;31m"
@@ -14,12 +17,12 @@ class ScaleConverter
 {
 	public:
 		ScaleConverter();
-		virtual ~ScaleConverter();
+		~ScaleConverter();
 		ScaleConverter& operator=(const ScaleConverter &copy_a);
 		ScaleConverter(const ScaleConverter &copy);
 
-		static void	Convert(char *str);
-		const char	*getType(char *str);
+		static void		Convert(std::string str);
+		std::string		getType(std::string str);
 };
 
 #endif

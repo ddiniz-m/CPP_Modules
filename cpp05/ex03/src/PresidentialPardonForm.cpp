@@ -1,5 +1,5 @@
 
-#include "../inc/AForm.hpp"
+#include "../inc/Form.hpp"
 #include "../inc/Bureaucrat.hpp"
 #include "../inc/PresidentialPardonForm.hpp"
 
@@ -62,7 +62,7 @@ void	PresidentialPardonForm::execute(Bureaucrat const & executor) const
 {
 	try
 	{
-		AForm::execute(executor);
+		Form::execute(executor);
 	}
 	catch(std::exception & e)
 	{
