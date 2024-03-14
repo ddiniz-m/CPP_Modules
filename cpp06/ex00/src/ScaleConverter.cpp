@@ -26,55 +26,77 @@ ScaleConverter::~ScaleConverter()
 }
 // ---------------------- Orthodox Canonical Form -----------------------------
 
-void	toFloat(std::string str)
+const char	*ScaleConverter::ImpossibleException::what() const throw()
 {
-	float	f;
-	std::stringstream ss;
-	ss << str;
-	ss >> f;
-
-	std::cout << "f: " << f << "\n";
-	std::cout << "Char: " << static_cast<char>(f) << "\n";
-	std::cout << "Int: " << static_cast<int>(f) << "\n";
-	std::cout << "Float: " << f << "\n";
-	std::cout << "Double: " << static_cast<double>(f) << "\n";
+	return("impossible");
 }
 
-void	toInt(std::string str)
+const char	*ScaleConverter::NonDisplayableException::what() const throw()
 {
-	int	i;
-
-	i = std::atoi(str.c_str());
-	std::cout << "Char: " << static_cast<char>(i) << "\n";
-	std::cout << "Int: " << i << "\n";
-	std::cout << "Float: " << static_cast<float>(i) << "\n";
-	std::cout << "Double: " << static_cast<double>(i) << "\n";
+	return("Non displayable");
 }
 
-void	toDouble(std::string str)
+const char	*ScaleConverter::InvalidTypeException::what() const throw()
 {
-	double	d;
-
-	d = std::atof(str.c_str());
-	std::cout << "Char: " << static_cast<char>(d) << "\n";
-	std::cout << "Int: " << static_cast<int>(d) << "\n";
-	std::cout << "Float: " << static_cast<float>(d) << "\n";
-	std::cout << "Double: " << d << "\n";
+	return("Invalid Type");
 }
 
-void	toChar(std::string str)
+void	ScaleConverter::checkIsPrint(int i)
 {
-	char	c;
-
-	c = str[0];
-	std::cout << "Char: " << c << "\n";
-	std::cout << "Int: " << (static_cast<int>(c)) << "\n";
-	std::cout << "Float: " << static_cast<float>(c) << "\n";
-	std::cout << "Double: " << static_cast<double>(c) << "\n";
+	if (!std::isprint(i))
+		throw NonDisplayableException();
 }
 
-std::string	ScaleConverter::getType(std::string str)
+void	ScaleConverter::checkImpossible(int i)
 {
+	if (i > 2147483647 || i < -2147483648)
+		throw ImpossibleException();
+}
+
+int		checkPseudo(std::string str)
+{
+	if (str.compare("-inff") == 0 || str.compare("+inff") == 0 ||str.compare("nanf") == 0)
+		return (1);
+	if (str.compare("-inf") == 0 ||str.compare("+inf") == 0 ||str.compare("nan") == 0)	
+		return (1);
+	return (0);
+}
+
+void	ScaleConverter::toChar(std::string str)
+{
+	int	i = strtod(str.c_str(), NULL);
+	try
+	{
+		if (!std::isprint(i))
+			throw NonDisplayableException();
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	return ;
+}
+
+void	ScaleConverter::toInt(std::string str)
+{
+
+	return ;
+}
+
+void	ScaleConverter::toFloat(std::string str)
+{
+
+	return ;
+}
+ 
+void	ScaleConverter::toDouble(std::string str)
+{
+	return ;
+}
+
+std::string	ScaleConverter::checkType(std::string str)
+{
+	ScaleConverter Conv;
 	int	i = 0;
 	int	flag = 0;
 
@@ -91,41 +113,47 @@ std::string	ScaleConverter::getType(std::string str)
 			if (str[i] == '.' && i + 1 < (int)str.length() && isdigit(str[i + 1]))
 				flag++;
 			else if (flag == 1 && i == (int)str.length() - 1 && str[i] == 'f')
+			{
 				return ("float");
+			}
 			else if (!isdigit(str[i]) || flag > 1)
-				return (NULL);
+				throw InvalidTypeException();
 			i++;
 		}
 		if (flag == 1)
 			return ("double");
 		return ("int");
 	}
-	return ("Non displayable");
+	throw InvalidTypeException();
 }
 
 void	ScaleConverter::Convert(std::string str)
 {
 	ScaleConverter	Conv;
-	std::string	type;
+	std::string		type;
 
-	type = Conv.getType(str);
-	std::cout << "Type: " << type << "\n";
-	if (type.compare("char") == 0)
+	try
 	{
-		toChar(str);
+		type = Conv.checkType(str);
 	}
-	else if (type.compare("int") == 0)
+	catch(const std::exception& e)
 	{
-		toInt(str);
+		std::cout << e.what() << '\n';
+		return ;
 	}
-	else if (type.compare("float") == 0)
+
+	void	(ScaleConverter::*member_ptr[4])(std::string str) = {
+		&ScaleConverter::toChar,
+		&ScaleConverter::toInt,
+		&ScaleConverter::toFloat,
+		&ScaleConverter::toDouble
+	};
+
+	std::string types[4] = {"char", "int", "float", "double"};
+
+	for (int i = 0; i < 4; i++)
 	{
-		toFloat(str);
+		if (type.compare(types[i]) == 0)
+			(Conv.*member_ptr[i])(str);
 	}
-	else if (type.compare("double") == 0)
-	{
-		toDouble(str);
-	}
-	else
-		std::cout << "Invalid Scalar type\n";
 }
