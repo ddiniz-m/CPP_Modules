@@ -5,6 +5,7 @@
 #include <cstring>
 #include <cstdlib>
 #include <string>
+#include <iomanip>
 
 #define NC "\033[0m"
 #define RED "\033[0;31m"
@@ -22,12 +23,12 @@ class ScaleConverter
 
 		static void	Convert(std::string str);
 		std::string	checkType(std::string str);
-		void		toDouble(std::string str);
-		void		toFloat(std::string str);
-		void		toInt(std::string str);
-		void		toChar(std::string str);
+		void		toDouble(ScaleConverter &conv, std::string str);
+		void		toFloat(ScaleConverter &conv, std::string str);
+		void		toInt(ScaleConverter &conv, std::string str);
+		void		toChar(ScaleConverter &conv, std::string str);
 		void		checkIsPrint(int i);
-		void		checkImpossible(int i);
+		void		checkImpossible(double d);
 
 		class	NonDisplayableException : public std::exception
 		{

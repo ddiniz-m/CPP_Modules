@@ -47,50 +47,210 @@ void	ScaleConverter::checkIsPrint(int i)
 		throw NonDisplayableException();
 }
 
-void	ScaleConverter::checkImpossible(int i)
+void	ScaleConverter::checkImpossible(double d)
 {
-	if (i > 2147483647 || i < -2147483648)
+	if (d > 2147483647 || d < -2147483648)
 		throw ImpossibleException();
 }
 
-int		checkPseudo(std::string str)
+std::string		handlePseudo(std::string str)
 {
-	if (str.compare("-inff") == 0 || str.compare("+inff") == 0 ||str.compare("nanf") == 0)
-		return (1);
-	if (str.compare("-inf") == 0 ||str.compare("+inf") == 0 ||str.compare("nan") == 0)	
-		return (1);
+	if (str.compare("-inff") == 0 || str.compare("+inff") == 0 || str.compare("nanf") == 0)
+		return ("float");
+	if (str.compare("-inf") == 0 || str.compare("+inf") == 0 || str.compare("nan") == 0)	
+		return ("double");
 	return (0);
 }
 
-void	ScaleConverter::toChar(std::string str)
+void	ScaleConverter::toChar(ScaleConverter &conv, std::string str)
 {
-	int	i = strtod(str.c_str(), NULL);
+	float	f = 0;
+	double	d = 0;
+	int		i = 0;
+	char	c = str[0];
+
 	try
 	{
-		if (!std::isprint(i))
-			throw NonDisplayableException();
+		i = static_cast<int>(c);
+		f = static_cast<float>(c);
+		d = static_cast<double>(c);
 	}
 	catch(const std::exception& e)
 	{
 		std::cerr << e.what() << '\n';
 	}
+	try
+	{
+		conv.checkImpossible(i);
+		throw c;
+	}
+	catch(const std::exception& e)
+	{
+		std::cout << "char: " << e.what() << "\n";
+	}
+	catch(char c)
+	{
+		std::cout << "char: '" << c << "'\n";
+	}
+	std::cout << "int: " << i << "\n";
+	std::cout << "float: " << f << ".0f\n";
+	std::cout << "double: " << d << ".0\n";
 	return ;
 }
 
-void	ScaleConverter::toInt(std::string str)
+void	ScaleConverter::toInt(ScaleConverter &conv, std::string str)
 {
+	float	f = 0;
+	double	d = 0;
+	int		i = std::atoi(str.c_str());
+	char	c = 0;
 
+	try
+	{
+		c = static_cast<char>(i);
+		f = static_cast<float>(i);
+		d = static_cast<double>(i);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	try
+	{
+		conv.checkImpossible(std::atof(str.c_str()));
+	}
+	catch(const ImpossibleException& e)
+	{
+		std::cout << "char: " << e.what() << "\n";
+		std::cout << "int: " << e.what() << "\n";
+		std::cout << "float: " << e.what() << "\n";
+		std::cout << "double: " << e.what() << "\n";
+		return;
+	}
+	try
+	{
+		conv.checkIsPrint(i);
+		throw c;
+	}
+	catch(const NonDisplayableException& e)
+	{
+		std::cout << "char: " << e.what() << "\n";
+	}
+	catch(char c)
+	{
+		std::cout << "char: '" << c << "'\n";
+	}
+	std::cout << "int: " << i << "\n";
+	std::cout << "float: " << f << ".0f\n";
+	std::cout << "double: " << d << ".0\n";
 	return ;
 }
 
-void	ScaleConverter::toFloat(std::string str)
+void	ScaleConverter::toFloat(ScaleConverter &conv, std::string str)
 {
+	float	f = std::atof(str.c_str());
+	double	d = 0;
+	int		i = 0;
+	char	c = 0;
+	size_t	decimal = str.length() - str.find_first_of(".") - 2;
+	std::cout << "decimal; " << decimal << '\n';
 
+	try
+	{
+		f = static_cast<float>(f);
+		c = static_cast<char>(f);
+		i = static_cast<int>(f);
+		d = static_cast<double>(f);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	try
+	{
+		conv.checkImpossible(std::atof(str.c_str()));
+	}
+	catch(const ImpossibleException& e)
+	{
+		std::cout << "char: " << e.what() << "\n";
+		std::cout << "int: " << e.what() << "\n";
+		std::cout << "float: " << e.what() << "\n";
+		std::cout << "double: " << e.what() << "\n";
+		return ;
+	}
+	try
+	{
+		conv.checkIsPrint(c);
+		throw c;
+	}
+	catch(const NonDisplayableException& e)
+	{
+		std::cout << "char: " << e.what() << "\n";
+	}
+	catch(char c)
+	{
+		std::cout << "char: '" << c << "'\n";
+	}
+	std::cout << "int: " << i << "\n";
+
+	std::cout << "float: " << std::fixed << std::setprecision(decimal) << f << ".f\n";
+	std::cout  <<"double: " << std::fixed << std::setprecision(decimal) << d << "\n";
 	return ;
 }
  
-void	ScaleConverter::toDouble(std::string str)
+void	ScaleConverter::toDouble(ScaleConverter &conv, std::string str)
 {
+	float			f = 0;
+	double			d = std::atof(str.c_str());
+	int				i = 0;
+	char			c = 0;
+
+	try
+	{
+		c = static_cast<char>(d);
+		i = static_cast<int>(d);
+		f = static_cast<float>(d);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	try
+	{
+		conv.checkImpossible(std::atof(str.c_str()));
+	}
+	catch(const ImpossibleException& e)
+	{
+		std::cout << "char: " << e.what() << "\n";
+		std::cout << "int: " << e.what() << "\n";
+		std::cout << "float: " << e.what() << "\n";
+		std::cout << "double: " << e.what() << "\n";
+		return ;
+	}
+	try
+	{
+		conv.checkIsPrint(c);
+		throw c;
+	}
+	catch(const NonDisplayableException& e)
+	{
+		std::cout << "char: " << e.what() << "\n";
+	}
+	catch(char c)
+	{
+		std::cout << "char: '" << c << "'\n";
+	}
+	std::cout << "int: " << i << "\n";
+
+	size_t	found = str.find(".0f");
+
+	std::cout << "float: " << f;
+	if (found != str.npos)
+		std::cout << ".0";
+	std::cout << "f\ndouble: " << d;
+	if (found != str.npos)
+		std::cout << ".0";
+	std::cout << "\n";
 	return ;
 }
 
@@ -102,11 +262,7 @@ std::string	ScaleConverter::checkType(std::string str)
 
 	if (str[i] == '-')
 		i++;
-	if((int)str.length() == 1 && isalpha(str[i]))
-	{
-		return ("char");
-	}
-	if (str[i] && isdigit(str[i]))
+	if (str[i] && str.find_first_not_of("-0123456789.f") == str.npos)
 	{
 		while (i < (int)str.length())
 		{
@@ -124,6 +280,12 @@ std::string	ScaleConverter::checkType(std::string str)
 			return ("double");
 		return ("int");
 	}
+	else if((int)str.length() == 1)
+	{
+		return ("char");
+	}
+	else
+		return (handlePseudo(str));
 	throw InvalidTypeException();
 }
 
@@ -142,7 +304,7 @@ void	ScaleConverter::Convert(std::string str)
 		return ;
 	}
 
-	void	(ScaleConverter::*member_ptr[4])(std::string str) = {
+	void	(ScaleConverter::*member_ptr[4])(ScaleConverter &conv, std::string str) = {
 		&ScaleConverter::toChar,
 		&ScaleConverter::toInt,
 		&ScaleConverter::toFloat,
@@ -154,6 +316,6 @@ void	ScaleConverter::Convert(std::string str)
 	for (int i = 0; i < 4; i++)
 	{
 		if (type.compare(types[i]) == 0)
-			(Conv.*member_ptr[i])(str);
+			(Conv.*member_ptr[i])(Conv, str);
 	}
 }
