@@ -23,6 +23,8 @@ class ScaleConverter
 
 		static void	Convert(std::string str);
 		std::string	checkType(std::string str);
+		std::string	handlePseudo(std::string str);
+		void		Pseudo(ScaleConverter &conv, std::string str);
 		void		toDouble(ScaleConverter &conv, std::string str);
 		void		toFloat(ScaleConverter &conv, std::string str);
 		void		toInt(ScaleConverter &conv, std::string str);
