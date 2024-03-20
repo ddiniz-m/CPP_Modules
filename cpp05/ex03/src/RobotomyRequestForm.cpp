@@ -70,6 +70,7 @@ void	RobotomyRequestForm::execute(Bureaucrat const & executor) const
 	}
 	std::cout << GREEN << "RobotomyRequestForm is being executed..." << NC << "\n";
 	std::cout << "*******HEAVEN PIERCING DRILLING NOISES*******\n";
+	srand((unsigned) time(NULL));
 	if (rand() % 2)
 		std::cout << this->getTarget() << "'s robotomy failed!\n";
 	else

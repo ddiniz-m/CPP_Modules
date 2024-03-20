@@ -2,7 +2,6 @@
 # define BUREAUCRAT_HPP
 
 #include <iostream>
-#include <exception>
 
 #define NC "\033[0m"
 #define RED "\033[0;31m"

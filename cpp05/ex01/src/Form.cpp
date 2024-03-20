@@ -5,8 +5,17 @@
 // ---------------------- Orthodox Canonical Form -----------------------------
 Form::Form() : name("Default"), signGrade(2), execGrade(1)
 {
-	std::cout << GREEN << "Form Default Constructor Called" << NC << std::endl;
 	this->sign = false;
+	std::cout << GREEN << "Form Default Constructor Called" << NC << std::endl;
+	try
+	{
+		checkGrade(*this);
+	}
+	catch(const std::exception& e)
+	{
+		std::cout << e.what() << "\n";
+		throw;
+	}
 }
 
 Form& Form::operator=(const Form &copy_a)
@@ -20,6 +29,15 @@ Form::Form(const Form &copy) : name("Default"), signGrade(150), execGrade(1)
 {
 	std::cout << GREEN << "Form Copy Constructor Called" << NC << std::endl;
 	*this = copy;
+	try
+	{
+		checkGrade(*this);
+	}
+	catch(const std::exception& e)
+	{
+		std::cout << e.what() << "\n";
+		throw;
+	}
 }
 
 Form::~Form()
@@ -28,10 +46,37 @@ Form::~Form()
 }
 // ---------------------- Orthodox Canonical Form -----------------------------
 
-Form::Form(std::string name) : name(name), signGrade(2), execGrade(1)
+Form::Form(std::string name) : name(name), signGrade(200), execGrade(1)
 {
-	std::cout << GREEN << "Form Name Default Constructor Called" << NC << std::endl;
 	this->sign = false;
+	std::cout << GREEN << "Form Name Default Constructor Called" << NC << std::endl;
+	try
+	{
+		checkGrade(*this);
+	}
+	catch(const std::exception& e)
+	{
+		std::cout << e.what() << "\n";
+		throw;
+	}
+}
+
+void	Form::checkGrade(Form &form)
+{
+	if (form.getExecGrade() > 150 || form.getExecGrade() < 1)
+	{
+		std::cout << "execGrade Error: ";
+		if (form.getExecGrade() > 150)
+			throw GradeTooLowException();
+		throw GradeTooHighException();
+	}
+	if (form.getSignGrade() > 150  || form.getSignGrade() < 1)
+	{
+		std::cout << "signGrade Error: ";
+		if (form.getSignGrade() > 150)
+			throw GradeTooLowException();
+		throw GradeTooHighException();
+	}
 }
 
 std::string	Form::getName(void) const

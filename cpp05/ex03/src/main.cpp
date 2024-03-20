@@ -9,7 +9,7 @@
 void	deleteForm(Form **form)
 {
 	for (int i = 0; i < 4; i++)
-			delete(form[i]);
+		delete(form[i]);
 }
 
 int	main(void)
