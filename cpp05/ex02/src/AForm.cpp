@@ -16,7 +16,7 @@ AForm& AForm::operator=(const AForm &copy_a)
 	return (*this);
 }
 
-AForm::AForm(const AForm &copy) : name("Default"), signGrade(150), execGrade(1)
+AForm::AForm(const AForm &copy) : name(copy.name), signGrade(150), execGrade(1)
 {
 	std::cout << GREEN << "AForm Copy Constructor Called" << NC << std::endl;
 	*this = copy;

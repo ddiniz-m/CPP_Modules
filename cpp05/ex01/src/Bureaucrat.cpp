@@ -15,7 +15,7 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat &copy_a)
 	return (*this);
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat &copy) : name("Copy")
+Bureaucrat::Bureaucrat(const Bureaucrat &copy) : name(copy.name), grade(copy.grade)
 {
 	std::cout << GREEN << "Bureaucrat Copy Constructor Called" << NC << std::endl;
 	*this = copy;

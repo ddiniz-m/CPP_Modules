@@ -16,7 +16,7 @@ RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm &c
 	return (*this);
 }
 
-RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &copy) : name("Robotomy Request"), signGrade(72), execGrade(45)
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &copy) : name(copy.name), signGrade(72), execGrade(45)
 {
 	std::cout << GREEN << "RobotomyRequestForm Copy Constructor Called" << NC << std::endl;
 	*this = copy;

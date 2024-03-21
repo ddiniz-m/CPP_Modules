@@ -25,7 +25,7 @@ Form& Form::operator=(const Form &copy_a)
 	return (*this);
 }
 
-Form::Form(const Form &copy) : name("Default"), signGrade(150), execGrade(1)
+Form::Form(const Form &copy) : name(copy.name), signGrade(150), execGrade(1)
 {
 	std::cout << GREEN << "Form Copy Constructor Called" << NC << std::endl;
 	*this = copy;
@@ -46,7 +46,7 @@ Form::~Form()
 }
 // ---------------------- Orthodox Canonical Form -----------------------------
 
-Form::Form(std::string name) : name(name), signGrade(200), execGrade(1)
+Form::Form(std::string name) : name(name), signGrade(150), execGrade(1)
 {
 	this->sign = false;
 	std::cout << GREEN << "Form Name Default Constructor Called" << NC << std::endl;

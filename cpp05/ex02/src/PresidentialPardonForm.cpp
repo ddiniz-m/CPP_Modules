@@ -16,7 +16,7 @@ PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPard
 	return (*this);
 }
 
-PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &copy) : name("Presidential Pardon"), signGrade(25), execGrade(5)
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &copy) : name(copy.name), signGrade(25), execGrade(5)
 {
 	std::cout << GREEN << "PresidentialPardonForm Copy Constructor Called" << NC << std::endl;
 	*this = copy;

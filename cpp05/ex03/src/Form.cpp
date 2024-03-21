@@ -16,7 +16,7 @@ Form& Form::operator=(const Form &copy_a)
 	return (*this);
 }
 
-Form::Form(const Form &copy) : name("Default"), signGrade(150), execGrade(1)
+Form::Form(const Form &copy) : name(copy.name), signGrade(150), execGrade(1)
 {
 	std::cout << GREEN << "Form Copy Constructor Called" << NC << std::endl;
 	*this = copy;

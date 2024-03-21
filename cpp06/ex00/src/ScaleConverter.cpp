@@ -83,21 +83,11 @@ void	ScaleConverter::Pseudo(ScaleConverter &conv, std::string str)
 
 void	ScaleConverter::toChar(ScaleConverter &conv, std::string str)
 {
-	float	f = 0;
-	double	d = 0;
-	int		i = 0;
 	char	c = str[0];
+	int		i = static_cast<int>(c);
+	float	f = static_cast<float>(c);
+	double	d = static_cast<double>(c);
 
-	try
-	{
-		i = static_cast<int>(c);
-		f = static_cast<float>(c);
-		d = static_cast<double>(c);
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
 	try
 	{
 		conv.checkIsPrint(c);
@@ -119,21 +109,11 @@ void	ScaleConverter::toChar(ScaleConverter &conv, std::string str)
 
 void	ScaleConverter::toInt(ScaleConverter &conv, std::string str)
 {
-	float	f = 0;
-	double	d = 0;
 	int		i = std::atoi(str.c_str());
-	char	c = 0;
+	char c = static_cast<char>(i);
+	float f = static_cast<float>(i);
+	double d = static_cast<double>(i);
 
-	try
-	{
-		c = static_cast<char>(i);
-		f = static_cast<float>(i);
-		d = static_cast<double>(i);
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
 	try
 	{
 		conv.checkImpossible(std::atof(str.c_str()));
@@ -165,22 +145,11 @@ void	ScaleConverter::toInt(ScaleConverter &conv, std::string str)
 void	ScaleConverter::toFloat(ScaleConverter &conv, std::string str)
 {
 	float	f = std::atof(str.c_str());
-	double	d = 0;
-	int		i = 0;
-	char	c = 0;
+	char	c = static_cast<char>(f);
+	int 	i = static_cast<int>(f);
+	double	d = static_cast<double>(f);
 	size_t	decimal = str.length() - str.find_first_of(".") - 2;
 
-	try
-	{
-		f = static_cast<float>(f);
-		c = static_cast<char>(f);
-		i = static_cast<int>(f);
-		d = static_cast<double>(f);
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
 	try
 	{
 		conv.checkImpossible(std::atof(str.c_str()));
@@ -211,22 +180,12 @@ void	ScaleConverter::toFloat(ScaleConverter &conv, std::string str)
  
 void	ScaleConverter::toDouble(ScaleConverter &conv, std::string str)
 {
-	float			f = 0;
-	double			d = std::atof(str.c_str());
-	int				i = 0;
-	char			c = 0;
+	double	d = std::atof(str.c_str());
+	char	c = static_cast<char>(d);
+	int		i = static_cast<int>(d);
+	float	f = static_cast<float>(d);
 	size_t	decimal = str.length() - str.find_first_of(".") - 1;
 
-	try
-	{
-		c = static_cast<char>(d);
-		i = static_cast<int>(d);
-		f = static_cast<float>(d);
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
 	try
 	{
 		conv.checkImpossible(d);

@@ -14,7 +14,7 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat &copy_a)
 	return (*this);
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat &copy)
+Bureaucrat::Bureaucrat(const Bureaucrat &copy) : name(copy.name)
 {
 	std::cout << GREEN << "Bureaucrat Copy Constructor Called" << NC << std::endl;
 	*this = copy;
@@ -31,24 +31,15 @@ Bureaucrat::Bureaucrat(int grade, const std::string name) : name(name)
 	std::cout << GREEN << "Bureaucrat Grade Constructor Called" << NC << std::endl;
 	myExeception(grade);
 	this->grade = grade;
+	std::cout << "Valid grade" << "\n";
 }
 
 int	Bureaucrat::myExeception(int grade)
 {
-	try
-	{
-		if (grade < 1)
-			throw GradeTooHighException();
-		if (grade > 150)
-			throw GradeTooLowException();
-		std::cout << "Valid grade" << "\n";
-		
-	}
-	catch(std::exception & e)
-	{
-		std::cerr << e.what() << '\n';
-		return (1);
-	}
+	if (grade < 1)
+		throw GradeTooHighException();
+	if (grade > 150)
+		throw GradeTooLowException();
 	return (0);
 }
 

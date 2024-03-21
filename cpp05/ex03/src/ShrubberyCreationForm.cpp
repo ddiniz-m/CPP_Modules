@@ -16,7 +16,7 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
 	return (*this);
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &copy) : name("Shrubbery Request"), signGrade(145), execGrade(137)
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &copy) : name(copy.name), signGrade(145), execGrade(137)
 {
 	std::cout << GREEN << "ShrubberyCreationForm Copy Constructor Called" << NC << std::endl;
 	*this = copy;
