@@ -1,13 +1,17 @@
 #ifndef EASYFIND_HPP
 # define EASYFIND_HPP
 
-#include <vector>
 #include <iostream>
+#include <algorithm>
 
-template <typename T> T easyfind(T a, int b)
+template <typename T> int easyfind(T &container, const int i)
 {
-	(void)b;
-	return (a);
+	typename T::iterator it;
+
+	it = find(container.begin(), container.end(), i);
+	if (it != container.end())
+		return (*it);
+	throw std::runtime_error("Element not found!");
 }
 
 #endif

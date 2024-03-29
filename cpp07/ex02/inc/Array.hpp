@@ -81,10 +81,6 @@ Array<T>::Array(unsigned int n)
 	std::cout << GREEN << "Array Size Constructor Called" << NC << std::endl;
 	this->arr = new T[n];
 	this->len = n;
-/* 	for (int i = 0; i < this->len; i++)
-	{
-		this->arr[i] = new T();
-	} */
 }
 
 template<typename T>
