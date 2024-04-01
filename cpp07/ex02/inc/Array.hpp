@@ -14,7 +14,7 @@ class Array
 {
 	private:
 		unsigned int	len;
-		T	*arr;
+		T				*arr;
 	public:
 		Array();
 		~Array();
