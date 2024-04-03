@@ -4,7 +4,7 @@
 
 int	main(int ac, char **av)
 {
-	if (ac > 2)
+	if (ac != 2)
 	{
 		std::cout << "Incorrect amount of arguments.\n";
 		return (1);
@@ -25,7 +25,9 @@ int	main(int ac, char **av)
 	{
 		getline(file, line);
 		bcn.fillMap(line);
+		std::cout << line << "\n";
+		
 	}
-	bcn.setDate();
+	bcn.printMap();
 	return (0);
 }

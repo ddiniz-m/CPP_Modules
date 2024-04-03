@@ -5,7 +5,9 @@
 #include <ctime>
 #include <fstream>
 #include <map>
+#include <cstdlib>
 #include <string>
+#include <sstream>
 
 #define NC "\033[0m"
 #define RED "\033[0;31m"
@@ -26,11 +28,9 @@ class BitcoinExchange : public std::map<int, T>
 		BitcoinExchange(const BitcoinExchange &copy);
 
 		void	setDate(void);
-		int		getDate(void);
-		void	setValue(T& val);
-		T		&getValue(void);
+		void	printMap(void);
 
-		void	displayDate(void);
+		void	displayDate(const int i);
 		void	fillMap(std::string line);
 };
 
@@ -63,66 +63,59 @@ BitcoinExchange<T>::~BitcoinExchange()
 }
 // ---------------------- Orthodox Canonical Form -----------------------------
 
-template <typename T>
-void	BitcoinExchange<T>::setDate( void )
+/* template <typename T>
+void	BitcoinExchange<T>::setDate()
 {
 	time_t	t;
 	tm * now;
 	
 	t = time(0);
 	now = localtime(&t);
-	this->date += (now->tm_year + 1900) * 1000;
+	date += (now->tm_year + 1900) * 1000;
 	if (now->tm_mon + 1 < 10)
-		this->date *= 10;
-	this->date += (now->tm_mon + 1) * 100;
-	this->date += now->tm_mday;
-}
+		date *= 10;
+	date += (now->tm_mon + 1) * 100;
+	date += now->tm_mday;
+} */
 
 template <typename T>
-void	BitcoinExchange<T>::displayDate(void)
+void	BitcoinExchange<T>::displayDate(const int i)
 {
-	std::cout << date << "\n";
-	std::cout << date / 10000 << "-";
-	if (date / 100 % 100 < 10)
+	std::cout << i / 10000 << "-";
+	if (i / 100 % 100 < 10)
 		std::cout << '0';
-	std::cout << date / 100 % 100 << "-";
-	if (date % 100 < 10)
+	std::cout << i / 100 % 100 << "-";
+	if (i % 100 < 10)
 		std::cout << '0';
-	std::cout << date % 100 << "\n";}
-
-template <typename T>
-int	BitcoinExchange<T>::getDate(void)
-{
-	return (this->date);
-}
-
-template <typename T>
-void	BitcoinExchange<T>::setValue(T& val)
-{
-	(void)val;
-}
-
-template <typename T>
-T		&BitcoinExchange<T>::getValue(void)
-{
-	return (this->value);
+	std::cout << i % 100;
 }
 
 template <typename T>
 void	BitcoinExchange<T>::fillMap(std::string line)
 {
 	int	date;
+	char c;
 	T	value;
 
-	std::cout << "DATE:\nINT CONVERSION: " << line.substr(0, line.find_first_of('|', 0)) << "\n";
-	date = atoi(line.substr(0, line.find_first_of('|', 0)));
-	std::cout << "to: " << date << "\n";
+	for (std::string::iterator it = line.begin(); it < line.end() && *it != ' '; it++)
+	{
+		if (*it == '-')
+			line.erase(it);
+	}
+	std::istringstream iss(line);
 
-	std::cout << "VALUE:\nT CONVERSION: " << line.substr(line. substr(line.find_first_of('|', 0)), '\0') << "\n";
-	value = atof(line. substr(line.find_first_of('|', 0)), '\0');
-	std::cout << "to: " << value << "\n";
+	iss >> date >> c >> value;
+	m.insert(std::make_pair(date, value));
+}
 
-	m<int, T> = {date, value};
+template <typename T>
+void	BitcoinExchange<T>::printMap(void)
+{
+	typename std::map<int, T>::iterator it;
+	for (it = m.begin(); it != m.end(); it++)
+	{
+		std::cout << "Date: "<< it->first << "\nValue: " << it->second << "\n";
+	}
 }
 
 #endif
