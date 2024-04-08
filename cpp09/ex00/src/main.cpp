@@ -12,7 +12,9 @@ int	main(int ac, char **av)
 
 	std::string				line;
 	std::fstream			file;
-	BitcoinExchange<int>	bcn;
+	BitcoinExchange			bcn;
+
+	bcn.readDb();
 
 	file.open(av[1], std::ios::in);
 	if (!file.is_open())
@@ -25,9 +27,9 @@ int	main(int ac, char **av)
 	{
 		getline(file, line);
 		bcn.fillMap(line);
-		std::cout << line << "\n";
-		
 	}
-	bcn.printMap();
+	bcn.printMap(bcn.getMap());
+	std::cout << "\n\n";
+	bcn.printMap(bcn.getDb());
 	return (0);
 }

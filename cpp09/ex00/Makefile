@@ -7,7 +7,7 @@ RM = rm -rf
 
 OBJ_DIR = obj
 
-SRC_CPP = main.cpp
+SRC_CPP = main.cpp BitcoinExchange.cpp
 SRCS = $(addprefix src/, $(SRC_CPP))
 OBJS = $(SRCS:src/%.cpp=$(OBJ_DIR)/%.o)
 
