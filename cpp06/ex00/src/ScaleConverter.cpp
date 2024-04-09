@@ -94,25 +94,19 @@ void	ScaleConverter::toChar(ScaleConverter &conv, std::string str)
 	}
 	catch(const std::exception& e)
 	{
-		std::cout << "char: " << e.what() << "\n";
-		std::cout << "int: " << i << "\n";
-		std::cout << "float: " << f << ".0f\n";
-		std::cout << "double: " << d << ".0\n";
+		printException(i, f, d, e.what());
 		return ;
 	}
-	std::cout << "char: '" << c << "'\n";
-	std::cout << "int: " << i << "\n";
-	std::cout << "float: " << f << ".0f\n";
-	std::cout << "double: " << d << ".0\n";
+	printIntChar(i, c, f, d);
 	return ;
 }
 
 void	ScaleConverter::toInt(ScaleConverter &conv, std::string str)
 {
 	int		i = std::atoi(str.c_str());
-	char c = static_cast<char>(i);
-	float f = static_cast<float>(i);
-	double d = static_cast<double>(i);
+	char	c = static_cast<char>(i);
+	float	f = static_cast<float>(i);
+	double	d = static_cast<double>(i);
 
 	try
 	{
@@ -121,24 +115,15 @@ void	ScaleConverter::toInt(ScaleConverter &conv, std::string str)
 	}
 	catch(const ImpossibleException& e)
 	{
-		std::cout << "char: " << e.what() << "\n";
-		std::cout << "int: " << e.what() << "\n";
-		std::cout << "float: " << e.what() << "\n";
-		std::cout << "double: " << e.what() << "\n";
+		printException2(e.what());
 		return;
 	}
 	catch(const NonDisplayableException& e)
 	{
-		std::cout << "char: " << e.what() << "\n";
-		std::cout << "int: " << i << "\n";
-		std::cout << "float: " << f << ".0f\n";
-		std::cout << "double: " << d << ".0\n";
+		printException(i, f, d, e.what());
 		return ;
 	}
-	std::cout << "char: '" << c << "'\n";
-	std::cout << "int: " << i << "\n";
-	std::cout << "float: " << f << ".0f\n";
-	std::cout << "double: " << d << ".0\n";
+	printIntChar(i, c, f, d);
 	return ;
 }
 
@@ -157,10 +142,7 @@ void	ScaleConverter::toFloat(ScaleConverter &conv, std::string str)
 	}
 	catch(const ImpossibleException& e)
 	{
-		std::cout << "char: " << e.what() << "\n";
-		std::cout << "int: " << e.what() << "\n";
-		std::cout << "float: " << e.what() << "\n";
-		std::cout << "double: " << e.what() << "\n";
+		printException2(e.what());
 		return ;
 	}
 	catch(const NonDisplayableException& e)
@@ -171,10 +153,7 @@ void	ScaleConverter::toFloat(ScaleConverter &conv, std::string str)
 		std::cout  <<"double: " << std::fixed << std::setprecision(decimal) << d << "\n";
 		return ;
 	}
-	std::cout << "char: '" << c << "'\n";
-	std::cout << "int: " << i << "\n";
-	std::cout << "float: " << std::fixed << std::setprecision(decimal) << f << "f\n";
-	std::cout  <<"double: " << std::fixed << std::setprecision(decimal) << d << "\n";
+	printFloatDouble(i, c, f, d, decimal);
 	return ;
 }
  
@@ -193,10 +172,7 @@ void	ScaleConverter::toDouble(ScaleConverter &conv, std::string str)
 	}
 	catch(const ImpossibleException& e)
 	{
-		std::cout << "char: " << e.what() << "\n";
-		std::cout << "int: " << e.what() << "\n";
-		std::cout << "float: " << e.what() << "\n";
-		std::cout << "double: " << e.what() << "\n";
+		printException2(e.what());
 		return ;
 	}
 	catch(const NonDisplayableException& e)
@@ -207,10 +183,7 @@ void	ScaleConverter::toDouble(ScaleConverter &conv, std::string str)
 		std::cout  <<"double: " << std::fixed << std::setprecision(decimal) << d << "\n";
 		return ;
 	}
-	std::cout << "char: '" << c << "'\n";
-	std::cout << "int: " << i << "\n";
-	std::cout << "float: " << std::fixed << std::setprecision(decimal) << f << "f\n";
-	std::cout  <<"double: " << std::fixed << std::setprecision(decimal) << d << "\n";
+	printFloatDouble(i, c, f, d, decimal);
 	return ;
 }
 

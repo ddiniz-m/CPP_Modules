@@ -1,3 +1,4 @@
+
 #include "../inc/BitcoinExchange.hpp"
 
 // ---------------------- Orthodox Canonical Form -----------------------------
@@ -42,12 +43,12 @@ const char	*BitcoinExchange::BadInputException::what() const throw()
 	return("bad input");
 }
 
-std::multimap<int, double>	BitcoinExchange::getMap(void)
+std::multimap<int, float>	BitcoinExchange::getMap(void)
 {
-	return (this->m);
+	return (this->input);
 }
 
-std::multimap<int, double>	BitcoinExchange::getDb(void)
+std::map<int, float>	BitcoinExchange::getDb(void)
 {
 	return (this->db);
 }
@@ -89,34 +90,25 @@ std::string	BitcoinExchange::dateErase(std::string line)
 
 void	BitcoinExchange::fillMap(std::string line)
 {
-	char	c;
-	int		date;
-	double	value;
+	char	c = '\0';
+	int		date = 0;
+	float	value = 0;
 
 	line = dateErase(line);
 
 	std::istringstream iss(line);
 
-	if (!(iss >> date >> c >> value))
-	{
-		if (value == -1)
-			/* std::cout << "Error: too large a number => " << date << "\n" */;
-		if (value > 1000)
-			/* std::cout << "Error: too large a number => " << date << "\n" */;
-	}
-	else if (value < 0)
-		/* std::cout << "Error: not a positive number => " << date << "\n" */;
-	else
-	{
-		m.insert(std::make_pair(date, value));
-	}
+	if (line.compare("date | value") == 0)
+		return ;
+	iss >> date >> c >> value;
+	input.insert(std::make_pair(date, value));
 }
 
 void	BitcoinExchange::fillDb(std::string line)
 {
 	char	c;
 	int		date;
-	double	value;
+	float	value;
 
 	line = dateErase(line);
 	std::istringstream iss(line);
@@ -125,15 +117,104 @@ void	BitcoinExchange::fillDb(std::string line)
 		db.insert(std::make_pair(date, value));
 }
 
-void	BitcoinExchange::printMap(std::multimap<int, double> map)
+void	BitcoinExchange::displayAmount(std::multimap<int, float>::iterator it)
 {
-	std::multimap<int, double>::iterator it;
+	std::map<int, float>::iterator		itDb;
+	std::map<int, float>::iterator		prev;
+
+	for (itDb = db.begin(), prev = itDb; itDb != db.end(); prev = itDb, itDb++)
+	{
+		if (it->first == itDb->first)
+		{
+			std::cout << it->second * itDb->second;
+			return ;
+		}
+		if (it->first - itDb->first < 0)
+			break ;
+	}
+	std::cout << it->second * prev->second;
+}
+
+int	digitCount(int i)
+{
+	if (i/10 == 0)
+		return (1);
+	return (1 + digitCount (i / 10));
+}
+
+int	badInput(std::multimap<int, float>::iterator it)
+{
+	if (digitCount(it->first) < 6)
+	if (!it->first || !it->second)
+		return (1);
+	if (it->first / 100 % 100 > 12 || it->first / 100 % 100 <= 0)
+		return (1);
+	if (it->first % 100 > 31 || it->first % 100 <= 0)
+		return (1);
+	return (0);
+}
+
+void	BitcoinExchange::printMap(std::multimap<int, float> map)
+{
+	std::multimap<int, float>::iterator	it;
+	
 	for (it = map.begin(); it != map.end(); it++)
 	{
-		std::cout << std::fixed << "Date: ";
+		try
+		{
+			if (badInput(it))
+				throw BadInputException();
+			if (it->second < 0)
+				throw NegativeException();
+			if (it->second > 1000)
+				throw IntMaxException();
+		}
+		catch(const BadInputException &e)
+		{
+			std::cout << "Error: " << e.what() << " => ";
+			displayDate(it->first);
+			std::cout << "\n";
+			continue;
+		}
+		catch(const std::exception& e)
+		{
+			std::cout << "Error: " << e.what() << '\n';
+			continue;
+		}
 		displayDate(it->first);
-		std::cout << "; Value: " << std::setprecision(2) << it->second << "\n";
+		std::cout << " => " << it->second << " = ";
+		displayAmount(it);
+		std::cout << "\n";
 	}
+}
+
+void	BitcoinExchange::printDb(std::map<int, float> db)
+{
+	std::map<int, float>::iterator it;
+	for (it = db.begin(); it != db.end(); it++)
+	{
+		std::cout << "Date: ";
+		displayDate(it->first);
+		std::cout << "; Value: " << it->second << "\n";
+	}
+}
+
+void	BitcoinExchange::readInput(char **av)
+{
+	std::string		line;
+	std::fstream	file;
+
+	file.open(av[1], std::ios::in);
+	if (!file.is_open())
+	{
+		std::cout << "Error: could not open file.\n";
+		return ;
+	}
+	while(getline(file, line))
+	{
+		fillMap(line);
+	}
+	printMap(input);
 }
 
 void	BitcoinExchange::readDb(void)

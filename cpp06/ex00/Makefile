@@ -7,7 +7,7 @@ RM = rm -rf
 
 OBJ_DIR = obj
 
-SRC_CPP = main.cpp ScaleConverter.cpp 
+SRC_CPP = main.cpp ScaleConverter.cpp prints.cpp
 SRCS = $(addprefix src/, $(SRC_CPP))
 OBJS = $(SRCS:src/%.cpp=$(OBJ_DIR)/%.o)
 

@@ -17,11 +17,11 @@
 #define YELLOW "\033[0;33m"
 #define MAGENTA "\033[0;35m"
 
-class BitcoinExchange : public std::map<int, double>
+class BitcoinExchange : public std::map<int, float>
 {
 	private:
-		std::multimap<int, double>	m;
-		std::multimap<int, double>	db;
+		std::multimap<int, float>	input;
+		std::map<int, float>		db;
 
 	public:
 		BitcoinExchange();
@@ -30,15 +30,18 @@ class BitcoinExchange : public std::map<int, double>
 		BitcoinExchange(const BitcoinExchange &copy);
 
 		void						setDate(void);
-		std::multimap<int, double>	getMap(void);
-		std::multimap<int, double>	getDb(void);
+		std::multimap<int, float>	getMap(void);
+		std::map<int, float>		getDb(void);
 
-		void			printMap(std::multimap<int, double> map);
+		void			printMap(std::multimap<int, float> map);
+		void			printDb(std::map<int, float> db);
+		void			displayAmount(std::multimap<int, float>::iterator it);
 		void			displayDate(const int i);
 		void			fillMap(std::string line);
 		void			fillDb(std::string line);
 		std::string		dateErase(std::string line);
 		void			readDb(void);
+		void			readInput(char **av);
 
 		class	NegativeException : public std::exception
 		{

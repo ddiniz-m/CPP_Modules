@@ -52,5 +52,10 @@ class ScaleConverter
 
 };
 
+void		printException(int i, float f, double d, const char *e);
+void		printException2(const char *e);
+void		printIntChar(int i, char c, float f, double d);
+void		printFloatDouble(int i, char c, float f, double d, size_t decimal);
+
 #endif
 
