@@ -66,8 +66,8 @@ void		ScaleConverter::handlePseudo(std::string str)
 
 void	ScaleConverter::Pseudo(std::string str)
 {
-	std::cout << "char: Impossible" << "\n";
-	std::cout << "int: Impossible" << "\n";
+	std::cout << "char: impossible" << "\n";
+	std::cout << "int: impossible" << "\n";
 	if (str.compare("-inff") == 0 || str.compare("+inff") == 0 || str.compare("nanf") == 0)
 	{
 		std::cout << "float: " << str << "\n";
@@ -80,111 +80,7 @@ void	ScaleConverter::Pseudo(std::string str)
 	}
 }
 
-void	ScaleConverter::toChar(ScaleConverter &conv, std::string str)
-{
-	char	c = str[0];
-	int		i = static_cast<int>(c);
-	float	f = static_cast<float>(c);
-	double	d = static_cast<double>(c);
 
-	try
-	{
-		conv.checkIsPrint(c);
-	}
-	catch(const std::exception& e)
-	{
-		printException(i, f, d, e.what());
-		return ;
-	}
-	printIntChar(i, c, f, d);
-	return ;
-}
-
-void	ScaleConverter::toInt(ScaleConverter &conv, std::string str)
-{
-	int		i = std::atoi(str.c_str());
-	char	c = static_cast<char>(i);
-	float	f = static_cast<float>(i);
-	double	d = static_cast<double>(i);
-
-	try
-	{
-		conv.checkImpossible(std::atof(str.c_str()));
-		conv.checkIsPrint(i);
-	}
-	catch(const ImpossibleException& e)
-	{
-		printException2(e.what());
-		return;
-	}
-	catch(const NonDisplayableException& e)
-	{
-		printException(i, f, d, e.what());
-		return ;
-	}
-	printIntChar(i, c, f, d);
-	return ;
-}
-
-void	ScaleConverter::toFloat(ScaleConverter &conv, std::string str)
-{
-	float	f = std::atof(str.c_str());
-	char	c = static_cast<char>(f);
-	int 	i = static_cast<int>(f);
-	double	d = static_cast<double>(f);
-	size_t	decimal = str.length() - str.find_first_of(".") - 2;
-
-	try
-	{
-		conv.checkImpossible(std::atof(str.c_str()));
-		conv.checkIsPrint(c);
-	}
-	catch(const ImpossibleException& e)
-	{
-		printException2(e.what());
-		return ;
-	}
-	catch(const NonDisplayableException& e)
-	{
-		std::cout << "char: " << e.what() << "\n";
-		std::cout << "int: " << i << "\n";
-		std::cout << "float: " << std::fixed << std::setprecision(decimal) << f << "f\n";
-		std::cout  <<"double: " << std::fixed << std::setprecision(decimal) << d << "\n";
-		return ;
-	}
-	printFloatDouble(i, c, f, d, decimal);
-	return ;
-}
- 
-void	ScaleConverter::toDouble(ScaleConverter &conv, std::string str)
-{
-	double	d = std::atof(str.c_str());
-	char	c = static_cast<char>(d);
-	int		i = static_cast<int>(d);
-	float	f = static_cast<float>(d);
-	size_t	decimal = str.length() - str.find_first_of(".") - 1;
-
-	try
-	{
-		conv.checkImpossible(d);
-		conv.checkIsPrint(d);
-	}
-	catch(const ImpossibleException& e)
-	{
-		printException2(e.what());
-		return ;
-	}
-	catch(const NonDisplayableException& e)
-	{
-		std::cout << "char: " << e.what() << "\n";
-		std::cout << "int: " << i << "\n";
-		std::cout << "float: " << std::fixed << std::setprecision(decimal) << f << "f\n";
-		std::cout  <<"double: " << std::fixed << std::setprecision(decimal) << d << "\n";
-		return ;
-	}
-	printFloatDouble(i, c, f, d, decimal);
-	return ;
-}
 
 void	ScaleConverter::checkType(std::string str)
 {

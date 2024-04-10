@@ -7,7 +7,7 @@ RM = rm -rf
 
 OBJ_DIR = obj
 
-SRC_CPP = main.cpp/* code *//* code */
+SRC_CPP = main.cpp
 SRCS = $(addprefix src/, $(SRC_CPP))
 OBJS = $(SRCS:src/%.cpp=$(OBJ_DIR)/%.o)
 
@@ -27,7 +27,7 @@ $(OBJ_DIR)/%.o:src/%.cpp
 	@$(CPP) $(CPPFLAGS) -o $@ -c $<
 
 clean:
-	@$(RM) $(OBJ_DIR)
+	@$(RM) $(OBJ_DIR) ./a.out
 
 fclean: clean
 	@$(RM) $(NAME)

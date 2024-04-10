@@ -27,7 +27,7 @@ $(OBJ_DIR)/%.o:src/%.cpp
 	@$(CPP) $(CPPFLAGS) -o $@ -c $<
 
 clean:
-	@$(RM) $(OBJ_DIR)
+	@$(RM) $(OBJ_DIR) ./a.out
 
 fclean: clean
 	@$(RM) $(NAME)

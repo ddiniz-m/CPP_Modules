@@ -3,11 +3,16 @@
 #include <cstdlib>
 #include "../inc/Array.hpp"
 
-
 #define MAX_VAL 10
-int main(int, char**)
+
+int main(void)
 {
-	
+	{
+		Array<int>arr(0);
+		std::cout << YELLOW;
+		arr.myPrint();
+		std::cout << NC << "\n";
+	}
 	{
 		Array<std::string>arr(10);
 		for (int i = 0; i < arr.size(); i++)
@@ -101,6 +106,14 @@ int main(int, char**)
 			numbers[i] = rand();
 		}
 		delete [] mirror;//
-		return 0;
 	}
+/* 	{
+		Array<Awesome> arr(MAX_VAL);
+		std::cout << YELLOW;
+		for (int i = 0; i < MAX_VAL; i++)
+		{
+			std::cout << arr[i].get() << "\n";
+		}
+		std::cout << NC << "\n";
+	} */
 }
