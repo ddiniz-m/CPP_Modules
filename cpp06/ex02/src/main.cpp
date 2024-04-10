@@ -6,7 +6,7 @@
 /*   By: ddiniz-m <ddiniz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:58:32 by ddiniz-m          #+#    #+#             */
-/*   Updated: 2024/03/19 14:59:53 by ddiniz-m         ###   ########.fr       */
+/*   Updated: 2024/04/10 12:46:26 by ddiniz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,5 @@ int	main(void)
 	p = generate();
 	identify(p);
 	identify(*p);
+	delete p;
 }

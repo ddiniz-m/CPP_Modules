@@ -9,8 +9,6 @@ int	main(int ac, char **av)
 		std::cout << GREEN << "Usage: ./Converter <argument>\n" << NC;
 		return (1);
 	}
-
-	ScaleConverter	Conv;
-
-	Conv.Convert(av[1]);
+	
+	ScaleConverter::Convert(av[1]);
 }

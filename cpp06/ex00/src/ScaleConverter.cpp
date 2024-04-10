@@ -53,18 +53,18 @@ void	ScaleConverter::checkImpossible(double d)
 		throw ImpossibleException();
 }
 
-std::string		ScaleConverter::handlePseudo(std::string str)
+void		ScaleConverter::handlePseudo(std::string str)
 {
 	if (str.compare("-inff") == 0 || str.compare("+inff") == 0 || str.compare("nanf") == 0)
-		return ("pseudo");
+		ScaleConverter::Pseudo(str);
 	else if (str.compare("-inf") == 0 || str.compare("+inf") == 0 || str.compare("nan") == 0)	
-		return ("pseudo");
+		ScaleConverter::Pseudo(str);
 	else
 		throw InvalidTypeException();
-	return (0);
+	return ;
 }
 
-void	ScaleConverter::Pseudo(ScaleConverter &conv, std::string str)
+void	ScaleConverter::Pseudo(std::string str)
 {
 	std::cout << "char: Impossible" << "\n";
 	std::cout << "int: Impossible" << "\n";
@@ -78,7 +78,6 @@ void	ScaleConverter::Pseudo(ScaleConverter &conv, std::string str)
 		std::cout << "float: " << str << "f\n";
 		std::cout << "double: " << str << "\n";
 	}
-	(void)conv;
 }
 
 void	ScaleConverter::toChar(ScaleConverter &conv, std::string str)
@@ -187,9 +186,9 @@ void	ScaleConverter::toDouble(ScaleConverter &conv, std::string str)
 	return ;
 }
 
-std::string	ScaleConverter::checkType(std::string str)
+void	ScaleConverter::checkType(std::string str)
 {
-	ScaleConverter Conv;
+	ScaleConverter	Conv;
 	int	i = 0;
 	int	flag = 0;
 
@@ -203,23 +202,27 @@ std::string	ScaleConverter::checkType(std::string str)
 				flag++;
 			else if (flag == 1 && i == (int)str.length() - 1 && str[i] == 'f')
 			{
-				return ("float");
+				ScaleConverter::toFloat(Conv, str);
+				return ;
 			}
 			else if (!isdigit(str[i]) || flag > 1)
 				throw InvalidTypeException();
 			i++;
 		}
 		if (flag == 1)
-			return ("double");
-		return ("int");
+		{
+			ScaleConverter::toDouble(Conv, str);
+			return ;
+		}
+		ScaleConverter::toInt(Conv, str);
 	}
 	else if((int)str.length() == 1)
 	{
-		return ("char");
+		ScaleConverter::toChar(Conv, str);
 	}
 	else
-		return (handlePseudo(str));
-	return NULL;
+		handlePseudo(str);
+	return ;
 }
 
 void	ScaleConverter::Convert(std::string str)
@@ -229,27 +232,11 @@ void	ScaleConverter::Convert(std::string str)
 
 	try
 	{
-		type = Conv.checkType(str);
+		checkType(str);
 	}
 	catch(const std::exception& e)
 	{
 		std::cout << e.what() << '\n';
 		return ;
-	}
-
-	void	(ScaleConverter::*member_ptr[5])(ScaleConverter &conv, std::string str) = {
-		&ScaleConverter::toChar,
-		&ScaleConverter::toInt,
-		&ScaleConverter::toFloat,
-		&ScaleConverter::toDouble,
-		&ScaleConverter::Pseudo
-	};
-
-	std::string types[5] = {"char", "int", "float", "double", "pseudo"};
-
-	for (int i = 0; i < 5; i++)
-	{
-		if (type.compare(types[i]) == 0)
-			(Conv.*member_ptr[i])(Conv, str);
 	}
 }

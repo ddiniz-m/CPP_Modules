@@ -15,22 +15,24 @@
 
 class ScaleConverter
 {
-	public:
+	private:
 		ScaleConverter();
 		~ScaleConverter();
+
+	public:
 		ScaleConverter& operator=(const ScaleConverter &copy_a);
 		ScaleConverter(const ScaleConverter &copy);
 
-		static void	Convert(std::string str);
-		std::string	checkType(std::string str);
-		std::string	handlePseudo(std::string str);
-		void		Pseudo(ScaleConverter &conv, std::string str);
-		void		toDouble(ScaleConverter &conv, std::string str);
-		void		toFloat(ScaleConverter &conv, std::string str);
-		void		toInt(ScaleConverter &conv, std::string str);
-		void		toChar(ScaleConverter &conv, std::string str);
-		void		checkIsPrint(int i);
-		void		checkImpossible(double d);
+		static	void		Convert(std::string str);
+		static	void		checkType(std::string str);
+		static	void		handlePseudo(std::string str);
+		static	void		Pseudo(std::string str);
+		static	void		toDouble(ScaleConverter &conv, std::string str);
+		static	void		toFloat(ScaleConverter &conv, std::string str);
+		static	void		toInt(ScaleConverter &conv, std::string str);
+		static	void		toChar(ScaleConverter &conv, std::string str);
+		static	void		checkIsPrint(int i);
+		static	void		checkImpossible(double d);
 
 		class	NonDisplayableException : public std::exception
 		{
@@ -38,13 +40,13 @@ class ScaleConverter
 				virtual const char	*what() const throw();
 		};
 
-		class ImpossibleException : public std::exception
+		class	ImpossibleException : public std::exception
 		{
 			public:
 				virtual const char	*what() const throw();
 		};
 
-		class InvalidTypeException : public std::exception
+		class	InvalidTypeException : public std::exception
 		{
 			public:
 				virtual const char	*what() const throw();

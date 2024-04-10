@@ -2,6 +2,7 @@
 # define BASE_HPP
 
 #define NC "\033[0m"
+#define GREEN "\033[0;32m"
 #define RED "\033[0;31m"
 
 #include <iostream>
@@ -10,6 +11,7 @@
 class Base
 {
 	public:
+		Base();
 		virtual ~Base();
 
 };
