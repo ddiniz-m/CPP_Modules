@@ -80,8 +80,6 @@ void	ScaleConverter::Pseudo(std::string str)
 	}
 }
 
-
-
 void	ScaleConverter::checkType(std::string str)
 {
 	ScaleConverter	Conv;

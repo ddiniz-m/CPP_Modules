@@ -10,7 +10,7 @@ int	main(int ac, char **av)
 		return (1);
 	}
 
-	BitcoinExchange			bcn;
+	BitcoinExchange	bcn;
 
 	bcn.readDb();
 	bcn.readInput(av);
