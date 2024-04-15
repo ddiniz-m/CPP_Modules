@@ -6,7 +6,7 @@
 
 template <typename T> int easyfind(T &container, const int i)
 {
-	typename T::iterator it;
+	typename T::iterator	it;
 
 	it = find(container.begin(), container.end(), i);
 	if (it != container.end())

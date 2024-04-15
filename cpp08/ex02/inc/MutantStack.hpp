@@ -14,12 +14,9 @@
 #define MAGENTA "\033[0;35m"
 #define CYAN "\033[0;36m"
 
-template <typename T>
-class myIterator;
-
 //	public std::stack<T, std::deque<T> >
 //MutantStack is inheriting from std::stack with value type "T" 
-// and std::deque<T> as underlying container type
+// and std::deque<T> as underlying container type, so we can use deque's iterator
 template <typename T>
 class MutantStack : public std::stack <T, std::deque<T> >
 {
@@ -31,9 +28,9 @@ class MutantStack : public std::stack <T, std::deque<T> >
 		MutantStack<T>& operator=(const MutantStack<T> &copy_a);
 		MutantStack(const MutantStack<T> &copy);
 
-		iterator begin(void);
-		iterator end(void);
-		size_t	size(void);
+		iterator	begin(void);
+		iterator	end(void);
+		size_t		size(void);
 };
 
 
@@ -53,7 +50,7 @@ MutantStack<T>& MutantStack<T>::operator=(const MutantStack<T> &copy_a)
 }
 
 template<typename T>
-MutantStack<T>::MutantStack(const MutantStack<T> &copy) : std::stack<T>(copy), std::deque<T>(copy)
+MutantStack<T>::MutantStack(const MutantStack<T> &copy) : std::stack<T>(copy)
 {
 	std::cout << GREEN << "MutantStack Copy Constructor Called" << NC << std::endl;
 }

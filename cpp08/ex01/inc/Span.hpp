@@ -14,7 +14,7 @@
 class Span
 {
 	private:
-		std::vector<int> v;
+		std::vector<int>	v;
 	public:
 		Span();
 		~Span();
@@ -23,11 +23,12 @@ class Span
 
 		Span(unsigned const int i);
 		std::vector<int>	&getArray(void);
-		void	addNumber(int i);
-		void	shortestSpan(void);
-		void	longestSpan(void);
-		void	vectorPrint(void);
-		void	addRange(std::vector<int>::iterator, std::vector<int>::iterator);
+		size_t				getCapacity(void);
+		void				addNumber(int i);
+		int					shortestSpan(void);
+		int					longestSpan(void);
+		void				vectorPrint(void);
+		void				addRange(std::vector<int>::iterator, std::vector<int>::iterator);
 };
 
 #endif

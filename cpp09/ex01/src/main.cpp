@@ -1,6 +1,6 @@
 #include "../inc/RPN.hpp"
 
-//pair<int, int>
+//stack<
 
 int	main(void)
 {

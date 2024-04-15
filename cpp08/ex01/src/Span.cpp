@@ -10,10 +10,8 @@ Span::Span()
 Span& Span::operator=(const Span &copy_a)
 {
 	std::cout << GREEN << "Span Copy Assignment Operator Called" << NC << std::endl;
-	v = copy_a.v;
 	v.reserve(copy_a.v.capacity());
-
-	std::cout << "capacity1: "<< v.capacity() << "\n";
+	v = copy_a.v;
 	return (*this);
 }
 
@@ -21,7 +19,6 @@ Span::Span(const Span &copy)
 {
 	std::cout << GREEN << "Span Copy Constructor Called" << NC << std::endl;
 	v.reserve(copy.v.capacity());
-	std::cout << "capacity2: "<< v.capacity() << "\n";
 	*this = copy;
 }
 
@@ -50,7 +47,7 @@ void	Span::addRange(std::vector<int>::iterator start, std::vector<int>::iterator
 		addNumber(*start++);
 }
 
-void	Span::shortestSpan(void)
+int	Span::shortestSpan(void)
 {
 	int	dif;
 	int	res;
@@ -58,7 +55,7 @@ void	Span::shortestSpan(void)
 	if (v.size() < 2)
 	{
 		std::cout << "Impossible\n";
-		return ;
+		return (-1);
 	}
 
 	std::vector<int> buf = v;
@@ -72,22 +69,29 @@ void	Span::shortestSpan(void)
 		if (dif < res)
 			res = dif;
 	}
-	std::cout << "Shortest Span: " << res << "\n";
+	std::cout << "Shortest Span: ";
+	return (res);
 }
 
-void	Span::longestSpan(void)
+int	Span::longestSpan(void)
 {
 	if (v.size() < 2)
 	{
 		std::cout << "Impossible\n";
-		return ;
+		return (-1);
 	}
-	std::cout << "Longest Span: " << *max_element(v.begin(), v.end()) - *min_element(v.begin(), v.end()) << "\n";
+	std::cout << "Longest Span: ";
+	return(*max_element(v.begin(), v.end()) - *min_element(v.begin(), v.end()));
 }
 
 std::vector<int>	&Span::getArray(void)
 {
 	return(this->v);
+}
+
+size_t	Span::getCapacity(void)
+{
+	return (v.capacity());
 }
 
 void	Span::vectorPrint(void)

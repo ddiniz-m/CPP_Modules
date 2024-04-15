@@ -17,8 +17,8 @@ int	main(void)
 			std::cerr << e.what() << '\n';
 		}
 		span.vectorPrint();
-		span.longestSpan();
-		span.shortestSpan();
+		std::cout << span.longestSpan() << "\n";
+		std::cout << span.shortestSpan() << "\n";
 	}
 	std::cout << MAGENTA << "\n********************SCOPE********************\n\n" << NC;
 	{
@@ -42,13 +42,13 @@ int	main(void)
 			std::cerr << e.what() << '\n';
 		}
 		span.vectorPrint();
-		span.longestSpan();
-		span.shortestSpan();
+		std::cout << span.longestSpan() << "\n";
+		std::cout << span.shortestSpan() << "\n";
 	}
 	std::cout << MAGENTA << "\n********************SCOPE********************\n\n" << NC;
 	{
-		Span span(10000);
-		std::vector<int>v(9998, 42);
+		Span span(20000);
+		std::vector<int>v(19998, 42);
 
 		try
 		{
@@ -61,7 +61,26 @@ int	main(void)
 			std::cerr << e.what() << '\n';
 		}
 		span.vectorPrint();
-		span.longestSpan();
-		span.shortestSpan();
+		std::cout << span.longestSpan() << "\n";
+		std::cout << span.shortestSpan() << "\n";
+	}
+	std::cout << MAGENTA << "\n********************SCOPE********************\n\n" << NC;
+	{
+		Span				s(10);
+		std::vector<int>	v(5, 1);
+
+		std::cout << s.getCapacity() << "\n";
+		s.addRange(v.begin(), v.end());
+		std::cout << s.getCapacity() << "\n";
+		s.vectorPrint();
+
+		Span	copy(s);
+		std::cout << copy.getCapacity() << "\n";
+		copy.vectorPrint();
+
+		Span	assign = s;
+		std::cout << assign.getCapacity() << "\n";
+		assign.vectorPrint();
+
 	}
 }
