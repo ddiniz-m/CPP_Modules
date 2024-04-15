@@ -15,13 +15,15 @@ class Span
 {
 	private:
 		std::vector<int>	v;
+		unsigned int		N;
+
 	public:
 		Span();
 		~Span();
 		Span& operator=(const Span &copy_a);
 		Span(const Span &copy);
 
-		Span(unsigned const int i);
+		Span(unsigned int n);
 		std::vector<int>	&getArray(void);
 		size_t				getCapacity(void);
 		void				addNumber(int i);

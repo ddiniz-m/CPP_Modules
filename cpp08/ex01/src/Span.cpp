@@ -7,20 +7,24 @@ Span::Span()
 	std::cout << GREEN << "Span Default Constructor Called" << NC << std::endl;
 }
 
-Span& Span::operator=(const Span &copy_a)
-{
-	std::cout << GREEN << "Span Copy Assignment Operator Called" << NC << std::endl;
-	v.reserve(copy_a.v.capacity());
-	v = copy_a.v;
-	return (*this);
-}
-
 Span::Span(const Span &copy)
 {
 	std::cout << GREEN << "Span Copy Constructor Called" << NC << std::endl;
-	v.reserve(copy.v.capacity());
 	*this = copy;
 }
+
+Span& Span::operator=(const Span &copy_a)
+{
+	std::cout << GREEN << "Span Copy Assignment Operator Called" << NC << std::endl;
+	if (this != &copy_a)
+	{
+		v = copy_a.v;
+		v.reserve(copy_a.v.capacity());
+		N = copy_a.N;
+	}
+	return (*this);
+}
+
 
 Span::~Span()
 {
@@ -28,9 +32,10 @@ Span::~Span()
 }
 // ---------------------- Orthodox Canonical Form -----------------------------
 
-Span::Span(const unsigned int N)
+Span::Span(unsigned int n)
 {
 	std::cout << GREEN << "Span Size Constructor Called" << NC << std::endl;
+	N = n;
 	v.reserve(N);
 }
 

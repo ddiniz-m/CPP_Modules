@@ -3,7 +3,7 @@
 int	main(void)
 {
 	{
-		Span span(10);
+		Span	span(10);
 
 		try
 		{
@@ -69,16 +69,15 @@ int	main(void)
 		Span				s(10);
 		std::vector<int>	v(5, 1);
 
-		std::cout << s.getCapacity() << "\n";
 		s.addRange(v.begin(), v.end());
-		std::cout << s.getCapacity() << "\n";
 		s.vectorPrint();
 
 		Span	copy(s);
 		std::cout << copy.getCapacity() << "\n";
 		copy.vectorPrint();
 
-		Span	assign = s;
+		Span	assign;
+		assign = s;
 		std::cout << assign.getCapacity() << "\n";
 		assign.vectorPrint();
 
