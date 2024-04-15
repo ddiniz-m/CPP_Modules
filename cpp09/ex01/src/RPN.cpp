@@ -26,3 +26,35 @@ RPN::~RPN()
 }
 // ---------------------- Orthodox Canonical Form -----------------------------
 
+void	printStack(std::stack<int, std::deque<int> > s)
+{
+	char	c;
+	while (!s.empty())
+	{
+		c = s.top();
+		std::cout << c << "\n";
+		s.pop();
+	}
+}
+
+void	RPN::parse(char *str)
+{
+	if (!str)
+		return;
+	while (*str)
+	{
+		if (isdigit(*str) && *str + 1 && !isspace(*str + 1))
+			nums.push(*str++);
+		else if (strchr("+-/*", *str))
+			ops.push(*str++);
+		else if (isspace(*str))
+			str++;
+		else
+			std::cout << "Invalid Character: " << *str++ << "\n";
+	}
+	std::cout << "NUMBERS:\n";
+	printStack(nums);
+	std::cout << "OPERATORS:\n";
+	printStack(ops);
+	return ;
+}
