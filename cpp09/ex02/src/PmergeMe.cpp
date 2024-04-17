@@ -52,13 +52,14 @@ void	PmergeMe::pairUp(int ac, char **av)
 {
 	int	i;
 
-	for (i = 1; i < ac - 1; i++)
+	for (i = 1; i <= ac - 1; i++)
 	{
 		std::vector<int>	v;
 		v.push_back(atoi(av[i++]));
-		if (i < ac - 1)
+		if (i <= ac - 1)
 			v.push_back(atoi(av[i]));
 		lst.push_back(v);
+		printVector(v);
 	}
 	printList();
 }
