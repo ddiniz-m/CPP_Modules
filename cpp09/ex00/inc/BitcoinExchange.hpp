@@ -2,13 +2,10 @@
 # define BITCOINEXCHANGE_HPP
 
 #include <iostream>
-#include <ctime>
 #include <fstream>
 #include <map>
-#include <cstdlib>
 #include <string>
 #include <sstream>
-#include <exception>
 #include <iomanip>
 
 #define NC "\033[0m"

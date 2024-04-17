@@ -2,7 +2,9 @@
 # define RPN_HPP
 
 #include <iostream>
+#include <sstream>
 #include <stack>
+#include <stdlib.h>
 #include <cstring>
 
 #define NC "\033[0m"
@@ -14,8 +16,9 @@
 class	RPN
 {
 	private:
-		std::stack<int, std::deque<int> >		nums;
-		std::stack<int, std::deque<int> >		ops;
+		int				n;
+		int				op;
+		std::stack<int>	nums;
 
 	public:
 		RPN();
@@ -23,7 +26,10 @@ class	RPN
 		RPN& operator=(const RPN &copy_a);
 		RPN(const RPN &copy);
 
-		void	parse(char *str);
+		void	stackOps(std::string token);
+		void	parse(std::string str);
+		// void	consecutiveOps(int n1, int n2, int op, int res);
+		void	run(std::string str);
 };
 
 

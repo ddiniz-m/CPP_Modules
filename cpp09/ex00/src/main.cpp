@@ -1,7 +1,5 @@
 #include "../inc/BitcoinExchange.hpp"
 
-//map<key, value>
-
 int	main(int ac, char **av)
 {
 	if (ac != 2)
