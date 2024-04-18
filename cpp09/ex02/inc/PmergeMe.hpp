@@ -2,6 +2,7 @@
 # define PMERGEME_HPP
 
 #include <iostream>
+#include <algorithm>
 #include <list>
 #include <vector>
 #include <cstdlib>
@@ -15,7 +16,9 @@
 class PmergeMe
 {
 	private:
-		std::list<std::vector<int > >	lst;
+		int					n;
+		std::list<int>		lst;
+		std::vector<std::pair<int, int> >	v;
 
 	public:
 		PmergeMe();
@@ -23,8 +26,10 @@ class PmergeMe
 		PmergeMe& operator=(const PmergeMe &copy_a);
 		PmergeMe(const PmergeMe &copy);
 
-		void	pairUp(int ac, char **av);
-		void	printList(void);
+		void				pairVector(int ac, char **av);
+		std::pair<int, int>	makePair(int n1, int n2);
+		void				firstSort(int start);
+		void				FordJohnson(void);
 };
 
 #endif

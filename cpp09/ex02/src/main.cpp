@@ -12,6 +12,6 @@ int	main(int ac, char **av)
 		return (1);
 	}
 	PmergeMe	Pme;
-	Pme.pairUp(ac, av);
+	Pme.pairVector(ac, av);
 	return (0);
 }
