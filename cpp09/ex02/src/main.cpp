@@ -13,5 +13,6 @@ int	main(int ac, char **av)
 	}
 	PmergeMe	Pme;
 	Pme.pairVector(ac, av);
+	Pme.FordJohnson();
 	return (0);
 }
