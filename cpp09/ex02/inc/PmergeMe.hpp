@@ -31,6 +31,7 @@ class PmergeMe
 		std::pair<int, int>	makePair(int n1, int n2);
 		void				firstSort(int start);
 		int					binaryInsertion(std::vector<int> iter, int b);
+		void				pushA(void);
 		void				FordJohnson(void);
 };
 

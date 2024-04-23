@@ -116,7 +116,7 @@ int	PmergeMe::binaryInsertion(std::vector<int> vec, int b)
 	while (low <= high)
 	{
 		mid = (low + high) / 2;
-		if (b < vec[mid])
+		if (b <= vec[mid])
 			high = mid - 1;
 		else
 			low = mid + 1;
@@ -133,50 +133,58 @@ int	J(int n)
 	return (J(n - 1) + (2 * J(n - 2)));
 }
 
-void	PmergeMe::FordJohnson(void)
+void	PmergeMe::pushA(void)
 {
 	std::vector<std::pair<int, int> >::iterator	a;
-	std::vector<std::pair<int, int> >::iterator	b;
-	std::vector<std::pair<int, int> >::iterator	it;
 
-	b = v.begin();
 	for (a = v.begin(); a < v.end(); a++)
 	{
 		if (a->first == -1)
 			continue ;
 		sorted.push_back(a->first);
 	}
-	sorted.insert(sorted.begin() + binaryInsertion(sorted, b->second), b->second);
 	std::cout << "\nA VECTOR:\n";
 	printVector(sorted);
+}
 
-	int	i;
-	int	j;
-	int	k;
+void	PmergeMe::FordJohnson(void)
+{
+	std::vector<std::pair<int, int> >::iterator	b;
+	std::vector<std::pair<int, int> >::iterator	it;
 
+	pushA();
 
-	i = 2;
-	k = J(i);
-	j = (2 * J(k));
-	for (b = v.begin() + j; b < v.end(); b += j)
+	int	k = 0;
+	int	i = 2;
+	int	j = (2 * J(J(i))) - 1;
+	int	l = j + 1;
+
+	for (b = v.begin() + j; b < v.end(); i++, l += j + 1)
 	{
-		std::cout << "Jacob k: " << k << "\n";
-		std::cout << "FJ    j: " << j << "\n";
-		std::cout << "SIZE: " << v.size() << "\n";
-		while ((unsigned long)j > v.size()) //this is wrong
-			j--;
-		it = v.begin() + j;
-		k = j;
-		while (k > 0)
+		// std::cout << "Jacob k: " << J(i) << "\n";
+		// std::cout << "FJ    j: " << j + 1 << "\n";
+		// std::cout << "SIZE: " << v.size() << "\n";
+		std::cout << GREEN << "b->second: " << b->second << NC << "\n";
+
+		for (k = j + 1; k > 0; k--, b--)
 		{
-			sorted.insert(sorted.begin() + binaryInsertion(sorted, it->second), it->second);
-			std::cout << "b->second: " << it->second << "\n";
-			it--;
-			k--;
+			// std::cout << "j: " << j + 1 << "\n";
+			// std::cout << "b->second: " << b->second << "\n";
+			// std::cout << "sorted[sorted.size() - 1]: " << sorted[sorted.size() - 1] << "\n";
+			if (b->second > sorted[sorted.size() - 1])
+				sorted.push_back(b->second);
+			else
+				sorted.insert(sorted.begin() + binaryInsertion(sorted, b->second), b->second);
 		}
-		k = J(i);
-		j = (2 * J(k));
-		i++;
+		for (k = 0; j < (int)v.size() && k <= j; k++)
+			b++;
+		j = (2 * J(J(i))) - 1;
+		l = l + j + 1;
+		while (j >= (int)v.size() - l - 1)
+		{
+			j--;
+		}
+		b = b + j + 1;
 	}
 
 	std::cout << "\nSORTED??:\n";
