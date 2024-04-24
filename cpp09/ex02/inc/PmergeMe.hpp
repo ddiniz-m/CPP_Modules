@@ -17,8 +17,10 @@ class PmergeMe
 {
 	private:
 		int									n;
+
 		std::list<int>						lst;
 		std::vector<std::pair<int, int> >	v;
+		std::vector<u_int64_t>				Jacob;
 		std::vector<int>					sorted;
 
 	public:
@@ -32,6 +34,7 @@ class PmergeMe
 		void				firstSort(int start);
 		int					binaryInsertion(std::vector<int> iter, int b);
 		void				pushA(void);
+		void				sequenceInit(void);
 		void				FordJohnson(void);
 };
 

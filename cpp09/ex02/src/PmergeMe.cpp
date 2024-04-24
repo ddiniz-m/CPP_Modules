@@ -147,46 +147,37 @@ void	PmergeMe::pushA(void)
 	printVector(sorted);
 }
 
+void	PmergeMe::sequenceInit(void)
+{
+	for (int i = 0; i < (int)v.size(); i++)
+	{
+		int j = J(i + 1) - J(i);
+		if (j >= 0)
+			Jacob.push_back(j);
+	}
+}
+
 void	PmergeMe::FordJohnson(void)
 {
-	std::vector<std::pair<int, int> >::iterator	b;
-	std::vector<std::pair<int, int> >::iterator	it;
-
+	sequenceInit();
 	pushA();
 
-	int	k = 0;
-	int	i = 2;
-	int	j = (2 * J(J(i))) - 1;
-	int	l = j + 1;
-
-	for (b = v.begin() + j; b < v.end(); i++, l += j + 1)
+	int	x = 0;
+	int	y = Jacob[2];
+	int	w = 0;
+	for (int i = 2; i < (int)v.size() && y <= (int)v.size(); i++)
 	{
-		// std::cout << "Jacob k: " << J(i) << "\n";
-		// std::cout << "FJ    j: " << j + 1 << "\n";
-		// std::cout << "SIZE: " << v.size() << "\n";
-		std::cout << GREEN << "b->second: " << b->second << NC << "\n";
-
-		for (k = j + 1; k > 0; k--, b--)
+		for (x = y - 1; x >= w; x--)
 		{
-			// std::cout << "j: " << j + 1 << "\n";
-			// std::cout << "b->second: " << b->second << "\n";
-			// std::cout << "sorted[sorted.size() - 1]: " << sorted[sorted.size() - 1] << "\n";
-			if (b->second > sorted[sorted.size() - 1])
-				sorted.push_back(b->second);
+			if (v[x].second > sorted[sorted.size() - 1])
+				sorted.push_back(v[x].second);
 			else
-				sorted.insert(sorted.begin() + binaryInsertion(sorted, b->second), b->second);
+				sorted.insert(sorted.begin() + binaryInsertion(sorted, v[x].second), v[x].second);
 		}
-		for (k = 0; j < (int)v.size() && k <= j; k++)
-			b++;
-		j = (2 * J(J(i))) - 1;
-		l = l + j + 1;
-		while (j >= (int)v.size() - l - 1)
-		{
-			j--;
-		}
-		b = b + j + 1;
+		w = y;
+		y += Jacob[i];
+		if (y + Jacob[i] >= v.size())
+			y = v.size();
 	}
-
-	std::cout << "\nSORTED??:\n";
 	printVector(sorted);
 }
