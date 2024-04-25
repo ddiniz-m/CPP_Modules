@@ -12,7 +12,7 @@ int	main(int ac, char **av)
 		return (1);
 	}
 	PmergeMe	Pme;
-	Pme.pairVector(ac, av);
-	Pme.FordJohnson();
+	
+	Pme.FJsort(ac, av);
 	return (0);
 }
