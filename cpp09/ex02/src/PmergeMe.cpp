@@ -72,7 +72,6 @@ void	PmergeMe::pairVector(int ac, char **av)
 {
 	int	i;
 	int	n1 = 0;
-
 	n = ac - 1;
 	for (i = 1; i <= n; i++)
 	{
@@ -134,10 +133,11 @@ void	PmergeMe::FordJohnsonVector(void)
 {
 	sequenceInitVector();
 	pushAVector(v);
-
 	int	x = 0;
 	int	y = Jacob[2];
 	int	w = 0;
+	if ((int)v.size() == 1)
+		y = 1;
 	for (int i = 2; i < (int)Jacob.size() && y <= (int)v.size(); i++)
 	{
 		for (x = y - 1; x >= w; x--)
@@ -208,6 +208,8 @@ void	PmergeMe::FordJohnsonList(void)
 	int	x = 0;
 	int	y = Jacob[2];
 	int	w = 0;
+	if ((int)v.size() == 1)
+		y = 1;
 	for (int i = 3; i < (int)Jacob.size() && y <= (int)lst.size(); i++)
 	{
 		for (x = y - 1; x >= w;)
@@ -229,7 +231,7 @@ void	PmergeMe::FordJohnsonList(void)
 	}
 }
 
-void	PmergeMe::output(int ac, char **av)
+void	PmergeMe::output(int ac, char **av, std::clock_t vEnd, std::clock_t lEnd)
 {
 	std::cout << "Before:	";
 	for (int i = 1; i < ac; i++)
@@ -247,18 +249,29 @@ void	PmergeMe::output(int ac, char **av)
 
 	std::cout << "Time to process a range of " << ac - 1 << " elements with [";
 	printFunctionName(sortedVector);
-	std::cout << "] : " << " time " << "\n";
+	std::cout << "] : " << static_cast<double>(vEnd)/CLOCKS_PER_SEC * 1000 << " μs \n";
 
 	std::cout << "Time to process a range of " << ac - 1 << " elements with [";
 	printFunctionName(sortedList);
-	std::cout << "] : " << " time " << "\n";
+	std::cout << "] : " << static_cast<double>(lEnd)/CLOCKS_PER_SEC * 1000 << " μs \n";
 }
 
 void	PmergeMe::FJsort(int ac, char **av)
 {
+	std::clock_t						vStart;
+	std::clock_t						lStart;
+	std::clock_t						vEnd;
+	std::clock_t						lEnd;
+
+	vStart = std::clock();
 	pairVector(ac, av);
-	pairList(ac, av);
 	FordJohnsonVector();
+	vEnd = std::clock() - vStart;
+
+	lStart = std::clock();
+	pairList(ac, av);
 	FordJohnsonList();
-	output(ac, av);
+	lEnd = std::clock() - lStart;
+
+	output(ac, av, vEnd, lEnd);
 }

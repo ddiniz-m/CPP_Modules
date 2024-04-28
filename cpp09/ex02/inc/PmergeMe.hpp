@@ -7,6 +7,7 @@
 #include <vector>
 #include <cstdlib>
 #include <ctime>
+#include <exception>
 
 #define NC "\033[0m"
 #define RED "\033[0;31m"
@@ -40,7 +41,6 @@ class PmergeMe
 	private:
 
 		int									n;
-		std::clock_t						start;
 		std::list<std::pair<int, int> >		lst;
 		std::vector<std::pair<int, int> >	v;
 		std::vector<u_int64_t>				Jacob;
@@ -68,6 +68,6 @@ class PmergeMe
 		std::list<int>::iterator	binarySearchList(std::list<int> &lst, int b);
 		void						FordJohnsonList(void);
 
-		void						output(int ac, char **av);
+		void						output(int ac, char **av, std::clock_t vEnd, std::clock_t lEnd);
 };
 #endif
