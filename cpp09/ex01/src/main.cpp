@@ -1,6 +1,6 @@
 #include "../inc/RPN.hpp"
 
-//stack<class T, <std::deque<T> >
+//stack<class T, <int>
 
 int	main(int ac, char **av)
 {

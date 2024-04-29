@@ -27,9 +27,9 @@ class	RPN
 		RPN(const RPN &copy);
 
 		void	stackOps(std::string token);
-		void	parse(std::string str);
-		// void	consecutiveOps(int n1, int n2, int op, int res);
+		void	rpn(std::string str);
 		void	run(std::string str);
+		void	checkRPN(std::string str);
 };
 
 

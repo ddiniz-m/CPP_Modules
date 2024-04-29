@@ -68,10 +68,9 @@ void	RPN::stackOps(std::string token)
 	int	n1, n2;
 
 	if (token.find_first_not_of("0123456789") == std::string::npos)
-	{
 		nums.push(i);
-		n++;
-	}
+	else if (nums.size() <= 1)
+		throw std::runtime_error("Wrong Expression");
 	else if (token.size() == 1 && strchr("+-*/", token[0]))
 	{
 		n2 = nums.top();
@@ -79,7 +78,6 @@ void	RPN::stackOps(std::string token)
 		n1 = nums.top();
 		nums.pop();
 		nums.push(operation(n1, n2 ,token[0]));
-		op++;
 	}
 	else if (isspace(i))
 		;
@@ -87,18 +85,36 @@ void	RPN::stackOps(std::string token)
 		throw std::runtime_error("Invalid Character");
 }
 
+void	RPN::checkRPN(std::string str)
+{
+	n = 0;
+	op = 0;
+	std::istringstream	iss(str);
+	std::string			token;
 
-void	RPN::parse(std::string str)
+	while (iss >> token)
+	{
+		if (atoi(token.c_str()) < 0)
+			throw std::runtime_error("Invalid Input");
+		if (token.find_first_not_of("0123456789") == std::string::npos)
+			n++;
+		if (token.size() == 1 && strchr("+-*/", token[0]))
+			op++;
+	}
+	if (n - 1 != op || op == 0)
+		throw std::runtime_error("Wrong Expression");
+}
+
+void	RPN::rpn(std::string str)
 {
 	std::istringstream	iss(str);
 	std::string			token;
 
 	try
 	{
+		checkRPN(str);
 		while (iss >> token)
 			stackOps(token);
-		if (n - 1 != op)
-			throw std::runtime_error("Wrong Expression");
 	}
 	catch(const std::exception& e)
 	{
@@ -108,13 +124,12 @@ void	RPN::parse(std::string str)
 	return ;
 }
 
+
 void	RPN::run(std::string str)
 {
-	n = 0;
-	op = 0;
 	try
 	{
-		parse(str);
+		rpn(str);
 	}
 	catch(int i)
 	{
