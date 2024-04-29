@@ -1,6 +1,6 @@
 #include "../inc/PmergeMe.hpp"
 
-int	isNumber(char *str)
+int	isValid(char *str)
 {
 	if (!str || !*str || atoi(str) < 0)
 		return (0);
@@ -15,6 +15,15 @@ int	isNumber(char *str)
 	return (1);
 }
 
+int	duplicate(int ac, char **av)
+{
+	for (int i = 1; i < ac; i++)
+		for (int j = i + 1; j < ac; j++)
+			if (atoi(av[j]) == atoi(av[i]))
+				return (1);
+	return (0);
+}
+
 int	check(int ac, char **av)
 {
 	int	i = 1;
@@ -22,9 +31,11 @@ int	check(int ac, char **av)
 
 	if (ac == 1)
 		throw std::runtime_error("Incorrect amount of arguments");
+	if (duplicate(ac, av))
+		throw std::runtime_error("Duplicate elements");
 	while (i < ac)
 	{
-		if (!isNumber(av[i]))
+		if (!isValid(av[i]))
 			throw std::runtime_error("Invalid Element");
 		if (i + 1 < ac && atoi(av[i]) > atoi(av[i + 1]))
 			sorted = 1;
