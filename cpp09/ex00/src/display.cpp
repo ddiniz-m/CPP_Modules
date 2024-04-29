@@ -11,73 +11,68 @@ void	BitcoinExchange::displayDate(const int i)
 	std::cout << i % 100;
 }
 
-void	BitcoinExchange::displayAmount(std::multimap<int, float>::iterator it)
+void	BitcoinExchange::displayAmount(std::pair<int, float> pair)
 {
 	std::map<int, float>::iterator		itDb;
 	std::map<int, float>::iterator		prev;
 
 	for (itDb = db.begin(), prev = itDb; itDb != db.end(); prev = itDb, itDb++)
 	{
-		if (it->first == itDb->first)
+		if (pair.first == itDb->first)
 		{
-			std::cout << it->second * itDb->second;
+			std::cout << pair.second * itDb->second;
 			return ;
 		}
-		if (it->first - itDb->first < 0)
+		if (pair.first - itDb->first < 0)
 			break ;
 	}
-	std::cout << it->second * prev->second;
+	std::cout << pair.second * prev->second;
 }
 
-void	BitcoinExchange::displayBadException(std::multimap<int, float>::iterator it)
+void	BitcoinExchange::displayBadException(std::pair<int, float> pair)
 {
-	if (digitCount(it->first) != 8)
+	if (digitCount(pair.first) != 8)
 		std::cout << "Wrong date format";
-	else if (it->first / 100 % 100 == 02 && it->first % 100 == 29 && !leapYear(it->first / 10000))
+	else if (pair.first / 100 % 100 == 02 && pair.first % 100 == 29 && !leapYear(pair.first / 10000))
 	{
 		std::cout << "Date does not exist (not a leap year): ";
-		displayDate(it->first);
+		displayDate(pair.first);
 	}
-	else if (it->second == 0)
+	else if (pair.second == 0)
 		std::cout << "Wrong format";
 	else
 	{
 		std::cout << "Date does not exist: ";
-		displayDate(it->first);
+		displayDate(pair.first);
 	}
 	std::cout << "\n";
 }
 
-void	BitcoinExchange::displayResult(std::multimap<int, float> map)
+void	BitcoinExchange::displayResult(std::pair<int, float> pair)
 {
-	std::multimap<int, float>::iterator	it;
-	
-	for (it = map.begin(); it != map.end(); it++)
+	try
 	{
-		try
-		{
-			if (badInput(it))
-				throw BadInputException();
-			if (it->second < 0)
-				throw NegativeException();
-			if (it->second > 1000)
-				throw IntMaxException();
-		}
-		catch(const BadInputException &e)
-		{
-			std::cout << "Error: " << e.what() << " => ";
-			displayBadException(it);
-			continue;
-		}
-		catch(const std::exception& e)
-		{
-			std::cout << "Error: " << e.what() << '\n';
-			continue;
-		}
-		displayDate(it->first);
-		std::cout << " => " << std::fixed << std::setprecision(sizeof(it->second) / 4);
-		std::cout << it->second << " = ";
-		displayAmount(it);
-		std::cout << "\n";
+		if (badInput(pair))
+			throw BadInputException();
+		if (pair.second < 0)
+			throw NegativeException();
+		if (pair.second > 1000)
+			throw IntMaxException();
 	}
+	catch(const BadInputException &e)
+	{
+		std::cout << "Error: " << e.what() << " => ";
+		displayBadException(pair);
+		return ;
+	}
+	catch(const std::exception& e)
+	{
+		std::cout << "Error: " << e.what() << '\n';
+		return ;
+	}
+	displayDate(pair.first);
+	std::cout << " => " << std::fixed << std::setprecision(sizeof(pair.second) / 4);
+	std::cout << pair.second << " = ";
+	displayAmount(pair);
+	std::cout << "\n";
 }

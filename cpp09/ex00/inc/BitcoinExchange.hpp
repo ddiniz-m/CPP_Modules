@@ -17,7 +17,6 @@
 class BitcoinExchange : public std::map<int, float>
 {
 	private:
-		std::multimap<int, float>	input;
 		std::map<int, float>		db;
 
 	public:
@@ -26,15 +25,15 @@ class BitcoinExchange : public std::map<int, float>
 		BitcoinExchange& operator=(const BitcoinExchange &copy_a);
 		BitcoinExchange(const BitcoinExchange &copy);
 
-		void			inputInit(std::string line);
-		void			dbInit(std::string line);
-		void			readDb(void);
-		void			readInput(char **av);
+		std::pair<int, float>	inputPair(std::string line);
+		void					dbInit(std::string line);
+		void					readDb(void);
+		void					readInput(char **av);
 
-		void			displayResult(std::multimap<int, float> map);
-		void			displayAmount(std::multimap<int, float>::iterator it);
-		void			displayBadException(std::multimap<int, float>::iterator it);
-		void			displayDate(const int i);
+		void					displayResult(std::pair<int, float> pair);
+		void					displayAmount(std::pair<int, float> pair);
+		void					displayBadException(std::pair<int, float> pair);
+		void					displayDate(const int i);
 
 		class	NegativeException : public std::exception
 		{
@@ -57,7 +56,7 @@ class BitcoinExchange : public std::map<int, float>
 int				leapYear(int i);
 int				digitCount(int i);
 std::string		dateErase(std::string line);
-int				badInput(std::multimap<int, float>::iterator it);
+int				badInput(std::pair<int, float> pair);
 
 #endif
 

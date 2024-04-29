@@ -43,7 +43,7 @@ const char	*BitcoinExchange::BadInputException::what() const throw()
 	return("bad input");
 }
 
-void	BitcoinExchange::inputInit(std::string line)
+std::pair<int, float>	BitcoinExchange::inputPair(std::string line)
 {
 	char	c = '\0';
 	int		date = 0;
@@ -53,12 +53,10 @@ void	BitcoinExchange::inputInit(std::string line)
 
 	std::istringstream iss(line);
 
-	if (line.compare("date | value") == 0)
-		return ;
 	iss >> date >> c >> value;
 	if (c != '|')
 		value = 0;
-	input.insert(std::make_pair(date, value));
+	return (std::make_pair(date, value)); 
 }
 
 void	BitcoinExchange::dbInit(std::string line)
@@ -87,9 +85,10 @@ void	BitcoinExchange::readInput(char **av)
 	}
 	while(getline(file, line))
 	{
-		inputInit(line);
+		if (line.compare("date | value") == 0)
+			continue ;
+		displayResult(inputPair(line));
 	}
-	displayResult(input);
 }
 
 void	BitcoinExchange::readDb(void)

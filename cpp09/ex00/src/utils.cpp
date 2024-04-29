@@ -30,17 +30,17 @@ std::string	dateErase(std::string line)
 	return (line);
 }
 
-int	badInput(std::multimap<int, float>::iterator it)
+int	badInput(std::pair<int, float> pair)
 {
-	if (!it->first || !it->second)
+	if (!pair.first || !pair.second)
 		return (1);
-	if (it->first / 100 % 100 == 02 && it->first % 100 == 29 && !leapYear(it->first / 10000))
+	if (pair.first / 100 % 100 == 02 && pair.first % 100 == 29 && !leapYear(pair.first / 10000))
 		return (1);
-	if (digitCount(it->first) > 8)
+	if (digitCount(pair.first) > 8)
 		return (1);
-	if (it->first / 100 % 100 > 12 || it->first / 100 % 100 <= 0)
+	if (pair.first / 100 % 100 > 12 || pair.first / 100 % 100 <= 0)
 		return (1);
-	if (it->first % 100 > 31 || it->first % 100 <= 0)
+	if (pair.first % 100 > 31 || pair.first % 100 <= 0)
 		return (1);
 	return (0);
 }
