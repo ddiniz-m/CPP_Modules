@@ -117,7 +117,7 @@ void	PmergeMe::pushAVector(std::vector<std::pair<int, int> > &v)
 	}
 }
 
-void	PmergeMe::sequenceInitVector(void)
+void	PmergeMe::sequenceInit(void)
 {
 	Jacob.reserve(15);
 	for (int i = 0; i < 15; i++)
@@ -131,7 +131,6 @@ void	PmergeMe::sequenceInitVector(void)
 /* sortedVector.insert(std::upper_bound(sortedVector.begin(), sortedVector.end(), v[x].second), v[x].second) */
 void	PmergeMe::FordJohnsonVector(void)
 {
-	sequenceInitVector();
 	pushAVector(v);
 	int	x = 0;
 	int	y = Jacob[2];
@@ -236,7 +235,7 @@ void	PmergeMe::output(int ac, char **av, std::clock_t vEnd, std::clock_t lEnd)
 	std::cout << "Before:	";
 	for (int i = 1; i < ac; i++)
 	{
-		std::cout << av[i];
+		std::cout << atoi(av[i]);
 		if (i + 1 != ac)
 			std::cout << " ";
 	}
@@ -262,6 +261,8 @@ void	PmergeMe::FJsort(int ac, char **av)
 	std::clock_t						lStart;
 	std::clock_t						vEnd;
 	std::clock_t						lEnd;
+	
+	sequenceInit();
 
 	vStart = std::clock();
 	pairVector(ac, av);

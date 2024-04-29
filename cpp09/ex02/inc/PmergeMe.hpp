@@ -59,7 +59,7 @@ class PmergeMe
 		void						pairVector(int ac, char **av);
 		void						firstSortVector(int start);
 		void						pushAVector(std::vector<std::pair<int, int> > &v);
-		void						sequenceInitVector(void);
+		void						sequenceInit(void);
 		void						FordJohnsonVector(void);
 
 		void						pairList(int ac, char **av);

@@ -2,8 +2,10 @@
 
 int	isNumber(char *str)
 {
-	if (!str || !*str)
+	if (!str || !*str || atoi(str) < 0)
 		return (0);
+	if (*str == '+')
+		str++;
 	while (*str)
 	{
 		if (!isdigit(*str))
