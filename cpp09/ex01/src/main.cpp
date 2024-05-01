@@ -1,6 +1,6 @@
 #include "../inc/RPN.hpp"
 
-//stack<class T, <int>
+//stack<int>
 
 int	main(int ac, char **av)
 {

@@ -1,6 +1,6 @@
 #! Makefile
 
-NAME = BitcoinExchange
+NAME = btc
 CPP = c++
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -g -fsanitize=address
 RM = rm -rf

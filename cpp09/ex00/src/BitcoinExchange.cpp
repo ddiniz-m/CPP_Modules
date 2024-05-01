@@ -80,7 +80,7 @@ void	BitcoinExchange::readInput(char **av)
 	file.open(av[1], std::ios::in);
 	if (!file.is_open())
 	{
-		std::cout << "Error: could not open file.\n";
+		std::cout << "Error: could not open input file.\n";
 		return ;
 	}
 	while(getline(file, line))
@@ -99,7 +99,7 @@ void	BitcoinExchange::readDb(void)
 	db.open("data.csv", std::ios::in);
 	if (!db.is_open())
 	{
-		std::cout << "Error: could not open file\n";
+		std::cout << "Error: could not open database.\n";
 		return ;
 	}
 

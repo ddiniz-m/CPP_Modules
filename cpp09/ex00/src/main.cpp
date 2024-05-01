@@ -8,9 +8,9 @@ int	main(int ac, char **av)
 		return (1);
 	}
 
-	BitcoinExchange	bcn;
+	BitcoinExchange	btc;
 
-	bcn.readDb();
-	bcn.readInput(av);
+	btc.readDb();
+	btc.readInput(av);
 	return (0);
 }
