@@ -18,12 +18,18 @@ class BitcoinExchange : public std::map<int, float>
 {
 	private:
 		std::map<int, float>		db;
+		int							lowestDate;
+		int							highestDate;
 
 	public:
 		BitcoinExchange();
 		~BitcoinExchange();
 		BitcoinExchange& operator=(const BitcoinExchange &copy_a);
 		BitcoinExchange(const BitcoinExchange &copy);
+
+		void					setLowestDate(int date);
+		void					setHighestDate(int date);
+		int						badInput(std::pair<int, float> pair);
 
 		std::pair<int, float>	inputPair(std::string line);
 		void					dbInit(std::string line);
@@ -53,6 +59,7 @@ class BitcoinExchange : public std::map<int, float>
 };
 
 //utils.cpp
+int				dateCheck(std::string line);
 int				leapYear(int i);
 int				digitCount(int i);
 std::string		dateErase(std::string line);

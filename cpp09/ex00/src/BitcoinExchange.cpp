@@ -27,6 +27,15 @@ BitcoinExchange::~BitcoinExchange()
 }
 // ---------------------- Orthodox Canonical Form -----------------------------
 
+void		BitcoinExchange::setLowestDate(int date)
+{
+	lowestDate = date;
+}
+
+void		BitcoinExchange::setHighestDate(int date)
+{
+	highestDate = date;
+}
 
 const char	*BitcoinExchange::NegativeException::what() const throw()
 {
@@ -46,17 +55,38 @@ const char	*BitcoinExchange::BadInputException::what() const throw()
 std::pair<int, float>	BitcoinExchange::inputPair(std::string line)
 {
 	char	c = '\0';
+	char	e = '\0';
 	int		date = 0;
 	float	value = 0;
 
-	line = dateErase(line);
+	if (dateCheck(line) != 0)
+		line.clear();
+	else
+		line = dateErase(line);
 
 	std::istringstream iss(line);
 
-	iss >> date >> c >> value;
-	if (c != '|')
+	iss >> date >> c >> value >> e;
+	if (c != '|' || (e && e != 'f'))
+	{
 		value = 0;
+	}
 	return (std::make_pair(date, value)); 
+}
+
+int	BitcoinExchange::badInput(std::pair<int, float> pair)
+{
+	if (!pair.first || !pair.second)
+		return (1);
+	if (pair.first / 100 % 100 == 02 && pair.first % 100 == 29 && !leapYear(pair.first / 10000))
+		return (1);
+	if (digitCount(pair.first) > 8 || pair.first < lowestDate || pair.first > highestDate)
+		return (1);
+	if (pair.first / 100 % 100 > 12 || pair.first / 100 % 100 <= 0)
+		return (1);
+	if (pair.first % 100 > 31 || pair.first % 100 <= 0)
+		return (1);
+	return (0);
 }
 
 void	BitcoinExchange::dbInit(std::string line)
@@ -70,10 +100,14 @@ void	BitcoinExchange::dbInit(std::string line)
 
 	if (iss >> date >> c >> value)
 		db.insert(std::make_pair(date, value));
+	if (digitCount(date) == 8 && !lowestDate)
+		setLowestDate(date);
+	if (digitCount(date) == 8 && highestDate < date)
+		setHighestDate(date);
 }
 
 void	BitcoinExchange::readInput(char **av)
-{
+{ 
 	std::string		line;
 	std::fstream	file;
 
@@ -93,19 +127,22 @@ void	BitcoinExchange::readInput(char **av)
 
 void	BitcoinExchange::readDb(void)
 {
-	std::fstream	db;
+	std::fstream	dataBase;
 	std::string		line;
 
-	db.open("data.csv", std::ios::in);
-	if (!db.is_open())
+	setLowestDate(0);
+	setHighestDate(0);
+	dataBase.open("data.csv", std::ios::in);
+	if (!dataBase.is_open())
 	{
 		std::cout << "Error: could not open database.\n";
 		return ;
 	}
 
-	while (!db.eof())
+	while (!dataBase.eof())
 	{
-		getline(db, line);
+		getline(dataBase, line);
 		dbInit(line);
 	}
+
 }
