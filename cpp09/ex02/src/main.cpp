@@ -1,10 +1,11 @@
 #include "../inc/PmergeMe.hpp"
+#include <string.h>
 
 int	isValid(char *str)
 {
 	if (!str || !*str || atoi(str) < 0)
 		return (0);
-	if (*str == '+')
+	if (*str == '+' && strlen(str) > 1)
 		str++;
 	while (*str)
 	{
