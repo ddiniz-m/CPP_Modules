@@ -19,7 +19,6 @@ class BitcoinExchange : public std::map<int, float>
 	private:
 		std::map<int, float>		db;
 		int							lowestDate;
-		int							highestDate;
 
 	public:
 		BitcoinExchange();
@@ -28,7 +27,6 @@ class BitcoinExchange : public std::map<int, float>
 		BitcoinExchange(const BitcoinExchange &copy);
 
 		void					setLowestDate(int date);
-		void					setHighestDate(int date);
 		int						badInput(std::pair<int, float> pair);
 
 		std::pair<int, float>	inputPair(std::string line);

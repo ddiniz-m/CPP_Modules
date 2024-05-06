@@ -32,11 +32,6 @@ void		BitcoinExchange::setLowestDate(int date)
 	lowestDate = date;
 }
 
-void		BitcoinExchange::setHighestDate(int date)
-{
-	highestDate = date;
-}
-
 const char	*BitcoinExchange::NegativeException::what() const throw()
 {
 	return("not a positive number");
@@ -80,7 +75,7 @@ int	BitcoinExchange::badInput(std::pair<int, float> pair)
 		return (1);
 	if (pair.first / 100 % 100 == 02 && pair.first % 100 == 29 && !leapYear(pair.first / 10000))
 		return (1);
-	if (digitCount(pair.first) > 8 || pair.first < lowestDate || pair.first > highestDate)
+	if (digitCount(pair.first) > 8 || pair.first < lowestDate)
 		return (1);
 	if (pair.first / 100 % 100 > 12 || pair.first / 100 % 100 <= 0)
 		return (1);
@@ -102,8 +97,6 @@ void	BitcoinExchange::dbInit(std::string line)
 		db.insert(std::make_pair(date, value));
 	if (digitCount(date) == 8 && !lowestDate)
 		setLowestDate(date);
-	if (digitCount(date) == 8 && highestDate < date)
-		setHighestDate(date);
 }
 
 void	BitcoinExchange::readInput(char **av)
@@ -131,7 +124,6 @@ void	BitcoinExchange::readDb(void)
 	std::string		line;
 
 	setLowestDate(0);
-	setHighestDate(0);
 	dataBase.open("data.csv", std::ios::in);
 	if (!dataBase.is_open())
 	{
