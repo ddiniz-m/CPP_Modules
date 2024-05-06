@@ -63,9 +63,7 @@ std::pair<int, float>	BitcoinExchange::inputPair(std::string line)
 
 	iss >> date >> c >> value >> e;
 	if (c != '|' || (e && e != 'f'))
-	{
 		value = 0;
-	}
 	return (std::make_pair(date, value)); 
 }
 
@@ -110,10 +108,22 @@ void	BitcoinExchange::readInput(char **av)
 		std::cout << "Error: could not open input file.\n";
 		return ;
 	}
+	if (file.eof())
+	{
+		std::cout << "Error: empty file\n";
+		return ;
+	}
+	int	i = -1;
 	while(getline(file, line))
 	{
+		i++;
 		if (line.compare("date | value") == 0)
 			continue ;
+		if (i == 0)
+		{
+			std::cout << "Error: wrong header\n";
+			break ;
+		}
 		displayResult(inputPair(line));
 	}
 }

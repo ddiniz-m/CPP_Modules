@@ -31,15 +31,15 @@ void	BitcoinExchange::displayAmount(std::pair<int, float> pair)
 
 void	BitcoinExchange::displayBadException(std::pair<int, float> pair)
 {
-	if (digitCount(pair.first) != 8)
+	if (pair.second == 0)
+		std::cout << "Wrong format";
+	else if (digitCount(pair.first) != 8)
 		std::cout << "Wrong date format";
 	else if (pair.first / 100 % 100 == 02 && pair.first % 100 == 29 && !leapYear(pair.first / 10000))
 	{
 		std::cout << "Date does not exist (not a leap year): ";
 		displayDate(pair.first);
 	}
-	else if (pair.second == 0)
-		std::cout << "Wrong format";
 	else
 	{
 		std::cout << "Date does not exist: ";
